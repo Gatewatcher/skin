@@ -1,0 +1,46 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "outDir": "./dist",
+    "target": "esnext",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "types": [
+      "vite/client",
+      "node",
+      "@testing-library/jest-dom",
+      "vitest/globals"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+    "noImplicitThis": false,
+    "paths": {
+      "@/assets/*": ["assets/*"],
+      "@/constants": ["constants"],
+      "@/storybook": ["../.storybook/utils"],
+      "@/tests": ["__tests__"],
+      "@/mocks/*": ["__mocks__/*"],
+      "@/types": ["types"],
+      "@/utils": ["utils"],
+      "@/utils/*": ["utils/*"],
+      "@/hocs": ["hocs"],
+      "@/hocs/*": ["hocs/*"],
+      "@/hooks": ["hooks"],
+      "@/wrappers": ["wrappers"],
+      "@/icons/*": ["icons/*"],
+      "@/illustrations/*": ["illustrations/*"],
+      "@/styles/*": ["styles/partials/*"],
+      "@/skin/*": ["components/*"]
+    }
+  },
+  "include": ["src", "setupTests.js", ".storybook"],
+  "exclude": ["src/**/*.test.ts"]
+}

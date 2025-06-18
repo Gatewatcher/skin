@@ -1,0 +1,19 @@
+.docs-story {
+  background: var(--body-background-color) !important;
+}
+
+.theme-switch-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--text-color);
+  margin-bottom: 16px;
+  gap: 24px;
+}
+
+.theme-switch-transitions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}

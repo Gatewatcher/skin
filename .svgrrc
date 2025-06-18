@@ -1,0 +1,6 @@
+{
+  "icon": false,
+  "typescript": true,
+  "jsxRuntime": "automatic",
+  "runtimeConfig": true
+}

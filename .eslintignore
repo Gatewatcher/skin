@@ -1,0 +1,6 @@
+node_modules
+build
+coverage
+cypress/downloads
+public
+*.d.ts
