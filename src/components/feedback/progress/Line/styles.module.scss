@@ -1,0 +1,120 @@
+@import '@/styles/mixins';
+
+.lineCircular {
+  width: 64px;
+  height: 64px;
+  transform: rotate(-90deg);
+
+  &Small {
+    width: 48px;
+    height: 48px;
+  }
+}
+
+@mixin progress($property) {
+  &Uploading {
+    #{$property}: var(--color-primary);
+
+    @include on-dark-theme {
+      #{$property}: var(--color-primary-400);
+    }
+  }
+
+  &Success {
+    #{$property}: var(--color-success);
+
+    @include on-dark-theme {
+      #{$property}: var(--color-success-400);
+    }
+  }
+
+  &Error {
+    #{$property}: var(--color-error);
+
+    @include on-dark-theme {
+      #{$property}: var(--color-error-400);
+    }
+  }
+}
+
+.track {
+  --track-color: var(--color-neutral-200);
+
+  @include on-dark-theme {
+    --track-color: var(--color-neutral-600);
+  }
+
+  &Linear {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 6px;
+    border-radius: var(--border-radius-rounded);
+    background-color: var(--track-color);
+  }
+
+  &Circular {
+    fill: none;
+    stroke: var(--track-color, 'red');
+    stroke-width: 2px;
+  }
+}
+
+.progress {
+  &Linear {
+    height: 100%;
+    border-radius: var(--border-radius-rounded);
+
+    @include progress(background-color);
+    @include transition('fast', 'regular', width);
+
+    &Infinite {
+      animation-duration: 1.5s;
+      animation-iteration-count: infinite;
+      animation-name: infinite-linear;
+      background: linear-gradient(90deg, var(--color-primary) 0%, transparent);
+    }
+
+    @keyframes infinite-linear {
+      from {
+        width: 20%;
+        margin-left: 0;
+      }
+      50% {
+        width: 70%;
+      }
+      to {
+        width: 30%;
+        margin-left: 100%;
+      }
+    }
+  }
+
+  &Circular {
+    fill: none;
+    stroke-dasharray: 100;
+    stroke-linecap: round;
+    stroke-width: 2px;
+
+    @include progress(stroke);
+    @include transition('fast', 'regular', stroke-dashoffset);
+
+    &Infinite {
+      animation-duration: 1.5s;
+      animation-fill-mode: forwards;
+      animation-iteration-count: infinite;
+      animation-name: infinite-circular;
+      stroke: url(#gradient);
+      stroke-dasharray: 100;
+    }
+
+    @keyframes infinite-circular {
+      from {
+        stroke-dashoffset: 200;
+      }
+      to {
+        stroke-dashoffset: 0;
+      }
+    }
+  }
+}

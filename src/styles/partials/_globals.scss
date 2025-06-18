@@ -1,0 +1,24 @@
+@import './mixins';
+
+* {
+  box-sizing: border-box;
+  font-family: var(--font-family-primary);
+}
+
+body {
+  margin: 0;
+  background: var(--body-background-color);
+  color: var(--text-color);
+}
+
+[role='button'] {
+  cursor: pointer;
+}
+
+[role='tooltip'],
+[role='dialog'],
+[role='popover'] {
+  &:focus {
+    outline: none;
+  }
+}

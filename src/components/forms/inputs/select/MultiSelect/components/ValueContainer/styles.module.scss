@@ -1,0 +1,9 @@
+.multiValueContainer {
+  position: relative;
+  display: grid;
+  overflow: hidden;
+  box-sizing: border-box;
+  flex: 1;
+  flex-wrap: wrap;
+  align-items: center;
+}

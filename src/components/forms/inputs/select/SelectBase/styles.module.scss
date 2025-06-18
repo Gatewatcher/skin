@@ -1,0 +1,193 @@
+@import '@/styles/mixins';
+@import '../../../../actions/selectable/styles.module';
+
+.control {
+  padding: var(--spacing-1) var(--spacing-6) !important;
+  border-color: var(--color-neutral-200) !important;
+  background: var(--color-white) !important;
+  box-shadow: none !important;
+
+  @include font-regular;
+
+  @include on-dark-theme {
+    border-color: var(--color-neutral-600) !important;
+    background-color: var(--color-neutral-900) !important;
+  }
+
+  &.isError {
+    border-color: var(--color-critical-risk-600) !important;
+  }
+
+  &.isFocused {
+    // Revert "transition all" from React-select.
+    transition: none !important;
+    @include focus(true);
+  }
+
+  &.isDisabled {
+    background-color: var(--color-neutral-100) !important;
+
+    @include disabled;
+  }
+
+  .clearIndicator {
+    @include transition('regular', 'regular', opacity);
+    color: var(--text-color) !important;
+    opacity: 0;
+  }
+
+  &:hover {
+    .clearIndicator {
+      opacity: 1;
+    }
+  }
+}
+
+.input {
+  color: var(--text-color) !important;
+
+  &Caret {
+    caret-color: transparent !important;
+  }
+}
+
+.loadingIndicator {
+  width: 1.25rem;
+  margin-right: var(--spacing-2);
+}
+
+.menu {
+  z-index: var(--z-index-select-menu) !important;
+  border-radius: var(--border-radius-regular) !important;
+  margin: 0 !important;
+  box-shadow: 0 0 var(--box-shadow-blur-radius-large) var(--color-neutral-200) !important;
+
+  @include font-regular;
+
+  @include on-dark-theme {
+    border: 1px solid var(--color-neutral-600);
+    background-color: var(--color-neutral-900);
+    box-shadow: none !important;
+  }
+}
+
+.menuPortal {
+  z-index: var(--z-index-select-menu) !important;
+}
+
+.menuList {
+  padding: 0 !important;
+}
+
+.multiValueContainer {
+  @include on-dark-theme {
+    color: var(--color-white) !important;
+  }
+}
+
+.option {
+  all: unset !important;
+  width: 100%;
+
+  &:first-of-type {
+    > button {
+      border-top-left-radius: var(--border-radius-regular) !important;
+      border-top-right-radius: var(--border-radius-regular) !important;
+    }
+  }
+
+  &:last-of-type {
+    > button {
+      border-bottom-left-radius: var(--border-radius-regular) !important;
+      border-bottom-right-radius: var(--border-radius-regular) !important;
+    }
+  }
+
+  > button {
+    border-radius: 0 !important;
+  }
+
+  &SelectAll {
+    border-bottom: solid 1px;
+    border-bottom-color: var(--color-neutral-200);
+    cursor: pointer;
+
+    @include on-dark-theme {
+      border-bottom-color: var(--color-neutral-600);
+    }
+
+    &Focused,
+    &:hover,
+    &:focus {
+      @include focused;
+    }
+
+    &Selected,
+    &:active {
+      @include active;
+    }
+  }
+
+  &Footer {
+    width: 100%;
+    border-top: solid 1px;
+    border-top-color: var(--color-neutral-200);
+  }
+
+  &Create {
+    justify-content: space-between;
+  }
+}
+
+.placeholder {
+  margin: 0 !important;
+  color: var(--color-neutral-400) !important;
+}
+
+.singleValue {
+  color: var(--text-color) !important;
+}
+
+.valueContainer {
+  padding: 0 !important;
+}
+
+.groupHeading {
+  margin-bottom: var(--spacing-2);
+  margin-left: var(--spacing-6);
+  color: var(--color-neutral-400);
+}
+
+.group {
+  padding-bottom: 0 !important;
+
+  @include deepInclude('option') {
+    button {
+      border-radius: 0 !important;
+    }
+  }
+
+  &:last-child {
+    @include deepInclude('option') {
+      &:last-of-type {
+        > button {
+          border-bottom-left-radius: var(--border-radius-regular) !important;
+          border-bottom-right-radius: var(--border-radius-regular) !important;
+        }
+      }
+    }
+  }
+}
+
+.dropdownIcon {
+  opacity: 0.4;
+  @include transition('regular', 'regular', transform, opacity);
+
+  &Bright {
+    opacity: 1;
+  }
+
+  &UpsideDown {
+    transform: rotate(-180deg);
+  }
+}

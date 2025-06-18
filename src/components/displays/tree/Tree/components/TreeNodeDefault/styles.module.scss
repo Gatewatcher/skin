@@ -1,0 +1,63 @@
+@import '@/styles/mixins';
+
+.TreeNode {
+  position: relative;
+  padding: var(--node-padding);
+  border: var(--frame-stroke-width) solid var(--path-color);
+  border-radius: var(--border-radius-regular);
+
+  @include transition('regular', 'regular', background-color);
+
+  &.expandable {
+    cursor: pointer;
+
+    &:hover {
+      background-color: var(--color-neutral-50);
+
+      @include on-dark-theme {
+        background-color: var(--color-neutral-800);
+      }
+    }
+  }
+
+  .indicatorContainer {
+    height: 0;
+    margin-left: auto;
+    line-height: 0;
+    transform: rotate(0);
+    transition: transform var(--transition-duration-regular)
+      var(--transition-timing-regular);
+
+    &.expanded {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+.TreeNodeContent {
+  max-width: 100%;
+}
+
+.ChildrenContainer {
+  overflow: hidden;
+  padding-left: var(--path-gutter);
+
+  .TreeNode {
+    margin-top: var(--node-spacing);
+
+    &::before {
+      position: absolute;
+      bottom: calc(50% - var(--path-stoke-width) / 2);
+      left: 0;
+      display: block;
+      width: var(--path-width);
+      height: var(--path-height);
+      border-bottom: var(--path-stoke-width) solid var(--path-color);
+      border-left: var(--path-stoke-width) solid var(--path-color);
+      content: '';
+      transform: translateX(
+        calc(-100% - var(--frame-stroke-width) - var(--path-gap) + 0px)
+      );
+    }
+  }
+}

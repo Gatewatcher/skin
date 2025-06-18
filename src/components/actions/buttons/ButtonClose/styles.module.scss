@@ -1,0 +1,23 @@
+@import '@/styles/mixins';
+
+.ButtonClose {
+  display: inline-block;
+  padding: 0 !important;
+  background: transparent !important;
+  color: inherit !important;
+  line-height: 0;
+  opacity: var(--alpha-50);
+
+  @include transition(regular, regular, opacity);
+
+  &:not(:disabled) {
+    &:hover,
+    &:focus {
+      opacity: 1;
+    }
+  }
+
+  &.rounded {
+    border-radius: var(--border-radius-rounded) !important;
+  }
+}

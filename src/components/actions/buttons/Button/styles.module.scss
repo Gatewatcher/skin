@@ -1,0 +1,18 @@
+@import '@/styles/mixins';
+
+.size {
+  &Small {
+    padding: var(--spacing-4) var(--spacing-6);
+
+    @include font-small;
+  }
+}
+
+.fill {
+  width: 100%;
+  justify-content: center;
+}
+
+.noPadding {
+  padding: 0;
+}

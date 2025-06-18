@@ -1,0 +1,78 @@
+@import '@/styles/mixins';
+
+.message {
+  margin-left: calc(var(--spacing-11) + var(--spacing-6));
+}
+
+.editIcon {
+  color: var(--color-neutral-400);
+}
+
+.divider {
+  height: var(--spacing-7);
+}
+
+.lines {
+  $width: 28px;
+
+  &::before {
+    position: absolute;
+    z-index: -1;
+    top: 50%;
+    left: 0;
+    width: $width;
+    height: 10px;
+    border-bottom: solid 1px;
+    border-bottom-color: var(--color-neutral-200);
+    border-left: solid 1px;
+    border-left-color: var(--color-neutral-200);
+    border-bottom-left-radius: var(--border-radius-rounded);
+    content: '';
+    transform: translateX(-100%);
+
+    @include on-dark-theme {
+      border-bottom-color: var(--color-neutral-700);
+      border-left-color: var(--color-neutral-700);
+    }
+  }
+
+  &::after {
+    position: absolute;
+    z-index: -1;
+    top: -50px;
+    left: -$width - 1;
+    width: 1px;
+    height: calc(100% + 50px);
+    background-color: var(--color-neutral-200);
+    content: '';
+
+    @include on-dark-theme {
+      background-color: var(--color-neutral-700);
+    }
+  }
+
+  &:last-of-type {
+    &::after {
+      top: 0;
+      height: 100%;
+      transform: translateY(-50%);
+    }
+  }
+}
+
+.card {
+  position: relative;
+  overflow: visible;
+  word-break: break-all;
+}
+
+.footer {
+  border-top: solid 1px;
+  border-top-color: var(--color-neutral-200);
+  background-color: var(--color-neutral-50-a70);
+
+  @include on-dark-theme {
+    border-top-color: var(--color-neutral-700);
+    background-color: var(--color-neutral-800);
+  }
+}

@@ -1,0 +1,75 @@
+@import '@/styles/mixins';
+
+@keyframes wave-animation {
+  0% {
+    transform: translateX(-100%);
+  }
+  50% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.Skeleton {
+  --skeleton-background-color: #e0e1e3;
+  --skeleton-animation-color: #f3f3f4;
+
+  @include on-dark-theme {
+    --skeleton-background-color: #525363;
+    --skeleton-animation-color: #6a6c79;
+  }
+
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
+  background-color: var(--skeleton-background-color);
+}
+
+.variant {
+  &Rounded {
+    border-radius: 100px;
+  }
+}
+
+.shape {
+  &Square {
+    flex: none;
+    aspect-ratio: 1;
+  }
+}
+
+.animation {
+  &None {
+    &:after {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        var(--skeleton-animation-color),
+        transparent
+      );
+      content: '';
+    }
+  }
+
+  &Wave {
+    &:after {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      animation: wave-animation 2s ease infinite normal none;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        var(--skeleton-animation-color),
+        transparent
+      );
+      content: '';
+      transform: translateX(-100%);
+    }
+  }
+}

@@ -1,0 +1,106 @@
+@import '@/styles/mixins';
+
+$container-height: 16px;
+$rail-height: 6px;
+$radius: calc($rail-height / 2);
+$padding: var(--spacing-8);
+
+.rc-slider {
+  position: relative;
+  width: 100%;
+  height: $container-height;
+  padding: $padding 0;
+  border-radius: $radius;
+
+  &-rail {
+    position: absolute;
+    width: 100%;
+    height: $rail-height;
+    border-radius: $radius;
+    background-color: var(--color-primary);
+    transform: translateY(-50%);
+  }
+
+  &-track {
+    position: absolute;
+    height: $rail-height;
+    border-radius: $radius;
+    background-color: var(--color-medium-risk);
+    transform: translateY(-50%);
+  }
+
+  &-handle {
+    position: absolute;
+    top: calc($container-height / 2);
+    width: 24px;
+    height: 24px;
+    border: var(--border-regular);
+    border-color: var(--color-neutral-300);
+    border-radius: 50%;
+    background-color: var(--color-white);
+    cursor: grab;
+    touch-action: pan-x;
+
+    @include transition('fast', 'fast', border-width, border-color);
+
+    &-dragging {
+      border-width: 3px;
+      border-color: var(--color-neutral-400);
+    }
+
+    &:focus-visible {
+      @include focus;
+    }
+
+    &:active {
+      cursor: grabbing;
+    }
+  }
+
+  &-mark {
+    position: absolute;
+    top: calc($padding + var(--spacing-8));
+    left: 0;
+    width: 100%;
+    color: var(--text-color);
+    text-align: center;
+
+    &-text {
+      position: absolute;
+      display: inline-block;
+      width: max-content;
+      padding: 0 var(--spacing-3);
+      cursor: pointer;
+
+      @include font-small;
+    }
+  }
+
+  &-step {
+    position: absolute;
+    top: $padding;
+    width: 100%;
+  }
+
+  &-dot {
+    position: absolute;
+    top: -3px;
+    width: $rail-height;
+    height: $rail-height;
+    border-radius: $radius;
+    background: transparent;
+    cursor: pointer;
+  }
+}
+
+.slider-reset-marks {
+  .rc-slider-mark-text {
+    &:first-child {
+      transform: translate(-20%) !important;
+    }
+
+    &:last-child {
+      transform: translate(-80%) !important;
+    }
+  }
+}

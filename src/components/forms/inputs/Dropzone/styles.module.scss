@@ -1,0 +1,124 @@
+@import '@/styles/mixins';
+
+.dropzoneContainer {
+  position: relative;
+}
+
+.dropzone {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  backdrop-filter: blur(5px);
+
+  &Border {
+    border: var(--border-regular);
+    border-color: transparent;
+    border-radius: var(--border-radius-regular);
+  }
+
+  &FullScreen {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+  }
+
+  &Drag {
+    z-index: 10;
+  }
+}
+
+.dropzoneWidgetContainer {
+  position: relative;
+  min-height: 180px;
+  cursor: pointer;
+
+  &:focus-visible {
+    @include focus;
+  }
+}
+
+.dropzoneInnerWidget {
+  width: 100%;
+  min-height: 180px;
+  background-color: var(--color-neutral-50);
+  cursor: pointer;
+
+  @include on-dark-theme {
+    background-color: var(--color-neutral-700);
+  }
+}
+
+.WithoutInner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.dropAnimationContainer {
+  position: fixed;
+  z-index: 11;
+  left: 50%;
+  display: inline-block;
+  pointer-events: none;
+  transform: translateX(-50%);
+
+  &Bottom {
+    bottom: var(--spacing-8);
+  }
+
+  &Top {
+    top: var(--spacing-8);
+  }
+
+  &Center {
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  svg {
+    animation: bounce 1s infinite;
+  }
+
+  :hover {
+    z-index: 9;
+  }
+}
+
+.disabled {
+  pointer-events: none;
+
+  @include disabled;
+}
+
+.dropInfoContainer {
+  visibility: hidden;
+
+  .dropInfo {
+    padding: var(--spacing-6);
+    border-radius: var(--spacing-2);
+    background-color: var(--body-background-color);
+  }
+}
+
+.dropInfoContainerDragActive {
+  visibility: visible;
+}
+
+.dragActive {
+  border-color: var(--color-primary-200);
+  background-color: var(--dropzone-active);
+}

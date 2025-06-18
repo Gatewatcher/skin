@@ -1,0 +1,26 @@
+@import '@/styles/mixins';
+
+.Paragraph {
+  margin: 0;
+  color: var(--text-color);
+  font-weight: var(--font-weight-regular);
+  white-space: pre-line;
+
+  @include child('Text') {
+    color: inherit;
+  }
+
+  @include child('Link') {
+    text-decoration: underline;
+  }
+}
+
+.maxLines {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+}
+
+.Wysiwyg {
+  white-space: pre-wrap;
+}

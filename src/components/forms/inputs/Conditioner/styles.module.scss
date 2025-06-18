@@ -1,0 +1,60 @@
+@import '@/styles/mixins';
+
+.Separator {
+  position: relative;
+  height: var(--spacing-8);
+}
+
+.Conditioner {
+  border-radius: var(--border-radius-regular);
+  background-color: var(--color-neutral-50);
+
+  @include on-dark-theme {
+    background-color: var(--color-neutral-700);
+  }
+}
+
+.isEven {
+  padding: var(--spacing-4);
+  border-radius: var(--border-radius-regular);
+  background-color: var(--color-neutral-50);
+
+  @include on-dark-theme {
+    background-color: var(--color-neutral-700);
+  }
+}
+
+.isOdd {
+  padding: var(--spacing-4);
+  border: 1px solid var(--color-neutral-200);
+  border-radius: var(--border-radius-regular);
+  background-color: var(--body-background-color);
+
+  @include on-dark-theme {
+    border-color: var(--color-neutral-600);
+  }
+}
+
+.ConditionText {
+  position: absolute;
+  top: 1px;
+  left: var(--spacing-6);
+  padding: 0 var(--spacing-6);
+  background: var(--color-neutral-50);
+
+  @include on-dark-theme {
+    background: var(--color-neutral-700);
+  }
+
+  &.oddText {
+    background-color: var(--body-background-color);
+
+    @include on-dark-theme {
+      background-color: var(--body-background-color);
+    }
+  }
+}
+
+.input {
+  background-color: var(--body-background-color);
+}

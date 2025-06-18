@@ -1,0 +1,29 @@
+@import '@/styles/mixins';
+
+.Listing {
+  position: relative;
+
+  &Loader {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.Controls {
+  place-items: center;
+
+  &GoToPageContainer {
+    justify-self: flex-start;
+  }
+
+  &PerPageContainer {
+    justify-self: flex-end;
+  }
+}

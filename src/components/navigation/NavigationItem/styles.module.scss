@@ -1,0 +1,80 @@
+@import '@/styles/mixins';
+
+.NavigationItem {
+  padding: var(--spacing-6);
+
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+
+  &ResetPadding {
+    padding: 0;
+  }
+}
+
+.Header {
+  color: var(--text-color);
+  font-weight: var(--font-weight-medium);
+
+  @include font-regular;
+}
+
+.Trigger {
+  all: unset;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding-bottom: var(--spacing-4);
+  border-radius: var(--border-radius-regular);
+  color: var(--text-color);
+  cursor: pointer;
+  font-weight: var(--font-weight-medium);
+  white-space: nowrap;
+
+  @include font-regular;
+
+  &:focus-visible {
+    @include focus;
+  }
+
+  > span {
+    @include transition('regular', 'regular', transform);
+  }
+
+  &::before {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0px;
+    height: 2px;
+    background-color: var(--color-neutral-700);
+    content: '';
+    opacity: 0;
+
+    @include transition('regular', 'regular', width, opacity, left);
+
+    @include on-dark-theme {
+      background-color: var(--color-white);
+    }
+  }
+
+  &:hover,
+  &Opened {
+    &::before {
+      left: 0;
+      width: 100%;
+      opacity: 1;
+    }
+  }
+}
+
+.TriggerOpened {
+  > span {
+    &:last-of-type {
+      transform: rotate(-180deg);
+    }
+  }
+}
+
+.LinkActive {
+  font-weight: var(--font-weight-medium);
+}

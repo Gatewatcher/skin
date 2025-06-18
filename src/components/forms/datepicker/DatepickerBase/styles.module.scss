@@ -1,0 +1,113 @@
+@import '@/styles/mixins';
+
+.Calendar {
+  width: 14rem;
+}
+
+.weekDay {
+  color: var(--color-neutral-400);
+}
+
+.Day {
+  position: relative;
+  width: 2rem;
+  height: 2rem;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  &Today {
+    &::before {
+      position: absolute;
+      bottom: 2px;
+      left: 25%;
+      width: 50%;
+      height: 1px;
+      background: var(--color-primary);
+      content: '';
+    }
+  }
+
+  &NotInMonth {
+    pointer-events: none;
+  }
+
+  &RangeBounds {
+    border-radius: var(--border-radius-rounded);
+    background-color: var(--color-primary);
+    color: var(--color-white);
+  }
+
+  &RangeStart {
+    position: relative;
+
+    &::after {
+      position: absolute;
+      z-index: -1;
+      top: 0;
+      right: 0;
+      width: 50%;
+      height: 100%;
+      background-color: var(--color-primary-a15);
+      content: '';
+    }
+  }
+
+  &RangeEnd {
+    position: relative;
+
+    &::after {
+      position: absolute;
+      z-index: -1;
+      top: 0;
+      left: 0;
+      width: 50%;
+      height: 100%;
+      background-color: var(--color-primary-a15);
+      content: '';
+    }
+  }
+
+  &InRange {
+    background-color: var(--color-primary-a15);
+    color: var(--color-primary);
+  }
+
+  &Disabled {
+    color: var(--color-neutral-400);
+    cursor: default;
+  }
+}
+
+.Presets {
+  border-right: solid 1px;
+  border-right-color: var(--color-neutral-200);
+}
+
+.Preset {
+  &Active {
+    color: var(--color-primary-500);
+  }
+}
+
+.Month,
+.Year {
+  > button {
+    padding-right: 0;
+    padding-left: 0;
+    color: var(--text-color);
+    font-weight: var(--font-weight-regular);
+  }
+}
+
+.Navigation {
+  width: 100%;
+}
+
+.Inputs {
+  width: 100%;
+}
+
+.TimeSelect {
+  width: 86px;
+}

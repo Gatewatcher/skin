@@ -1,0 +1,21 @@
+.size {
+  &Small {
+    max-width: 250px;
+  }
+
+  &Medium {
+    max-width: 500px;
+  }
+
+  &Large {
+    max-width: 750px;
+  }
+}
+
+.arrow {
+  z-index: -1;
+}
+
+.overflow {
+  overflow-y: auto;
+}

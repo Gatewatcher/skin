@@ -1,0 +1,10 @@
+.ColorIndicator {
+  border-radius: var(--border-radius-rounded);
+}
+
+.size {
+  &Medium {
+    width: 16px;
+    height: 16px;
+  }
+}

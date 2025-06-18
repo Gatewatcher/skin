@@ -1,0 +1,90 @@
+@import '@/styles/mixins';
+
+.PanelContentLayout {
+  display: flex;
+  overflow: auto;
+  height: 100%;
+  flex-direction: column;
+}
+
+.Actions {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  margin-left: auto;
+  gap: var(--spacing-7);
+}
+
+.Body {
+  flex-grow: 1;
+  padding: 0 var(--spacing-9) var(--spacing-9) var(--spacing-9);
+  background-color: var(--body-background-color);
+
+  &.fitContent {
+    align-self: flex-start;
+  }
+}
+
+.Header,
+.Footer {
+  position: sticky;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: var(--spacing-9);
+  // Prevent global border-top on .Header and .Footer.
+  border: none;
+  background-color: var(--body-background-color);
+  gap: var(--spacing-8);
+  // Vertical -0.5px prevents from randomly displaying a 1 pixel gap that may be caused by rounding (noticed on Chrome).
+  inset: -0.5px 0;
+
+  .paddingTop {
+    padding-top: var(--spacing-9);
+  }
+}
+
+.Header {
+  // Stay on top of the Body.
+  z-index: 1;
+  align-items: baseline;
+}
+
+.Footer {
+  align-items: center;
+  border-top: 1px solid var(--color-neutral-200);
+  margin-top: auto;
+
+  @include on-dark-theme {
+    border-top: 1px solid var(--color-neutral-600);
+  }
+}
+
+.fill {
+  flex: 1 1 auto;
+
+  // Every element under .Fill that is not or contained in a Drawer layout element.
+  & :not(.Header, .Footer, .Body, .Header *, .Footer *, .Body *) {
+    display: flex;
+    // Firefox: the default `min-width: auto` makes the target overflow its parent if it contains large children.
+    min-width: 0;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+}
+
+.dynamicContainer {
+  position: absolute;
+  height: 0;
+  inset: auto 0 0 0;
+}
+
+.dynamicContent {
+  padding: 0 var(--spacing-9) var(--spacing-9) var(--spacing-9);
+  background-color: var(--body-background-color);
+  box-shadow: 0 5px 5px var(--shadow-color-elevation-2);
+
+  @include on-dark-theme {
+    box-shadow: 0 5px 5px var(--shadow-color-elevation-2);
+  }
+}

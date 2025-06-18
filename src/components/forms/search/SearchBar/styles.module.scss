@@ -1,0 +1,110 @@
+@import '@/styles/mixins';
+
+.SearchBar {
+  padding: var(--spacing-4) var(--spacing-6);
+  border: 1px solid;
+  border-color: var(--color-neutral-200);
+  border-radius: var(--border-radius-rounded);
+
+  @include transition('regular', 'regular', border-radius);
+
+  &:focus-within {
+    border-radius: var(--border-radius-regular);
+    @include focus;
+  }
+
+  @include on-dark-theme {
+    border-color: var(--color-neutral-600);
+  }
+
+  &.disabled {
+    border-color: var(--color-neutral-200);
+    background-color: var(--color-neutral-50);
+    color: var(--color-neutral-400);
+
+    @include disabled;
+    @include on-dark-theme {
+      border-color: var(--color-neutral-600);
+      background-color: var(--color-neutral-700);
+      color: var(--color-neutral-500);
+    }
+  }
+
+  &.error {
+    border-color: var(--color-danger-600);
+
+    @include on-dark-theme {
+      border-color: var(--color-danger-400);
+    }
+  }
+
+  &.grow {
+    max-width: 60%;
+    flex-grow: 0;
+    @include transition('regular', 'ease', flex-grow);
+    &:focus-within {
+      flex-grow: 1;
+      @include transition('regular', 'ease', flex-grow);
+    }
+  }
+}
+
+.input {
+  min-width: 0;
+  height: calc(var(--font-size-regular) * 1.5);
+  flex: 1 1 0;
+  border: none;
+  background-color: transparent;
+  color: var(--text-color);
+  font-size: var(--font-size-regular);
+  outline: none;
+  text-overflow: ellipsis;
+  transform: translateY(-1px);
+
+  .disabled {
+    background-color: var(--color-danger) !important;
+  }
+}
+
+.indicatorContainer {
+  line-height: 0;
+}
+
+.clearButton {
+  &:active {
+    outline: none;
+  }
+}
+
+.iconContainer {
+  transform: translateY(2px);
+
+  @include disabled;
+  @include transition('regular', 'regular', opacity);
+
+  &.focused {
+    opacity: 1;
+  }
+}
+
+.variant {
+  &Ghosted {
+    border-color: transparent;
+
+    @include on-dark-theme {
+      border-color: transparent;
+      background-color: var(--color-neutral-700);
+    }
+  }
+
+  &Underlined {
+    border: none;
+    border-radius: 0;
+    border-bottom: solid 1px;
+    border-bottom-color: var(--color-neutral-200);
+
+    @include on-dark-theme {
+      border-bottom-color: var(--color-neutral-600);
+    }
+  }
+}

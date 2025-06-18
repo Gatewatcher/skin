@@ -1,0 +1,7 @@
+@import '@/styles/mixins';
+
+.Label {
+  color: var(--text-color);
+
+  @include font-regular;
+}

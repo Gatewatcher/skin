@@ -1,0 +1,16 @@
+@import '@/styles/mixins';
+
+.Carousel {
+  height: 100%;
+}
+
+.Preview {
+  @include transition(regular, regular, right);
+  position: relative;
+}
+
+.PreviewContainer {
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}

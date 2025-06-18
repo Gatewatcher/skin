@@ -1,0 +1,19 @@
+.SidePanelLayout {
+  display: flex;
+  overflow: hidden;
+  flex: 1 1 auto;
+}
+
+.SidePanel {
+  position: relative;
+  // Keep the box shadow on top of the drawer header.
+  z-index: 2;
+  overflow: auto;
+  box-shadow: 5px 0 5px var(--shadow-color-elevation-2);
+
+  .inner {
+    position: absolute;
+    display: flex;
+    inset: 0;
+  }
+}

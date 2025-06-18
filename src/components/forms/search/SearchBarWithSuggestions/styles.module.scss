@@ -1,0 +1,21 @@
+@import '@/styles/mixins';
+
+.SearchBarWithSuggestions {
+  position: relative;
+}
+
+.suggestions {
+  position: absolute;
+  z-index: 3;
+  width: 100%;
+  border: var(--border-regular);
+  border-color: var(--color-neutral-200);
+  border-radius: var(--border-radius-regular);
+  margin-top: 3px;
+  background-color: var(--color-white);
+
+  @include on-dark-theme {
+    border-color: var(--color-neutral-600);
+    background-color: var(--color-neutral-900);
+  }
+}

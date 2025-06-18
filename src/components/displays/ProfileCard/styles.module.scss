@@ -1,0 +1,29 @@
+@import '@/styles/mixins';
+
+.card {
+  width: fit-content;
+  min-width: 300px;
+}
+
+.header {
+  height: 44px;
+  background: no-repeat url('./assets/profile-card.webp');
+  background-position: center;
+  background-size: cover;
+}
+
+.name {
+  color: var(--color-neutral-600);
+
+  @include on-dark-theme {
+    color: var(--color-text);
+  }
+}
+
+.email {
+  color: var(--color-neutral-500);
+
+  @include on-dark-theme {
+    color: var(--color-text);
+  }
+}

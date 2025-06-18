@@ -1,0 +1,57 @@
+@import '@/styles/alpaga';
+@import '@/styles/mixins';
+
+.StorageBar {
+  &Container {
+    height: 10px;
+    align-content: center;
+
+    --bar-border-color: white;
+    @include on-dark-theme {
+      --bar-border-color: var(--color-neutral-900);
+    }
+
+    border-right: 2px solid var(--bar-border-color);
+    border-left: 2px solid var(--bar-border-color);
+    &:first-child {
+      border-left: none;
+    }
+    &:last-child {
+      border-right: none;
+    }
+  }
+
+  width: 100%;
+  height: 6px;
+
+  @include transition('fast', 'regular', height);
+
+  @each $index, $color in $qualitative-alpaga-colors {
+    &-#{$index} {
+      background-color: $color;
+    }
+  }
+
+  &Available {
+    background-color: var(--color-neutral-200);
+    @include on-dark-theme {
+      background-color: var(--color-neutral-600);
+    }
+  }
+
+  &:hover {
+    height: 10px;
+  }
+}
+
+.StorageIcon {
+  @each $index, $color in $qualitative-alpaga-colors {
+    &-#{$index} {
+      background-color: $color;
+    }
+  }
+
+  width: 8px;
+  height: 8px;
+  border-radius: 100%;
+}

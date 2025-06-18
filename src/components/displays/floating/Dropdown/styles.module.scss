@@ -1,0 +1,35 @@
+@import '@/styles/mixins';
+
+.Dropdown {
+  border-radius: var(--border-radius-regular);
+
+  &Bordered {
+    border: var(--border-regular);
+    border-color: var(--color-neutral-200);
+    background-color: var(--color-white);
+
+    @include on-dark-theme {
+      border-color: var(--color-neutral-600);
+      background-color: var(--color-neutral-900);
+    }
+  }
+
+  &Shadowed {
+    background-color: var(--color-white);
+
+    @include on-dark-theme {
+      background-color: var(--color-neutral-800);
+    }
+  }
+}
+
+.DropdownGroup {
+  &:not(:last-of-type) {
+    border-bottom: solid 1px var(--color-neutral-200);
+    border-bottom-color: var(--color-neutral-200);
+
+    @include on-dark-theme {
+      border-bottom-color: var(--color-neutral-600);
+    }
+  }
+}

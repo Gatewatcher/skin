@@ -1,0 +1,19 @@
+.linearActivity {
+  --linear-activity-height: 4px;
+
+  overflow: hidden;
+  width: 100%;
+  height: var(--linear-activity-height);
+  background-color: var(--color-primary-100);
+
+  &.rounded {
+    border-radius: calc(var(--linear-activity-height) / 2);
+  }
+}
+
+.determinate {
+  position: relative;
+  height: 100%;
+  background-color: var(--color-primary);
+  transition: width 100ms ease;
+}

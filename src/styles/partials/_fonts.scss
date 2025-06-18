@@ -1,0 +1,24 @@
+@font-face {
+  font-display: fallback;
+  font-family: 'Barlow';
+  font-weight: 400;
+  src: local('Barlow'), url('./fonts/Barlow/Barlow-Regular.woff') format('woff'),
+    url('./fonts/Barlow/Barlow-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-display: fallback;
+  font-family: 'Barlow';
+  font-weight: 500;
+  src: local('Barlow'), url('./fonts/Barlow/Barlow-Medium.woff') format('woff'),
+    url('./fonts/Barlow/Barlow-Medium.ttf') format('truetype');
+}
+
+@font-face {
+  font-display: fallback;
+  font-family: 'Barlow';
+  font-weight: 600;
+  src: local('Barlow'),
+    url('./fonts/Barlow/Barlow-SemiBold.woff') format('woff'),
+    url('./fonts/Barlow/Barlow-SemiBold.ttf') format('truetype');
+}

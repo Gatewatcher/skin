@@ -1,0 +1,25 @@
+@import '@/styles/mixins';
+
+.ChipPreview {
+  border: var(--border-regular);
+  border-color: var(--color-neutral-200);
+  background-color: transparent;
+  color: var(--text-color);
+
+  @include on-dark-theme {
+    border-color: var(--color-neutral-600);
+  }
+
+  &:hover {
+    border-color: var(--color-primary-400);
+
+    @include on-dark-theme {
+      border-color: var(--color-primary-400);
+    }
+  }
+}
+
+.ChipPreviewText {
+  overflow: hidden;
+  max-width: 350px;
+}

@@ -1,0 +1,68 @@
+@import '@/styles/mixins';
+
+.Uploads {
+  position: fixed;
+  z-index: var(--z-index-upload);
+  right: var(--spacing-9);
+  bottom: var(--spacing-9);
+  width: 400px;
+  padding: var(--spacing-6);
+  border-radius: var(--border-radius-regular);
+  background-color: var(--color-white);
+
+  @include on-dark-theme {
+    background-color: var(--color-neutral-800);
+  }
+}
+
+.filesContainer {
+  width: 100%;
+  max-height: 300px;
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  @include child('Grid') {
+    width: 100%;
+
+    > li {
+      min-width: 0;
+      max-width: 100%;
+
+      &:first-of-type {
+        > div {
+          padding-top: 0;
+        }
+      }
+
+      &:last-of-type {
+        > div {
+          padding-bottom: 0;
+        }
+      }
+    }
+  }
+}
+
+.Item {
+  color: var(--text-color);
+
+  &:hover {
+    @include deepInclude('RemoveButton') {
+      opacity: 1;
+    }
+  }
+
+  &Header {
+    max-width: 90%;
+  }
+
+  &Errors {
+    max-width: 70%;
+  }
+}
+
+.RemoveButton {
+  opacity: 0;
+
+  @include transition('regular', 'regular', opacity);
+}

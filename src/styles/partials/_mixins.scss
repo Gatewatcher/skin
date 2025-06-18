@@ -1,0 +1,117 @@
+@import './colors';
+
+// SELECTORS
+
+@mixin deep($class) {
+  [class^='_#{$class}'] {
+    @content;
+  }
+}
+
+@mixin child($class) {
+  > [class^='_#{$class}'] {
+    @content;
+  }
+}
+
+@mixin childInclude($classes...) {
+  @each $class in $classes {
+    > [class*='_#{$class}'] {
+      @content;
+    }
+  }
+}
+
+@mixin deepInclude($class) {
+  [class*='_#{$class}'] {
+    @content;
+  }
+}
+
+@mixin siblings($class) {
+  + [class^='_#{$class}'] {
+    @content;
+  }
+}
+
+@mixin on-dark-theme {
+  @at-root :root[data-theme='dark'] & {
+    @content;
+  }
+}
+
+@mixin on-light-theme {
+  @at-root :root[data-theme='light'] & {
+    @content;
+  }
+}
+
+// FONTS
+
+@mixin font-extra-large {
+  font-size: var(--font-size-extra-large);
+  line-height: var(--font-size-extra-large);
+}
+
+@mixin font-regular {
+  font-size: var(--font-size-regular);
+  line-height: var(--font-line-height-regular);
+}
+
+@mixin font-small {
+  font-size: var(--font-size-small);
+  line-height: var(--font-line-height-small);
+}
+
+@mixin font-extra-small {
+  font-size: var(--font-size-extra-small);
+  line-height: var(--font-line-height-extra-small);
+}
+
+// TRANSITIONS
+
+@mixin transition($duration: 'regular', $timing: 'regular', $properties...) {
+  transition-duration: var(
+    --transition-duration-#{$duration},
+    --transition-duration-regular
+  );
+  transition-property: $properties;
+  transition-timing-function: var(
+    --transition-timing-#{$timing},
+    --transition-timing-regular
+  );
+}
+
+@mixin box-shadow(
+  $blur-radius: 'regular',
+  $opacity: 10,
+  $color: $color-neutral
+) {
+  box-shadow: 0 0
+    var(
+      --box-shadow-blur-radius-#{$blur-radius},
+      var(--box-shadow-blur-radius-regular)
+    )
+    rgba($color, var(--alpha-#{$opacity}, var(--alpha-10)));
+}
+
+@mixin focus($isImportant: false) {
+  @if ($isImportant) {
+    outline: var(--focus-color) solid var(--outline-width) !important;
+  } @else {
+    outline: var(--focus-color) solid var(--outline-width);
+  }
+}
+
+@mixin reset-focus {
+  outline: none !important;
+}
+
+@mixin divider($property: 'border-bottom') {
+  #{$property}: solid 1px var(--divider-color);
+}
+
+@mixin disabled {
+  cursor: not-allowed;
+  opacity: var(--alpha-disabled);
+}

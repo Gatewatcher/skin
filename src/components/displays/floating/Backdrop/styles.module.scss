@@ -1,0 +1,22 @@
+@import '@/styles/colors';
+
+.Backdrop {
+  z-index: var(--z-index-floating-backdrop-index);
+  display: grid;
+  background: var(--color-black-a50);
+  place-items: center;
+}
+
+.scrollable {
+  height: 100%;
+  overflow-y: auto;
+}
+
+.transitionScrollable {
+  height: 100%;
+  padding-top: var(--spacing-12);
+}
+
+.transparent {
+  background: transparent;
+}

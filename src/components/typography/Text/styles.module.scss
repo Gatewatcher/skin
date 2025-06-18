@@ -1,0 +1,51 @@
+@import '@/styles/mixins';
+
+.Text {
+  max-width: 100%;
+  margin: 0;
+  color: var(--text-color);
+  overflow-wrap: break-word;
+  text-overflow: ellipsis;
+
+  &.overflowHidden {
+    overflow: hidden;
+  }
+
+  &.textEllipsis {
+    text-overflow: ellipsis;
+  }
+}
+
+.display {
+  &Inline {
+    display: inline;
+  }
+
+  &InlineBlock {
+    display: inline-block;
+  }
+}
+
+.strong {
+  font-weight: var(--font-weight-medium);
+}
+
+.italic {
+  font-style: italic;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.alignment {
+  display: block;
+}
+
+.strikethrough {
+  text-decoration: line-through;
+}
+
+.underlineStrikethrough {
+  text-decoration: underline line-through;
+}

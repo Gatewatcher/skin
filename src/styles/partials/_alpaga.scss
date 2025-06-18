@@ -1,0 +1,43 @@
+@import './colors';
+
+$color-alpaga-turquoise-50: #ebfdfa;
+$color-alpaga-turquoise-100: #c0f7f0;
+$color-alpaga-turquoise-200: #a2f4e9;
+$color-alpaga-turquoise-300: #78eee0;
+$color-alpaga-turquoise-400: #5debd9;
+$color-alpaga-turquoise-500: #35e6d0;
+$color-alpaga-turquoise-600: #30d1bd;
+$color-alpaga-turquoise-700: #26a394;
+$color-alpaga-turquoise-800: #1d7f72;
+$color-alpaga-turquoise-900: #166157;
+
+$color-alpaga-purple-50: #f3f1fe;
+$color-alpaga-purple-100: #dbd6fd;
+$color-alpaga-purple-200: #c9c0fb;
+$color-alpaga-purple-300: #b1a4fa;
+$color-alpaga-purple-400: #a192f9;
+$color-alpaga-purple-500: #8a77f7;
+$color-alpaga-purple-600: #7e6ce1;
+$color-alpaga-purple-700: #6254af;
+$color-alpaga-purple-800: #4c4188;
+$color-alpaga-purple-900: #3a3268;
+
+$color-alpaga-orchid-50: #faf3ff;
+$color-alpaga-orchid-100: #f0d9fd;
+$color-alpaga-orchid-200: #e9c7fd;
+$color-alpaga-orchid-300: #dfadfc;
+$color-alpaga-orchid-400: #d99dfb;
+$color-alpaga-orchid-500: #cf85fa;
+$color-alpaga-orchid-600: #bc79e4;
+$color-alpaga-orchid-700: #935eb2;
+$color-alpaga-orchid-800: #72498a;
+$color-alpaga-orchid-900: #573869;
+
+$qualitative-alpaga-colors: (
+  0: $color-primary-300,
+  1: $color-alpaga-turquoise-500,
+  2: $color-alpaga-purple-500,
+  3: $color-alpaga-orchid-300,
+  4: $color-alpaga-orchid-700,
+  5: $color-alpaga-turquoise-800,
+);

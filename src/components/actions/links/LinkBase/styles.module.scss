@@ -1,0 +1,107 @@
+@import '@/styles/mixins';
+
+.LinkBase {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  border-radius: var(--border-radius-regular);
+  color: var(--color-primary);
+  cursor: pointer;
+  text-decoration: none;
+
+  @include transition('fast', 'fast', color);
+
+  &:hover {
+    color: var(--color-primary-600);
+    text-decoration: underline;
+  }
+
+  &:focus-visible,
+  &:active {
+    color: var(--color-primary-700);
+  }
+
+  &:focus-visible {
+    @include focus;
+  }
+
+  @include on-dark-theme {
+    color: var(--color-primary-100);
+
+    &:hover {
+      color: var(--color-primary-200);
+    }
+
+    &:active {
+      color: var(--color-primary-300);
+    }
+  }
+}
+
+.size {
+  &Regular {
+    @include font-regular;
+  }
+
+  &Small {
+    @include font-small;
+  }
+
+  &ExtraSmall {
+    @include font-extra-small;
+  }
+}
+
+.variant {
+  &Secondary {
+    color: var(--text-color);
+
+    &:hover,
+    &:active,
+    &:visited {
+      color: var(--text-color);
+    }
+
+    @include on-dark-theme {
+      color: var(--text-color);
+
+      &:hover,
+      &:active,
+      &:visited {
+        color: var(--text-color);
+      }
+    }
+  }
+
+  &Bared {
+    color: var(--text-color);
+    text-decoration: none;
+  }
+
+  &Subtle {
+    color: var(--text-color);
+
+    @include transition(regular, regular, color);
+
+    @include on-dark-theme {
+      color: var(--text-color);
+    }
+  }
+}
+
+.underlined {
+  text-decoration: underline;
+}
+
+.italic {
+  font-style: italic;
+}
+
+.alignBottom {
+  display: inline-block;
+  vertical-align: text-bottom;
+}
+
+.inline {
+  display: inline;
+}

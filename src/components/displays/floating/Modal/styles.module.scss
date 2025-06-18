@@ -1,0 +1,79 @@
+@import '@/styles/mixins';
+@import '@/styles/breakpoints';
+
+.Modal {
+  padding: var(--spacing-9);
+  border: var(--border-regular);
+  border-color: var(--color-neutral-200);
+  border-radius: var(--border-radius-regular);
+  background-color: var(--color-white);
+  color: var(--text-color);
+  overflow-y: auto;
+
+  @include on-dark-theme {
+    border-color: var(--color-neutral-700);
+    background-color: var(--color-neutral-900);
+  }
+}
+
+@mixin full-width-for-small-screens {
+  @media screen and (max-width: #{map-get($breakpoints, 'sm')}px) {
+    width: calc(100vw - var(--spacing-8));
+    max-width: 100vw;
+  }
+}
+
+.size {
+  max-width: 90vw;
+
+  @include full-width-for-small-screens;
+
+  &Medium {
+    width: 60vw;
+
+    @include full-width-for-small-screens;
+  }
+
+  &Large {
+    width: 80vw;
+
+    @include full-width-for-small-screens;
+  }
+
+  &Small {
+    width: 40vw;
+
+    @include full-width-for-small-screens;
+  }
+
+  &SemiFull {
+    width: 90vw;
+
+    @include full-width-for-small-screens;
+  }
+
+  &Full {
+    width: 100vw;
+    max-width: 100vw;
+    height: 100vh;
+    max-height: 100vh !important;
+  }
+}
+
+.scrollOn {
+  &Modal {
+    max-height: 90vh;
+  }
+}
+
+// COMPOUNDS
+.Header {
+  @include font-regular;
+}
+
+.BasicActions {
+  width: 100%;
+}
+.Close {
+  margin-left: auto;
+}

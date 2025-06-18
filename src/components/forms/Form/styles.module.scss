@@ -1,0 +1,5 @@
+.Section {
+  &:not(:last-of-type) {
+    margin-bottom: var(--spacing-9);
+  }
+}

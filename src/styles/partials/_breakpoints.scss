@@ -1,0 +1,73 @@
+@use 'sass:list';
+@use 'sass:map';
+
+$breakpoints: (
+  'xs': 0,
+  'sm': 576,
+  'md': 768,
+  'lg': 992,
+  'xl': 1200,
+  'xxl': 1600,
+);
+
+@mixin generate-variables-from-breakpoints($variablePrefix) {
+  $mapKeys: map.keys($breakpoints);
+  $mapValues: map.values($breakpoints);
+  $firstKey: list.nth($mapKeys, 1);
+
+  // Indexes starting at 1, we want to loop from the second item.
+  @for $currentIndex from 2 through length($breakpoints) {
+    $currentBreakpointKey: list.nth($mapKeys, $currentIndex);
+    $previousBreakpointKey: list.nth($mapKeys, $currentIndex - 1);
+    $currentBreakpointValue: list.nth($mapValues, $currentIndex);
+
+    // Output the current variable, which value is the previous variable.
+    #{$variablePrefix}-#{$currentBreakpointKey}: var(
+      #{$variablePrefix}-#{$previousBreakpointKey}
+    );
+
+    // Output the variable for the current breakpoint, and its corresponding value.
+    @media screen and (min-width: #{$currentBreakpointValue}px) {
+      #{$variablePrefix}: var(#{$variablePrefix}-#{$currentBreakpointKey});
+    }
+  }
+
+  // Output the variable that will be used in the CSS prop.
+  #{$variablePrefix}: var(#{$variablePrefix}-#{$firstKey});
+}
+
+@mixin breakpoint-xs {
+  @media screen and (min-width: 0) {
+    @content;
+  }
+}
+
+@mixin breakpoint-sm {
+  @media screen and (min-width: #{map.get($breakpoints, 'sm')}px) {
+    @content;
+  }
+}
+
+@mixin breakpoint-md {
+  @media screen and (min-width: #{map.get($breakpoints, 'md')}px) {
+    @content;
+  }
+}
+
+@mixin breakpoint-lg {
+  @media screen and (min-width: #{map.get($breakpoints, 'lg')}px) {
+    @content;
+  }
+}
+
+@mixin breakpoint-xl {
+  @media screen and (min-width: #{map.get($breakpoints, 'xl')}px) {
+    @content;
+  }
+}
+
+@mixin breakpoint-xxl {
+  @media screen and (min-width: #{map.get($breakpoints, 'xxl')}px) {
+    @content;
+  }
+}

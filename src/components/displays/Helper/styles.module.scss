@@ -1,0 +1,22 @@
+@import '@/styles/mixins';
+
+.Helper {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: var(--spacing-6);
+  border-radius: var(--border-radius-regular);
+}
+
+.paragraph {
+  width: 100%;
+  margin: 0;
+}
+
+.icon {
+  margin-right: var(--spacing-6);
+}
+
+.close {
+  margin-left: var(--spacing-6);
+}

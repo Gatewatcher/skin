@@ -1,0 +1,29 @@
+@import '@/styles/mixins';
+
+.Tree {
+  --half-checkbox-width: 0.5rem + 1px;
+  --frame-stroke-width: 1px;
+  --node-max-children: 1000;
+  --node-padding: var(--spacing-6);
+  --node-spacing: var(--spacing-6);
+  --path-color: var(--color-neutral-200);
+  --path-gap: var(--spacing-4);
+  --path-stoke-width: 1px;
+  --path-width: var(--spacing-6);
+
+  --node-height: calc(100% + var(--frame-stroke-width) * 2);
+  --path-height: calc(
+    (var(--node-height) + var(--node-spacing)) * var(--node-max-children)
+  );
+  /* stylelint-disable scss/operator-no-newline-after -- conflicts with prettier */
+  --path-gutter: calc(
+    var(--frame-stroke-width) + calc(var(--path-stoke-width) / 2) +
+      var(--path-width) + var(--path-gap) + var(--node-padding) +
+      var(--half-checkbox-width)
+  );
+  /* stylelint-enable scss/operator-no-newline-after */
+
+  @include on-dark-theme {
+    --path-color: var(--color-neutral-600);
+  }
+}

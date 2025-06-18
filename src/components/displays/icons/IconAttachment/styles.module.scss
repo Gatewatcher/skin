@@ -1,0 +1,26 @@
+.icon {
+  &Small,
+  &Medium {
+    > span {
+      transform: scale(1.25);
+    }
+  }
+
+  &Large {
+    > span {
+      transform: scale(1.2);
+    }
+  }
+
+  &XLarge {
+    > span {
+      transform: scale(1.15);
+    }
+  }
+
+  &XxLarge {
+    > span {
+      transform: scale(1.1);
+    }
+  }
+}

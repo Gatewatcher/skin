@@ -1,0 +1,9 @@
+@import '@/styles/mixins';
+
+.Placeholder {
+  color: var(--color-neutral-500);
+
+  @include on-dark-theme {
+    color: var(--text-color);
+  }
+}

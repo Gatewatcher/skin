@@ -1,0 +1,77 @@
+@import '@/styles/mixins';
+
+.buttonFloat {
+  z-index: var(--z-index-floating);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--border-radius-rounded);
+  cursor: pointer;
+
+  @include transition(regular, regular, all);
+
+  &Large {
+    width: var(--spacing-13);
+    height: var(--spacing-13);
+  }
+
+  &Medium {
+    width: var(--spacing-11);
+    height: var(--spacing-11);
+  }
+
+  &Small {
+    width: var(--spacing-9);
+    height: var(--spacing-9);
+  }
+
+  &Contained {
+    border: 0;
+    background-color: var(--color-white);
+
+    @include on-dark-theme {
+      background-color: var(--color-neutral-800);
+    }
+
+    &:hover {
+      background-color: var(--color-neutral-50);
+
+      @include on-dark-theme {
+        background-color: var(--color-neutral-700);
+      }
+    }
+  }
+
+  &Outlined {
+    border: solid 1px;
+    border-color: var(--color-neutral-100);
+    background-color: var(--color-white);
+
+    @include on-dark-theme {
+      border-color: var(--color-neutral-700);
+      background-color: var(--color-neutral-800);
+    }
+
+    &:hover {
+      border-color: var(--color-neutral-200);
+      background-color: var(--color-neutral-50);
+
+      @include on-dark-theme {
+        border-color: var(--color-neutral-600);
+        background-color: var(--color-neutral-700);
+      }
+    }
+
+    &:disabled {
+      border-color: var(--color-neutral-200);
+
+      @include on-dark-theme {
+        border-color: var(--color-neutral-600);
+      }
+    }
+  }
+
+  &:disabled {
+    @include disabled;
+  }
+}

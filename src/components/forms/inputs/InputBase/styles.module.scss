@@ -1,0 +1,56 @@
+@import '@/styles/mixins';
+
+.InputBase:focus-within {
+  @include focus;
+}
+
+.input {
+  width: 100%;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background-color: transparent;
+  color: var(--text-color);
+  outline: none;
+
+  @include font-regular;
+
+  &:read-only {
+    color: var(--color-neutral-600);
+    pointer-events: none;
+
+    @include on-dark-theme {
+      color: var(--color-neutral-300);
+    }
+  }
+
+  &:disabled {
+    color: var(--color-neutral-500);
+
+    @include on-dark-theme {
+      color: var(--color-white);
+    }
+  }
+
+  &:focus,
+  &:active,
+  &:hover {
+    outline: none !important;
+  }
+
+  &::placeholder {
+    color: var(--color-neutral-400);
+  }
+
+  &:placeholder-shown {
+    text-overflow: ellipsis;
+  }
+}
+
+.inputMarginLeft {
+  margin-left: var(--spacing-4);
+}
+
+.inputMarginRight {
+  margin-right: var(--spacing-4);
+}

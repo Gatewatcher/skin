@@ -1,0 +1,16 @@
+@use 'sass:math';
+
+@function color-variant($color, $variant: 500) {
+  @if ($color == 'neutral' and $variant == 700) or
+    ($color != 'neutral' and $variant == 500)
+  {
+    @return var(--color-#{$color});
+  }
+
+  @return var(--color-#{$color}-#{$variant});
+}
+
+@function pxToRem($pxWithoutUnit) {
+  $remFactor: #{math.div(1, 16)}rem;
+  @return calc(#{$remFactor '*' $pxWithoutUnit});
+}

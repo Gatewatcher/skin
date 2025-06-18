@@ -1,0 +1,14 @@
+.Draggable {
+  align-self: center;
+  border-radius: var(--border-radius-regular);
+  user-select: none;
+
+  &:hover {
+    box-shadow: 0 0 5px 3px var(--shadow-color-elevation-2);
+  }
+}
+
+.icon {
+  align-self: center;
+  opacity: 0.25;
+}

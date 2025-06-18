@@ -1,0 +1,31 @@
+@import '../ButtonBase/styles.module';
+
+.ButtonIcon {
+  padding: var(--spacing-3);
+}
+
+.size {
+  &Large {
+    padding: var(--spacing-4);
+  }
+
+  &Small {
+    padding: var(--spacing-2);
+  }
+}
+
+.contained {
+  @include button-contained('Neutral', 'neutral');
+}
+
+.outlined {
+  @include button-outlined('Neutral', 'neutral');
+}
+
+.ghosted {
+  @include button-ghosted('Neutral', 'neutral');
+}
+
+.transparent {
+  @include button-transparent('Neutral', 'neutral');
+}

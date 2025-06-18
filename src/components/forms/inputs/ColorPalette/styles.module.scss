@@ -1,0 +1,53 @@
+@import '@/styles/mixins';
+
+.ColorPalette {
+  width: fit-content;
+}
+
+.ColorInput {
+  width: 20px;
+}
+
+.ColorChoice {
+  display: grid;
+  width: 18px;
+  height: 18px;
+  border-radius: var(--border-radius-rounded);
+  margin: 0;
+  -webkit-appearance: none;
+  appearance: none;
+  content: '';
+  cursor: pointer;
+  transition: var(--transition-duration-fast) transform ease-in-out;
+
+  &::before {
+    width: 12px;
+    height: 12px;
+    align-self: center;
+    border-radius: var(--border-radius-rounded);
+    content: '';
+    justify-self: center;
+    outline: 3px solid var(--color-white);
+    outline-offset: -1px;
+    transform: scale(0);
+    transition: var(--transition-duration-fast) transform ease-in-out;
+
+    @include on-dark-theme {
+      outline-color: var(--color-neutral-900);
+    }
+  }
+
+  &:checked::before {
+    transform: scale(1);
+  }
+
+  &:focus,
+  &:active {
+    outline: 3px solid;
+  }
+
+  &:not(:checked):focus,
+  &:not(:checked):hover {
+    transform: scale(1.1);
+  }
+}

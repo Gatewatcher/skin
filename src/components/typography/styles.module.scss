@@ -1,0 +1,117 @@
+@import '@/styles/mixins';
+
+.size {
+  &Regular {
+    @include font-regular;
+  }
+
+  &Small {
+    @include font-small;
+  }
+
+  &ExtraSmall {
+    @include font-extra-small;
+  }
+}
+
+.overflowWrap {
+  &Normal {
+    overflow-wrap: normal;
+  }
+
+  &Anywhere {
+    overflow-wrap: anywhere;
+  }
+
+  &BreakWord {
+    overflow-wrap: break-word;
+  }
+}
+
+.wordBreak {
+  &WordBreak {
+    word-break: break-word;
+  }
+
+  &BreakWord {
+    word-break: break-word;
+  }
+
+  &BreakAll {
+    word-break: break-all;
+  }
+
+  &KeepAll {
+    word-break: keep-all;
+  }
+}
+
+.weight {
+  &Medium {
+    font-weight: var(--font-weight-medium);
+  }
+
+  &Semibold {
+    font-weight: var(--font-weight-semibold);
+  }
+}
+
+.whiteSpace {
+  &Normal {
+    white-space: normal;
+  }
+
+  &Nowrap {
+    white-space: nowrap;
+  }
+
+  &Pre {
+    white-space: pre;
+  }
+
+  &PreWrap {
+    white-space: pre-wrap;
+  }
+
+  &PreLine {
+    white-space: pre-line;
+  }
+}
+
+.alignment {
+  &Start {
+    text-align: start;
+  }
+
+  &End {
+    text-align: end;
+  }
+
+  &Center {
+    text-align: center;
+  }
+
+  &Justify {
+    text-align: justify;
+  }
+}
+
+.transform {
+  &Capitalize {
+    text-transform: capitalize;
+  }
+
+  &CapitalizeFirstLetter {
+    &::first-letter {
+      text-transform: capitalize;
+    }
+  }
+
+  &Lowercase {
+    text-transform: lowercase;
+  }
+
+  &Uppercase {
+    text-transform: uppercase;
+  }
+}

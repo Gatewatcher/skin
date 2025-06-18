@@ -1,0 +1,89 @@
+@import '@/styles/mixins';
+
+@mixin input {
+  padding: var(--spacing-4) var(--spacing-6);
+  border: 1px solid;
+  border-color: var(--color-neutral-200);
+  border-radius: var(--border-radius-regular);
+  background-color: transparent;
+  color: var(--text-color);
+
+  &:focus {
+    @include focus;
+  }
+
+  @include on-dark-theme {
+    border-color: var(--color-neutral-600);
+  }
+}
+
+.Input {
+  @include input;
+}
+
+.readonly {
+  border: solid 1px;
+  border-color: var(--color-neutral-200);
+  background-color: var(--color-neutral-50-a70);
+
+  @include reset-focus;
+
+  @include on-dark-theme {
+    border-color: var(--color-neutral-600);
+    background-color: var(--color-neutral-800-a70);
+  }
+}
+
+.disabled {
+  border-color: var(--color-neutral-200);
+
+  @include disabled;
+  @include reset-focus;
+
+  @include on-dark-theme {
+    border-color: var(--color-neutral-600);
+  }
+}
+
+.fitContent {
+  width: fit-content;
+  min-width: 200px;
+}
+
+.errors {
+  border-color: var(--color-danger-600);
+
+  @include on-dark-theme {
+    border-color: var(--color-danger-400);
+  }
+}
+
+.container {
+  display: flex;
+  width: max-content;
+  flex-direction: column;
+}
+
+.bottomText {
+  margin-top: var(--spacing-2);
+  font-weight: var(--font-weight-medium);
+
+  @include font-extra-small;
+
+  &Helper {
+    color: var(--color-neutral-400);
+  }
+
+  &Errors {
+    color: var(--color-danger-600);
+
+    @include on-dark-theme {
+      color: var(--color-danger-400);
+    }
+  }
+}
+
+.withElementBeforeOrAfter {
+  display: flex;
+  column-gap: var(--spacing-4);
+}

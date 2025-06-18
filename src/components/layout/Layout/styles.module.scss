@@ -1,0 +1,43 @@
+@use 'sass:map';
+@import '@/styles/breakpoints';
+
+.Layout {
+  display: flex;
+  min-height: 100vh;
+  flex-flow: row nowrap;
+  align-items: stretch;
+}
+
+.sideNavZone {
+  flex: 0 1 auto;
+}
+
+.topNavZone {
+  position: sticky;
+  z-index: var(--z-index-top-nav-zone);
+  top: 0;
+  flex: 0 1 auto;
+}
+
+.mainZone {
+  display: flex;
+  width: 0;
+  flex: 1 1 auto;
+  flex-flow: column nowrap;
+  align-items: stretch;
+}
+
+.panelOverflow {
+  overflow-x: auto;
+  scrollbar-gutter: stable;
+}
+
+.contentZone {
+  width: 100%;
+  flex: 1 1 auto;
+  margin: 0 auto;
+
+  &MinWidth {
+    min-width: #{map.get($breakpoints, 'xl')}px;
+  }
+}

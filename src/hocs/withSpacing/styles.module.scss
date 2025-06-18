@@ -1,0 +1,67 @@
+@import '@/styles/breakpoints';
+
+.Spacings {
+  &Padding {
+    @include generate-variables-from-breakpoints('--padding');
+    padding: var(--padding);
+
+    &Top {
+      @include generate-variables-from-breakpoints('--padding-top');
+      padding-top: var(--padding-top);
+    }
+    &Right {
+      @include generate-variables-from-breakpoints('--padding-right');
+      padding-right: var(--padding-right);
+    }
+    &Bottom {
+      @include generate-variables-from-breakpoints('--padding-bottom');
+      padding-bottom: var(--padding-bottom);
+    }
+    &Left {
+      @include generate-variables-from-breakpoints('--padding-left');
+      padding-left: var(--padding-left);
+    }
+    &X {
+      @include generate-variables-from-breakpoints('--padding-x');
+      padding-right: var(--padding-x);
+      padding-left: var(--padding-x);
+    }
+    &Y {
+      @include generate-variables-from-breakpoints('--padding-y');
+      padding-top: var(--padding-y);
+      padding-bottom: var(--padding-y);
+    }
+  }
+
+  &Margin {
+    @include generate-variables-from-breakpoints('--margin');
+    margin: var(--margin);
+
+    &Top {
+      @include generate-variables-from-breakpoints('--margin-top');
+      margin-top: var(--margin-top);
+    }
+    &Right {
+      @include generate-variables-from-breakpoints('--margin-right');
+      margin-right: var(--margin-right);
+    }
+    &Bottom {
+      @include generate-variables-from-breakpoints('--margin-bottom');
+      margin-bottom: var(--margin-bottom);
+    }
+    &Left {
+      @include generate-variables-from-breakpoints('--margin-left');
+      margin-left: var(--margin-left);
+    }
+    &X {
+      @include generate-variables-from-breakpoints('--margin-x');
+      margin-right: var(--margin-x);
+      margin-left: var(--margin-x);
+    }
+    &Y {
+      @include generate-variables-from-breakpoints('--margin-y');
+      margin-top: var(--margin-y);
+      margin-bottom: var(--margin-y);
+    }
+  }
+}

@@ -1,0 +1,45 @@
+@import '@/styles/mixins';
+
+@mixin padding {
+  padding: var(--spacing-8);
+}
+
+.Accordion {
+  overflow: hidden;
+  border: var(--border-regular);
+  border-color: var(--color-neutral-200);
+  border-radius: var(--border-radius-regular);
+
+  @include on-dark-theme {
+    border-color: var(--color-neutral-600);
+  }
+}
+
+.Title {
+  cursor: pointer;
+
+  @include padding;
+  @include child('Title') {
+    font-weight: var(--font-weight-medium);
+  }
+
+  @include transition('regular', 'regular', all);
+
+  > span {
+    @include transition('regular', 'regular', transform);
+  }
+
+  &Opened {
+    > span {
+      &:last-of-type {
+        transform: rotate(180deg);
+      }
+    }
+  }
+}
+
+.Body {
+  @include padding;
+  padding-top: 0;
+  overflow-wrap: break-word;
+}

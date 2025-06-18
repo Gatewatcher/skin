@@ -1,0 +1,99 @@
+@import '@/styles/mixins';
+
+.Switch {
+  $input-width: 44px;
+  $toggle-size: 16px;
+  $toggle-offset: 4px;
+
+  --checked-color: var(--color-primary);
+
+  width: fit-content;
+
+  @include on-dark-theme {
+    --checked-color: var(--color-primary-400);
+  }
+
+  > input {
+    margin-left: calc(var(--spacing-4) * -1 - var(--spacing-1));
+    appearance: none;
+
+    &:not(:disabled):focus-visible {
+      ~ div {
+        @include focus;
+      }
+    }
+
+    &:not(:checked) {
+      ~ div {
+        @include childInclude('iconStart') {
+          transform: scale(0.3);
+        }
+      }
+    }
+
+    &:checked {
+      ~ div {
+        background: var(--checked-color);
+
+        @include childInclude('iconEnd') {
+          transform: scale(0.3);
+        }
+
+        &::after {
+          left: $input-width - $toggle-size - $toggle-offset;
+        }
+      }
+    }
+  }
+
+  > div {
+    position: relative;
+    display: flex;
+    width: $input-width;
+    height: 22px;
+    align-items: center;
+    border-radius: var(--border-radius-rounded);
+    background-color: var(--color-neutral-400);
+    cursor: pointer;
+
+    @include transition('regular', 'regular', background-color, opacity, color);
+
+    &::after {
+      position: absolute;
+      left: $toggle-offset;
+      display: flex;
+      width: $toggle-size;
+      height: $toggle-size;
+      border-radius: var(--border-radius-rounded);
+      background-color: var(--color-white);
+
+      content: '';
+
+      @include transition('regular', 'regular', left);
+    }
+  }
+}
+
+.disabled {
+  pointer-events: none;
+
+  @include disabled;
+}
+
+.icon {
+  position: absolute;
+
+  @include transition('regular', 'regular', transform);
+
+  &Start {
+    left: var(--spacing-2);
+  }
+
+  &End {
+    right: var(--spacing-2);
+  }
+}
+
+.container {
+  width: fit-content;
+}

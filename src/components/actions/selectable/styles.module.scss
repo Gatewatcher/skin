@@ -1,0 +1,84 @@
+@import '@/styles/mixins';
+
+@mixin focused {
+  background-color: var(--color-neutral-50) !important;
+  @include on-dark-theme {
+    background-color: var(--color-neutral-a45) !important;
+  }
+}
+
+@mixin active {
+  background-color: var(--color-neutral-100) !important;
+  @include on-dark-theme {
+    background-color: var(--color-neutral-a75) !important;
+  }
+}
+
+.Item {
+  all: unset;
+  display: flex;
+  width: 100%;
+  box-sizing: border-box;
+  cursor: pointer;
+
+  @include transition('regular', 'regular', background-color);
+
+  &:first-child {
+    border-top-left-radius: var(--border-radius-regular);
+    border-top-right-radius: var(--border-radius-regular);
+  }
+
+  &:last-child {
+    border-bottom-left-radius: var(--border-radius-regular);
+    border-bottom-right-radius: var(--border-radius-regular);
+  }
+
+  &:focus-visible {
+    outline-offset: calc(-1 * var(--outline-width));
+
+    @include focus;
+  }
+
+  &Disabled {
+    pointer-events: none;
+
+    @include disabled;
+  }
+
+  &Focused,
+  &:hover,
+  &:focus {
+    @include focused;
+  }
+
+  &Selected,
+  &:active {
+    @include active;
+  }
+
+  &ContentFill {
+    .itemContent {
+      max-width: 100%;
+    }
+  }
+}
+
+.itemContent {
+  max-width: 400px;
+  flex: 1 1 auto;
+
+  @include child('Text') {
+    display: block;
+    flex-grow: 1;
+  }
+}
+
+.startElementContainer {
+  margin-right: var(--spacing-4);
+  line-height: 0;
+}
+
+.endElementContainer {
+  margin-left: var(--spacing-4);
+  line-height: 0;
+}

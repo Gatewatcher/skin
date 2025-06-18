@@ -1,0 +1,36 @@
+@import '@/styles/mixins';
+
+.pointer {
+  width: 100%;
+  cursor: pointer;
+}
+
+.ResumeItem {
+  line-height: 0;
+}
+
+.Panels {
+  &ListContainer {
+    overflow-y: auto;
+  }
+}
+
+.PanelItem {
+  &Disabled {
+    @include deep(Radio) {
+      --checked-color: var(--color-neutral-400);
+
+      @include on-dark-theme {
+        --checked-color: var(--color-neutral-400);
+      }
+
+      &:has(> input:disabled) {
+        opacity: 1;
+      }
+    }
+  }
+
+  &Placdeholder {
+    width: 24px;
+  }
+}

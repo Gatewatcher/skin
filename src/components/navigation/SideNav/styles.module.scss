@@ -1,0 +1,149 @@
+@import '@/styles/mixins';
+
+$logo-height: 64px;
+
+.SideNav {
+  position: relative;
+  display: flex;
+  width: 66px;
+  height: 100vh;
+  flex-direction: column;
+  padding: var(--spacing-5);
+  padding-top: 0;
+  border-right: solid 1px var(--color-neutral-200);
+  background-color: var(--color-neutral-50);
+  text-align: center;
+
+  @include on-dark-theme {
+    border: 1px solid var(--color-neutral-700);
+    background-color: var(--color-neutral-800);
+  }
+
+  @include transition('regular', 'regular', width);
+
+  &Opened {
+    width: 232px;
+
+    @include transition('regular', 'regular', width);
+  }
+
+  ul {
+    list-style: none;
+  }
+
+  a {
+    &:focus {
+      outline: none !important;
+    }
+  }
+}
+
+.linkList {
+  overflow: hidden;
+}
+
+.Button {
+  position: absolute;
+  z-index: var(--z-index-side-nav-button);
+  top: 50px;
+  right: -15px;
+  display: flex;
+  width: 26px;
+  height: 26px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--color-neutral-200);
+  border-radius: var(--border-radius-rounded);
+  background-color: var(--color-neutral-50);
+
+  @include on-dark-theme {
+    border: 1px solid var(--color-neutral-700);
+    background-color: var(--color-neutral-800);
+  }
+
+  &Opened {
+    transform: rotate(180deg);
+
+    @include transition('regular', 'regular', transform);
+  }
+
+  &:hover {
+    background-color: var(--color-neutral-100);
+
+    @include on-dark-theme {
+      background-color: var(--color-neutral-900);
+    }
+  }
+}
+
+// COMPOUNDS
+.Item {
+  width: 100%;
+
+  &Dropdown {
+    width: 200px;
+    margin-left: var(--spacing-10);
+  }
+}
+
+.Link {
+  cursor: pointer;
+
+  &Nav {
+    display: inline-flex;
+    width: 211px;
+    align-items: center;
+    padding: var(--spacing-5);
+    border-radius: var(--border-radius-large);
+    color: var(--color-neutral-700);
+    gap: var(--spacing-5);
+    text-decoration: none;
+
+    @include transition('regular', 'regular', width);
+    @include transition('regular', 'regular', background-color);
+
+    @include on-dark-theme {
+      color: var(--color-neutral-100);
+    }
+
+    &:hover,
+    &Active {
+      background-color: var(--color-neutral-100);
+
+      @include on-dark-theme {
+        background-color: var(--color-neutral-900);
+      }
+    }
+
+    &Closed {
+      width: 45px;
+
+      @include transition('regular', 'regular', width);
+    }
+  }
+
+  &Text {
+    &Closed {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      border: 0;
+      margin: -1px;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+    }
+
+    @include font-small;
+  }
+}
+
+.Footer {
+  overflow: hidden;
+
+  @include transition('regular', 'regular', width);
+
+  &Closed {
+    @include transition('regular', 'regular', width);
+  }
+}

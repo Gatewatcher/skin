@@ -1,0 +1,29 @@
+@import '@/styles/mixins';
+
+.Card {
+  overflow: hidden;
+  border: var(--border-regular);
+  border-color: var(--color-neutral-200);
+  border-radius: var(--border-radius-regular);
+  background: var(--color-white);
+
+  @include on-dark-theme {
+    border-color: var(--color-neutral-700);
+    background: var(--color-neutral-900);
+  }
+}
+
+// COMPOUNDS
+.Header {
+  &Border {
+    border-bottom: var(--border-regular) var(--color-neutral-200);
+  }
+
+  @include on-dark-theme {
+    border-color: var(--color-neutral-700);
+  }
+}
+
+.Title {
+  overflow: hidden;
+}

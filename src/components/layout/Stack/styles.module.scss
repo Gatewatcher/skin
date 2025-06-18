@@ -1,0 +1,78 @@
+@import '@/styles/breakpoints';
+
+.Stack {
+  display: flex;
+}
+
+.alignContent {
+  align-content: var(--stack-align-content);
+
+  @include generate-variables-from-breakpoints('--stack-align-content');
+}
+
+.alignItems {
+  align-items: var(--stack-align-items);
+
+  @include generate-variables-from-breakpoints('--stack-align-items');
+}
+
+.alignSelf {
+  align-self: var(--stack-align-self);
+
+  @include generate-variables-from-breakpoints('--stack-align-self');
+}
+
+.flex {
+  flex: var(--stack-flex);
+
+  @include generate-variables-from-breakpoints('--stack-flex');
+}
+
+.flexBasis {
+  flex-basis: var(--stack-flex-basis);
+
+  @include generate-variables-from-breakpoints('--stack-flex-basis');
+}
+
+.flexDirection {
+  flex-direction: var(--stack-flex-direction);
+
+  @include generate-variables-from-breakpoints('--stack-flex-direction');
+}
+
+.flexGrow {
+  flex-grow: var(--stack-flex-grow);
+
+  @include generate-variables-from-breakpoints('--stack-flex-grow');
+}
+
+.flexShrink {
+  flex-shrink: var(--stack-flex-shrink);
+
+  @include generate-variables-from-breakpoints('--stack-flex-shrink');
+}
+
+.flexWrap {
+  flex-wrap: var(--stack-flex-wrap);
+
+  @include generate-variables-from-breakpoints('--stack-flex-wrap');
+}
+
+.gap {
+  gap: var(--stack-gap-x, 0) var(--stack-gap-y, 0);
+
+  @include generate-variables-from-breakpoints('--stack-gap-x');
+  @include generate-variables-from-breakpoints('--stack-gap-y');
+}
+
+.justifyContent {
+  justify-content: var(--stack-justify-content);
+
+  @include generate-variables-from-breakpoints('--stack-justify-content');
+}
+
+.order {
+  order: var(--stack-order);
+
+  @include generate-variables-from-breakpoints('--stack-order');
+}

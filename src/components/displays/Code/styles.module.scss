@@ -1,0 +1,18 @@
+@import '@/styles/mixins';
+
+.Code {
+  display: inline-block;
+  padding: var(--spacing-1) var(--spacing-2) var(--spacing-2);
+  border-radius: var(--border-radius-small);
+  background-color: var(--color-neutral-100);
+
+  &.block {
+    display: block;
+    padding: var(--spacing-1) var(--spacing-5) var(--spacing-3);
+    white-space: pre-wrap;
+  }
+
+  @include on-dark-theme {
+    background-color: var(--color-neutral-700);
+  }
+}

@@ -1,0 +1,91 @@
+@import '@/styles/mixins';
+
+.Radio {
+  --unckecked-color: var(--color-neutral-400);
+  --checked-color: var(--color-primary);
+
+  @include on-dark-theme {
+    --checked-color: var(--color-primary-400);
+  }
+
+  display: flex;
+  width: fit-content;
+  align-items: center;
+  cursor: pointer;
+
+  &:has(> input:disabled) {
+    pointer-events: none;
+
+    @include disabled;
+  }
+
+  > input {
+    display: grid;
+    width: 1rem;
+    height: 1rem;
+    flex-shrink: 0;
+    border: var(--border-regular);
+    border-color: var(--unckecked-color);
+    border-radius: 50%;
+    margin: 0;
+    appearance: none;
+    cursor: pointer;
+    place-content: center;
+
+    @include transition('regular', 'regular', border-color);
+
+    ~ label {
+      padding-left: var(--spacing-4);
+      cursor: pointer;
+
+      @include child('Text') {
+        @include transition('regular', 'regular', color);
+      }
+    }
+
+    &::before {
+      width: 1rem;
+      height: 1rem;
+      border-radius: 50%;
+      background-color: var(--checked-color);
+      content: '';
+      transform: scale(0);
+
+      @include transition('fast', 'regular', transform);
+    }
+
+    &:checked {
+      border-color: var(--checked-color);
+
+      ~ label {
+        @include child('Text') {
+          color: var(--checked-color);
+        }
+      }
+
+      &::before {
+        transform: scale(0.6);
+      }
+    }
+
+    &:focus-visible {
+      outline-offset: 0;
+
+      @include focus;
+    }
+
+    &:active {
+      &:not(:checked) {
+        &::before {
+          transform: scale(0.2);
+        }
+      }
+    }
+  }
+
+  &:hover {
+    > input {
+      border-color: var(--checked-color);
+    }
+  }
+}

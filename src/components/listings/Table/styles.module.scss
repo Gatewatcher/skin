@@ -1,0 +1,366 @@
+@import '@/styles/mixins';
+
+.container {
+  position: relative;
+}
+
+.content {
+  overflow-x: auto;
+}
+
+.scrollableObserverLeft {
+  width: 1px;
+  margin-right: -1px;
+}
+
+.scrollableObserverRight {
+  width: 1px;
+  margin-left: -1px;
+}
+
+.scrollable {
+  @mixin scrollable {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    bottom: 0;
+    width: 30px;
+    content: '';
+    pointer-events: none;
+
+    @content;
+  }
+
+  &Left {
+    &::before {
+      @include scrollable {
+        left: 0;
+        box-shadow: inset 10px 0 8px -8px var(--shadow-color-elevation-2);
+        inset-inline-start: 0;
+
+        @include on-dark-theme {
+          box-shadow: inset 10px 0 8px -8px var(--shadow-color-elevation-2);
+        }
+      }
+    }
+  }
+
+  &Right {
+    &::after {
+      @include scrollable {
+        right: 0;
+        box-shadow: inset -10px 0 8px -8px var(--shadow-color-elevation-2);
+        inset-inline-end: 0;
+
+        @include on-dark-theme {
+          box-shadow: inset -10px 0 8px -8px var(--shadow-color-elevation-2);
+        }
+      }
+    }
+  }
+}
+
+.Table {
+  position: relative;
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+
+  &Layout {
+    &Auto {
+      table-layout: auto;
+    }
+
+    &Fixed {
+      table-layout: fixed;
+
+      &Empty {
+        th {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  &Resizable {
+    width: fit-content;
+    min-width: 100%;
+  }
+}
+
+.Borders {
+  --table-cell-border-color: var(--color-neutral-100);
+
+  @include on-dark-theme {
+    --table-cell-border-color: var(--color-neutral-700);
+  }
+}
+
+// CELL
+.Cell {
+  min-width: var(--spacing-12);
+  padding: var(--spacing-5) var(--spacing-6);
+  border-bottom: solid 1px;
+  border-bottom-color: var(--table-cell-border-color);
+  color: var(--text-color);
+
+  line-height: 0;
+
+  @include font-regular;
+
+  @include childInclude('FloatingActions') {
+    display: flex;
+    width: 100%;
+    line-height: var(--font-size-regular);
+  }
+
+  @include childInclude('OverflownText', 'OverflownLink') {
+    line-height: 0;
+  }
+
+  &:has(> [class*=' _OverflownText']) {
+    line-height: 0;
+  }
+
+  &Fit {
+    width: 0;
+    min-width: fit-content;
+  }
+
+  &Muted > * {
+    opacity: var(--alpha-muted);
+  }
+}
+
+// ACTIONS
+.ActionsCell {
+  &Dropdown {
+    min-width: 150px;
+  }
+
+  &Link {
+    &:hover,
+    &:focus {
+      @include reset-focus;
+
+      background-color: transparent !important;
+      cursor: default;
+    }
+  }
+}
+
+.Action {
+  all: unset;
+  border-radius: var(--border-radius-regular);
+  cursor: pointer;
+
+  &:focus-visible {
+    @include focus;
+  }
+}
+
+// HEADERS
+.Headers {
+  position: relative;
+  z-index: 2;
+
+  &Sticky {
+    position: sticky;
+    top: 0;
+
+    background: var(--body-background-color);
+  }
+}
+
+// HeaderCell
+.HeaderCell {
+  position: relative;
+  min-width: var(--spacing-12);
+  padding: var(--spacing-5) var(--spacing-6);
+  border-bottom: solid 1px;
+  border-bottom-color: var(--table-cell-border-color);
+  color: var(--color-neutral);
+  font-weight: var(--font-weight-medium);
+  text-align: left;
+
+  .columnResizer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 5px;
+    height: calc(100% - var(--spacing-4));
+    cursor: col-resize;
+    padding-block: var(--spacing-2);
+    user-select: none;
+  }
+
+  .resizerArea {
+    position: absolute;
+    z-index: 10;
+    top: 0;
+    right: 0;
+    width: var(--spacing-13);
+    height: calc(100% - var(--spacing-4));
+    cursor: col-resize;
+    transform: translateX(50%);
+    user-select: none;
+
+    &:last-of-type {
+      width: var(--spacing-8);
+      transform: none;
+    }
+  }
+
+  .resizing {
+    border-right: 2px solid var(--table-cell-border-color);
+  }
+
+  .pinsContainer {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+  }
+
+  &:hover {
+    .columnResizer {
+      border-right: 2px solid var(--table-cell-border-color);
+    }
+  }
+
+  .pinIcon {
+    cursor: pointer;
+  }
+
+  @include font-regular;
+
+  &Sortable {
+    width: fit-content;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  &Disabled {
+    cursor: default;
+  }
+
+  &NoWrap {
+    white-space: nowrap;
+  }
+
+  &Sort {
+    color: var(--color-neutral-400);
+
+    @include on-dark-theme {
+      color: var(--color-neutral-500);
+    }
+
+    &:first-of-type {
+      margin-bottom: calc(-1 * var(--spacing-2));
+    }
+
+    &:last-of-type {
+      margin-top: calc(-1 * var(--spacing-2));
+    }
+
+    &Active {
+      color: var(--color-neutral);
+
+      @include on-dark-theme {
+        color: var(--color-neutral-300);
+      }
+    }
+  }
+
+  @include on-dark-theme {
+    color: var(--text-color);
+  }
+}
+
+.Row {
+  @include transition('regular', 'regular', var(--background-color));
+
+  &Clickable {
+    cursor: pointer;
+
+    &:hover {
+      .Cell {
+        background-color: var(--hovered-row-background);
+      }
+    }
+  }
+
+  &Selected {
+    .Cell {
+      background-color: var(--selected-row-background);
+    }
+  }
+
+  &:last-of-type {
+    @include childInclude('Cell') {
+      border: none;
+    }
+  }
+}
+
+.BatchActions {
+  border-radius: var(--border-radius-large);
+  background-color: var(--color-white);
+  transition: opacity 0.5s ease-in-out;
+
+  &DelayedOpacity {
+    opacity: 0.5;
+  }
+
+  &:hover {
+    opacity: 1;
+  }
+
+  @include on-dark-theme {
+    background-color: var(--color-neutral-700);
+  }
+
+  &Border {
+    border-bottom: solid 1px;
+    border-bottom-color: var(--color-neutral-200);
+
+    @include on-dark-theme {
+      border-bottom-color: var(--color-neutral-600);
+    }
+  }
+
+  &Container {
+    position: fixed;
+    z-index: 2;
+    right: 0;
+    bottom: 100px;
+    left: 0;
+    width: 40%;
+    min-width: 500px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  &Actions {
+    width: 100%;
+  }
+
+  &DropdownAction {
+    &Icon {
+      @include transition('regular', 'regular', transform);
+
+      &UpsideDown {
+        transform: rotate(-180deg);
+      }
+    }
+  }
+}
+
+.pinnedCell {
+  position: sticky;
+  z-index: 2;
+  background-color: var(--body-background-color);
+}
+
+.pinningActionsContainer {
+  width: 180px;
+}

@@ -1,0 +1,135 @@
+@import '@/styles/mixins';
+
+.TitleList {
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+  margin-bottom: var(--spacing-8);
+  list-style: none;
+}
+
+.Title {
+  --stepper-point-size: 14px;
+
+  --stepper-point-color: var(--color-neutral-300);
+  --stepper-point-color-active: var(--color-primary-600);
+  --stepper-connector-color: var(--color-neutral-200);
+  --stepper-connector-color-active: var(--color-primary-600);
+  --stepper-title-color: var(--color-neutral-500);
+  --stepper-title-color-active: var(--color-primary-600);
+
+  @include on-dark-theme {
+    --stepper-point-color: var(--color-neutral-300);
+    --stepper-point-color-active: var(--color-primary-400);
+    --stepper-connector-color: var(--color-neutral-400);
+    --stepper-connector-color-active: var(--color-primary-400);
+    --stepper-title-color: var(--color-neutral-400);
+    --stepper-title-color-active: var(--color-primary-400);
+  }
+
+  position: relative;
+  width: 100%;
+
+  &::before {
+    position: absolute;
+    z-index: var(--z-index-behind);
+    top: calc(var(--stepper-point-size) / 2);
+    left: 50%;
+    width: 100%;
+    height: 3px;
+    background: var(--stepper-connector-color);
+    content: '';
+
+    @include transition('regular', 'regular', background-color);
+  }
+
+  &ListItem {
+    padding-top: 3px;
+
+    &:last-child {
+      ::before {
+        display: none;
+      }
+    }
+  }
+
+  &Active {
+    @include child('TitlePoint') {
+      border-color: var(--stepper-point-color-active);
+    }
+
+    @include child('TitleText') {
+      color: var(--stepper-title-color-active);
+      font-weight: var(--font-weight-semibold);
+    }
+  }
+
+  &Done {
+    @include child('TitlePoint') {
+      border-color: var(--stepper-point-color-active);
+      background-color: var(--stepper-point-color-active);
+      cursor: pointer;
+    }
+
+    @include child('TitleText') {
+      color: var(--stepper-title-color-active);
+      cursor: pointer;
+      font-weight: var(--font-weight-semibold);
+    }
+
+    &::before {
+      background-color: var(--stepper-connector-color-active);
+    }
+  }
+
+  &Point {
+    position: relative;
+    width: var(--stepper-point-size);
+    height: var(--stepper-point-size);
+    box-sizing: content-box;
+    border: solid 2px;
+    border-color: var(--stepper-point-color);
+    border-radius: var(--border-radius-rounded);
+    background-color: var(--body-background-color);
+    outline: solid 3px;
+    outline-color: var(--body-background-color);
+
+    @include transition('regular', 'regular', all);
+  }
+
+  &Text {
+    max-width: 120px;
+    padding-top: var(--spacing-4);
+    color: var(--stepper-title-color);
+    text-align: center;
+
+    @include transition('regular', 'regular', color);
+
+    @include font-regular;
+  }
+}
+
+.PanelList {
+  position: relative;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.StepperPanel:not(.Active) {
+  display: none !important;
+}
+
+.Navigation {
+  &FirstStep {
+    > :last-child {
+      margin-left: auto;
+    }
+  }
+
+  &LastStep {
+    > :first-child {
+      margin-right: auto;
+    }
+  }
+}

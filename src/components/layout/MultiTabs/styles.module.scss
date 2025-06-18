@@ -1,0 +1,121 @@
+@import '@/styles/mixins';
+
+.multiTabsContainer {
+  --bottom-border-width: 2px;
+  display: flex;
+  overflow: hidden;
+  max-width: 100%;
+  flex-direction: column;
+}
+
+.multiTabHeader {
+  position: sticky;
+  top: 0;
+  right: 0;
+  max-width: 100%;
+  flex: 0 0 auto;
+  background-color: var(--body-background-color);
+  user-select: none;
+
+  &.withBorderBottom {
+    &:before {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      height: var(--bottom-border-width);
+      background-color: var(--color-neutral-200);
+      content: '';
+
+      @include on-dark-theme {
+        border-color: var(--color-neutral-600);
+      }
+    }
+  }
+}
+
+.tabList {
+  overflow: hidden;
+}
+
+.tab {
+  height: 100%;
+  padding: var(--spacing-6);
+  border-bottom: var(--bottom-border-width) solid transparent;
+  cursor: pointer;
+  opacity: 0.75;
+
+  &.active {
+    border-color: var(--color-primary);
+  }
+
+  &:hover,
+  &.active {
+    opacity: 1;
+  }
+}
+
+.title {
+  color: var(--color-primary);
+}
+
+.toolbar {
+  flex-shrink: 0;
+}
+
+.closeButton {
+  margin-right: calc(-1 * var(--spacing-3));
+}
+
+.carouselContainer {
+  position: relative;
+  overflow: hidden;
+}
+
+.gradientDivider {
+  --width: var(--spacing-6);
+  position: sticky;
+  z-index: 1;
+  right: 0;
+  display: flex;
+  width: var(--width);
+  flex: 0 0 var(--width);
+  align-items: center;
+  align-self: stretch;
+  margin-bottom: var(--bottom-border-width);
+  pointer-events: none;
+
+  &.toTheLeft {
+    margin-left: calc(-1 * var(--width));
+    background: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0) 0%,
+      var(--body-background-color) 100%
+    );
+  }
+
+  &.toTheRight {
+    margin-right: calc(-1 * var(--width));
+    background: linear-gradient(
+      to left,
+      rgba(0, 0, 0, 0) 0%,
+      var(--body-background-color) 100%
+    );
+  }
+}
+
+.panel {
+  position: relative;
+  overflow: auto;
+  flex: 1 1 auto;
+
+  /*
+    Web browsers may implement the hidden state using display: none, in which case the element will not participate in page layout.
+    This also means that changing the value of the CSS display property on an element in the hidden state will override the state.
+    For instance, elements styled display: block will be displayed despite the hidden attribute's presence.
+    https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/hidden#the_hidden_state
+  */
+  &[hidden] {
+    display: none !important;
+  }
+}

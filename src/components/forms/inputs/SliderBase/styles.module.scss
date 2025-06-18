@@ -1,0 +1,58 @@
+@import '@/styles/mixins';
+
+.header {
+  margin-bottom: var(--spacing-2);
+}
+
+.main {
+  display: flex;
+}
+
+.label {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  color: var(--text-color);
+  white-space: pre-line;
+
+  @include font-small;
+
+  &Start {
+    justify-content: flex-end;
+    margin-right: var(--spacing-10);
+  }
+
+  &End {
+    margin-left: var(--spacing-10);
+  }
+}
+
+.mainLabel {
+  color: var(--text-color);
+  font-weight: var(--font-weight-medium);
+  text-align: center;
+
+  @include font-regular;
+}
+
+.headerLabels {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  margin-bottom: var(--spacing-2);
+  color: var(--text-color);
+
+  > span {
+    @include font-small;
+  }
+}
+
+.disabled {
+  pointer-events: none;
+
+  @include disabled;
+}
+
+.withMarks {
+  padding-bottom: var(--spacing-5);
+}

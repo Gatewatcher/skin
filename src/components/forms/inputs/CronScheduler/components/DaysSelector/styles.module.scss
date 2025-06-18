@@ -1,0 +1,44 @@
+@import '@/styles/mixins';
+
+.list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.item {
+  margin-right: calc(0px - 1px);
+}
+
+.item:first-child > .button {
+  border-bottom-left-radius: var(--border-radius-regular);
+  border-top-left-radius: var(--border-radius-regular);
+}
+
+.item:last-child > .button {
+  border-bottom-right-radius: var(--border-radius-regular);
+  border-top-right-radius: var(--border-radius-regular);
+}
+
+.button {
+  position: relative;
+  width: 1rem;
+  border: var(--border-regular) var(--color-neutral-200);
+  border-radius: 0;
+
+  &:focus-visible {
+    z-index: 1;
+    @include focus;
+  }
+
+  @include on-dark-theme {
+    border-color: var(--color-neutral-600);
+  }
+
+  // Increased specificity to override the theme's border for buttons.
+  &.active.active {
+    border-color: var(--color-primary-400);
+    background-color: var(--color-primary);
+    color: var(--color-white);
+  }
+}

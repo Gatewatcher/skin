@@ -1,0 +1,37 @@
+@import '@/styles/mixins';
+
+.Header {
+  background: var(--body-background-color);
+
+  &Margin {
+    margin-bottom: var(--spacing-9);
+  }
+
+  &.sticky {
+    position: sticky;
+    z-index: var(--z-index-sticky-header);
+    top: 0;
+    padding-bottom: var(--spacing-9);
+
+    &:after {
+      position: absolute;
+      z-index: 1;
+      bottom: -1.5rem;
+      width: 100%;
+      height: var(--spacing-10);
+      border-top: solid 1px var(--color-neutral-600);
+
+      background: linear-gradient(
+        180deg,
+        var(--body-background-color) 25%,
+        rgba(255, 255, 255, 0) 100%
+      );
+
+      content: '';
+    }
+  }
+}
+
+.Subheader:first-child {
+  margin-top: 0;
+}

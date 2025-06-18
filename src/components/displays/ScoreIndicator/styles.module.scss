@@ -1,0 +1,191 @@
+@import '@/styles/mixins';
+
+.ScoreIndicator {
+  --score-indicator-small: 80px;
+  --score-indicator-medium: 125px;
+
+  &Small {
+    width: var(--score-indicator-small);
+    min-width: var(--score-indicator-small);
+    height: var(--score-indicator-small);
+  }
+
+  &Medium {
+    width: var(--score-indicator-medium);
+    min-width: var(--score-indicator-medium);
+    height: var(--score-indicator-medium);
+  }
+
+  position: relative;
+  overflow: hidden;
+  transform-origin: top left;
+  transition: width 300ms, height 300ms, min-width 300ms;
+
+  --sector-neutral-color: var(--color-neutral-100);
+  --sector-low-color: var(--color-low-risk);
+  --sector-medium-color: var(--color-medium-risk);
+  --sector-high-color: var(--color-high-risk);
+  --sector-critical-color: var(--color-critical-risk);
+
+  @include on-dark-theme {
+    --sector-neutral-color: var(--color-neutral-50-a25);
+    --sector-low-color: var(--color-low-risk-300);
+    --sector-medium-color: var(--color-medium-risk-300);
+    --sector-high-color: var(--color-high-risk-300);
+    --sector-critical-color: var(--color-critical-risk-300);
+  }
+
+  $color-score: (
+    Neutral: var(--sector-neutral-color),
+    Low: var(--sector-low-color),
+    Info: var(--sector-low-color),
+    Medium: var(--sector-medium-color),
+    High: var(--sector-high-color),
+    Warning: var(--sector-high-color),
+    Critical: var(--sector-critical-color),
+    Danger: var(--sector-critical-color),
+    Error: var(--sector-critical-color),
+    Success: var(--sector-critical-color),
+  );
+
+  .TextContainer {
+    --score-indicator-text-small: 18px;
+    --score-indicator-text-medium: 30px;
+    position: absolute;
+    top: 50%;
+    font-weight: bold;
+    transform: translateY(-50%);
+    transition: font-size 300ms;
+
+    > span {
+      transition: font-size 300ms;
+    }
+
+    &Small {
+      font-size: var(--score-indicator-text-small);
+      > span {
+        font-size: calc(var(--score-indicator-text-small) / 1.5);
+      }
+    }
+
+    &Medium {
+      font-size: var(--score-indicator-text-medium);
+      > span {
+        font-size: calc(var(--score-indicator-text-medium) / 1.5);
+      }
+    }
+
+    @each $color-name, $color in $color-score {
+      &Color#{$color-name} {
+        color: $color;
+      }
+    }
+  }
+
+  .ChipContainer {
+    transform-origin: bottom center;
+    transition: scale 300ms;
+
+    &Small {
+      scale: 0.5;
+    }
+
+    &Medium {
+      scale: 0.7;
+    }
+  }
+
+  .Sector {
+    --sector-mask-proportion: 83%;
+    --sector-mask-smooth-gap-small: 4%;
+    --sector-mask-smooth-gap-medium: 2%;
+    --sector-mask-max: 100%;
+    --sector-base-size: calc(360deg * 3 / 4);
+    --sector-gap: 2deg;
+    --sector-smooth-gap: 0.5deg;
+
+    $sector-supported-size: (2, 3, 4, 6, 8, 9);
+    position: absolute;
+
+    border-radius: 50%;
+
+    transition: width 300ms, height 300ms;
+
+    &Small {
+      --sector-mask-smooth-proportion: calc(
+        var(--sector-mask-proportion) + var(--sector-mask-smooth-gap-small)
+      );
+      --sector-mask-smooth-max: calc(
+        var(--sector-mask-max) - var(--sector-mask-smooth-gap-small)
+      );
+
+      width: var(--score-indicator-small);
+      height: var(--score-indicator-small);
+      mask-image: radial-gradient(
+        closest-side,
+        transparent var(--sector-mask-proportion),
+        white var(--sector-mask-smooth-proportion),
+        white var(--sector-mask-smooth-max),
+        transparent var(--sector-mask-max)
+      );
+    }
+
+    &Medium {
+      --sector-mask-smooth-proportion: calc(
+        var(--sector-mask-proportion) + var(--sector-mask-smooth-gap-medium)
+      );
+      --sector-mask-smooth-max: calc(
+        var(--sector-mask-max) - var(--sector-mask-smooth-gap-medium)
+      );
+
+      width: var(--score-indicator-medium);
+      height: var(--score-indicator-medium);
+      mask-image: radial-gradient(
+        closest-side,
+        transparent var(--sector-mask-proportion),
+        white var(--sector-mask-smooth-proportion),
+        white var(--sector-mask-smooth-max),
+        transparent var(--sector-mask-max)
+      );
+    }
+
+    /* stylelint-disable scss/operator-no-newline-after -- conflicts with prettier */
+    @each $size in $sector-supported-size {
+      @for $index from 1 through $size {
+        &Rotate#{$size}:nth-child(#{$index}) {
+          rotate: calc(
+            var(--sector-base-size) /
+              -2 +
+              var(--sector-base-size) /
+              $size *
+              ($index - 1) +
+              var(--sector-gap)
+          );
+        }
+      }
+    }
+
+    @each $color-name, $color in $color-score {
+      @each $size in $sector-supported-size {
+        &#{$color-name}#{$size} {
+          background: conic-gradient(
+            transparent 0,
+            $color var(--sector-smooth-gap),
+            $color
+              calc(var(--sector-base-size) / $size - var(--sector-gap) * 2),
+            transparent
+              calc(
+                var(--sector-base-size) /
+                  $size -
+                  var(--sector-gap) *
+                  2 +
+                  var(--sector-smooth-gap)
+              ),
+            transparent
+          );
+        }
+      }
+    }
+    /* stylelint-enable scss/operator-no-newline-after */
+  }
+}

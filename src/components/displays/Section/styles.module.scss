@@ -1,0 +1,33 @@
+@import '@/styles/mixins';
+
+.Section {
+  border: var(--border-regular);
+  border-radius: var(--border-radius-regular);
+}
+
+.variant {
+  &Primary {
+    border-color: var(--color-neutral-200);
+    background: var(--color-white);
+
+    @include on-dark-theme {
+      border-color: var(--color-neutral-700);
+      background: var(--color-neutral-900);
+    }
+  }
+
+  &Secondary {
+    border-color: var(--color-neutral-50);
+    background: var(--color-neutral-50);
+
+    @include on-dark-theme {
+      border-color: var(--color-neutral-800);
+      background: var(--color-neutral-800);
+    }
+  }
+
+  &Tertiary {
+    border-color: transparent;
+    background: transparent;
+  }
+}

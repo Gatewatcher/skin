@@ -1,0 +1,16 @@
+@import '../styles.module';
+
+.Markdown {
+  height: initial;
+  background: transparent;
+  box-shadow: none;
+  color: var(--text-color) !important;
+
+  --md-editor-font-family: var(--font-family-primary);
+
+  @include input;
+
+  &:focus-within {
+    @include focus;
+  }
+}

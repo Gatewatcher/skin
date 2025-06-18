@@ -1,0 +1,14 @@
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_7144_28031)">
+<rect x="9" y="4.5" width="1.5" height="1.5" fill="currentColor"/>
+<rect x="12.75" y="4.5" width="1.5" height="1.5" fill="currentColor"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M6 3C6 2.17157 6.67157 1.5 7.5 1.5H15.75C16.5784 1.5 17.25 2.17157 17.25 3V3.75H18.75V5.25H17.25V8.25C17.25 9.07843 16.5784 9.75 15.75 9.75H15V11.25H18C19.2426 11.25 20.25 12.2574 20.25 13.5V15.75H18.75V13.5C18.75 13.0858 18.4142 12.75 18 12.75H6C5.58579 12.75 5.25 13.0858 5.25 13.5V15.75H3.75V13.5C3.75 12.2574 4.75736 11.25 6 11.25H8.25V9.75H7.5C6.67157 9.75 6 9.07843 6 8.25V5.25H4.5V3.75H6V3ZM7.5 3H15.75V8.25H7.5V3ZM9.75 11.25H13.5V9.75H9.75V11.25Z" fill="currentColor"/>
+<path d="M11.25 18.75L8.25 15.75L5.25 18.75L6.3075 19.815L7.5 18.6225V22.5H9V18.6225L10.185 19.8075L11.25 18.75Z" fill="currentColor"/>
+<path d="M12.75 19.5L15.75 22.5L18.75 19.5L17.6925 18.435L16.5 19.6275L16.5 15.75L15 15.75L15 19.6275L13.815 18.4425L12.75 19.5Z" fill="currentColor"/>
+</g>
+<defs>
+<clipPath id="clip0_7144_28031">
+<rect width="24" height="24" fill="white"/>
+</clipPath>
+</defs>
+</svg>

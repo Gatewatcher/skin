@@ -1,0 +1,22 @@
+@import '@/styles/mixins';
+
+.List {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+
+  @include childInclude('Item') {
+    &:last-of-type {
+      border: none;
+    }
+  }
+}
+
+.Item {
+  @include divider;
+
+  &Active {
+    background-color: var(--selected-row-background);
+  }
+}

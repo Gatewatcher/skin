@@ -1,0 +1,19 @@
+.ShimmerEffect {
+  animation: shimmer 2s infinite;
+
+  background: linear-gradient(
+    90deg,
+    #ff3f3f 0%,
+    #ff3f3f 30%,
+    var(--text-color) 50%,
+    var(--text-color) 60%,
+    var(--text-color) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  background-size: 200%;
+  color: transparent;
+  font-size: 50px;
+  font-weight: bold;
+}

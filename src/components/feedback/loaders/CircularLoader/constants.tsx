@@ -1,0 +1,4 @@
+export const DEFAULT_WITH_LONG_RUNNING_ANIMATION = false;
+export const DEFAULT_WITH_BACKGROUND_CIRCLE = true;
+
+export const DEFAULT_BACKGROUND_CIRCLE_COLOR = 'default';

@@ -1,0 +1,9 @@
+@import '@/styles/mixins';
+
+.type {
+  &Neutral {
+    @include on-dark-theme {
+      background-color: var(--color-neutral-400-a25) !important;
+    }
+  }
+}

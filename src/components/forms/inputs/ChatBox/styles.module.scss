@@ -1,0 +1,109 @@
+@import '@/styles/mixins';
+
+.ChatBox {
+  display: flex;
+  overflow: hidden;
+  width: 100%;
+  align-items: center;
+
+  &WithAttachment {
+    align-items: flex-end;
+  }
+
+  &InputContainer {
+    width: 100%;
+  }
+
+  &AttachmentsContainer {
+    max-height: 260px;
+    padding-top: var(--spacing-3);
+    padding-right: var(--spacing-3);
+    overflow-y: auto;
+  }
+}
+
+.autoCompletionOptionsList {
+  position: absolute;
+  min-width: 238px;
+  max-height: 200px;
+  padding: var(--spacing-4);
+  border-radius: var(--border-radius-regular);
+  background-color: var(--body-background-color);
+  overflow-y: auto;
+}
+
+.autoCompletionOptionsListTop {
+  transform: translateY(-100%);
+}
+
+.listItem {
+  cursor: pointer;
+  padding-block: var(--spacing-3);
+  padding-inline: var(--spacing-2);
+
+  &:hover {
+    background-color: var(--hovered-row-background);
+  }
+
+  &Selected {
+    background-color: var(--hovered-row-background);
+  }
+}
+
+.defaultAttachmentPreview {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--border-radius-regular);
+  background-color: var(--color-primary);
+  color: white;
+
+  &Loading {
+    stroke: var(--color-low-risk-300);
+  }
+}
+
+.Attachment {
+  position: relative;
+  width: fit-content;
+  max-width: 100%;
+  border: 1px solid var(--color-neutral-200);
+  border-radius: var(--border-radius-large);
+
+  @include on-dark-theme {
+    border: 1px solid var(--color-neutral-600);
+  }
+
+  &:hover {
+    > span {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
+  &TextContainer {
+    overflow-x: hidden;
+  }
+
+  &CloseButton {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+
+    background-color: var(--color-neutral-500);
+    color: white;
+
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    @include transition('regular', 'ease', all);
+
+    @include on-dark-theme {
+      background-color: var(--color-neutral-400);
+      color: var(--color-neutral-700);
+    }
+  }
+}

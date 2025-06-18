@@ -1,0 +1,29 @@
+@import '@/styles/mixins';
+
+.NavBar {
+  width: 100%;
+  height: var(--navbar-height);
+  min-height: var(--navbar-height);
+  border-bottom: 1px solid;
+  border-bottom-color: var(--border-color-default);
+  background-color: var(--color-white);
+  color: var(--text-color);
+
+  @include on-dark-theme {
+    background-color: var(--color-neutral-900);
+  }
+}
+
+.endContainer {
+  height: 100%;
+  margin-left: auto;
+
+  @include child('TriggerElement') {
+    height: 100%;
+
+    @include child('Trigger') {
+      height: 100%;
+      padding-bottom: 0;
+    }
+  }
+}

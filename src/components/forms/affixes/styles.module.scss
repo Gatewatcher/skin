@@ -1,0 +1,51 @@
+@import '@/styles/mixins';
+
+.affix {
+  position: relative;
+
+  &::before {
+    position: absolute;
+    z-index: -1;
+    top: calc(-1 * var(--spacing-4));
+    width: calc(100% + var(--spacing-6));
+    height: calc(100% + 2 * var(--spacing-4));
+    background-color: var(--color-neutral-50);
+    content: '';
+
+    @include on-dark-theme {
+      background-color: var(--color-neutral-800);
+    }
+  }
+
+  &Prefix {
+    padding-right: var(--spacing-4);
+
+    &::before {
+      left: calc(-1 * var(--spacing-6));
+      border-right: solid 1px;
+      border-right-color: var(--color-neutral-200);
+
+      @include on-dark-theme {
+        border-right-color: var(--color-neutral-600);
+      }
+    }
+  }
+
+  &Suffix {
+    padding-left: var(--spacing-4);
+
+    &::before {
+      right: calc(-1 * var(--spacing-6));
+      border-left: solid 1px;
+      border-left-color: var(--color-neutral-200);
+
+      @include on-dark-theme {
+        border-left-color: var(--color-neutral-600);
+      }
+    }
+  }
+}
+
+.copy {
+  @include reset-focus;
+}

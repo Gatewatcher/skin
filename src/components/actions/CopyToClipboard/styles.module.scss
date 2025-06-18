@@ -1,0 +1,66 @@
+@import '@/styles/mixins';
+
+.copyLink {
+  width: fit-content;
+  max-width: 100%;
+}
+
+.label {
+  overflow: hidden;
+  flex: 1 1 0;
+  border-bottom: 1px dashed transparent;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  @include font-regular;
+
+  &.hover {
+    border-color: var(--color-neutral-400);
+  }
+}
+
+.icon {
+  position: relative;
+  overflow: hidden;
+  width: 0;
+  border-bottom: 1px dashed transparent;
+  cursor: pointer;
+  line-height: 0;
+
+  &:hover {
+    color: var(--color-primary);
+
+    @include transition(regular, regular, opacity);
+  }
+
+  * {
+    line-height: 0;
+  }
+}
+
+.tooltip {
+  min-width: min-content;
+
+  &Title {
+    font-size: var(--font-size-small);
+  }
+
+  &Preview {
+    display: block;
+    max-width: var(--floating-max-width-small);
+    padding: var(--spacing-3) var(--spacing-2) 0 0;
+    border-top: 1px solid var(--color-neutral-200);
+    margin: var(--spacing-3) 0 var(--spacing-3) 0;
+    color: var(--color-neutral-400);
+    font-size: var(--font-size-extra-small);
+    line-height: 1.5;
+    overflow-wrap: break-word;
+  }
+}
+
+.truncate {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}

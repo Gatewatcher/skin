@@ -1,0 +1,22 @@
+@import '@/styles/mixins';
+
+.Toasts {
+  position: fixed;
+  z-index: var(--z-index-toast);
+  width: 330px;
+  list-style: none;
+}
+
+.Toast {
+  display: block;
+  max-height: 240px;
+  padding: var(--spacing-6);
+  border-radius: var(--border-radius-regular);
+  background: var(--color-white);
+  color: var(--color-text);
+  overflow-y: auto;
+
+  @include on-dark-theme {
+    background-color: var(--color-neutral);
+  }
+}

@@ -1,0 +1,9 @@
+@import '@/styles/mixins';
+
+.ItemsPerPage {
+  height: 100%;
+
+  &:last-child {
+    min-width: 100px;
+  }
+}

@@ -1,0 +1,38 @@
+@import '@/styles/mixins';
+
+.leaf {
+  width: fit-content;
+  color: var(--color-neutral-600);
+  outline: none;
+
+  @include on-dark-theme {
+    color: var(--color-neutral-100);
+  }
+}
+
+.node {
+  width: fit-content;
+  color: var(--color-neutral-400);
+  cursor: pointer;
+  outline: none;
+}
+
+.arrow {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 5px solid var(--color-primary-300);
+
+  @include transition(fast, regular, transform);
+
+  &Expanded {
+    transform: rotate(90deg);
+  }
+
+  &Container {
+    width: 10px;
+    height: 10px;
+  }
+}

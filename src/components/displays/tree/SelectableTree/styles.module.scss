@@ -1,0 +1,18 @@
+@import '@/styles/mixins';
+
+.SelectableTreeNode {
+  transition-property: background-color, border-color;
+
+  &.selected {
+    border-color: var(--color-primary-500);
+
+    @include on-dark-theme {
+      border-color: var(--color-primary-400);
+    }
+  }
+}
+
+.CheckboxWrapper {
+  overflow: hidden;
+  margin-left: calc(var(--spacing-2) * -1);
+}

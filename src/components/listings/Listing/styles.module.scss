@@ -1,0 +1,20 @@
+@import '@/styles/mixins';
+
+.Container {
+  width: 100%;
+
+  &Medium {
+    min-height: 500px;
+  }
+
+  &Small {
+    min-height: 200px;
+  }
+}
+
+.EmptyData,
+.ErrorData {
+  color: var(--text-color);
+
+  @include font-regular;
+}

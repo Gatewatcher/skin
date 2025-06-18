@@ -1,0 +1,3 @@
+import { DEFAULT_COLOR_NEUTRAL_SCALE } from '@/constants';
+
+export const DEFAULT_VARIANT = DEFAULT_COLOR_NEUTRAL_SCALE;

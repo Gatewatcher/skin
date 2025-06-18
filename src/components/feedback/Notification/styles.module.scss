@@ -1,0 +1,43 @@
+@import '@/styles/mixins';
+
+.Notification {
+  &:hover {
+    @include deepInclude('close') {
+      opacity: var(--alpha-50);
+    }
+  }
+}
+
+.NotificationContent {
+  min-width: 0;
+  line-height: 0;
+}
+
+.header {
+  > h5 {
+    font-weight: var(--font-weight-medium);
+  }
+}
+
+.content {
+  @include childInclude('Text') {
+    flex-shrink: 0;
+    margin-left: var(--spacing-4);
+  }
+}
+
+.footer {
+  @include child('Chip') {
+    text-transform: capitalize;
+  }
+
+  @include child('Link') {
+    margin-left: auto;
+  }
+}
+
+.close {
+  opacity: 0;
+
+  @include transition('regular', 'regular', opacity);
+}

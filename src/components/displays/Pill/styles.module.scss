@@ -1,0 +1,44 @@
+@import '@/styles/mixins';
+
+.Pill {
+  width: fit-content;
+  border: solid 1px;
+  border-color: var(--border-color-default);
+  border-radius: var(--border-radius-rounded);
+  cursor: pointer;
+
+  &Transition {
+    @include transition('regular', 'regular', background-color);
+
+    &:hover {
+      background-color: var(--color-neutral-100);
+
+      @include on-dark-theme {
+        background-color: var(--color-neutral-700);
+      }
+    }
+  }
+
+  &Active {
+    border-color: var(--color-primary);
+    background-color: var(--color-primary);
+
+    @include child('Text') {
+      color: var(--color-white);
+    }
+  }
+
+  &Disabled {
+    pointer-events: none;
+
+    @include on-dark-theme {
+      @include child('Text') {
+        color: var(--color-neutral-600);
+      }
+    }
+
+    @include child('Text') {
+      color: var(--color-neutral-300);
+    }
+  }
+}

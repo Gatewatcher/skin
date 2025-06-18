@@ -1,0 +1,48 @@
+@import '@/styles/mixins';
+
+%placeholder color {
+  --divider-color: var(--color-neutral-200);
+
+  @include on-dark-theme {
+    --divider-color: var(--color-neutral-600);
+  }
+}
+
+.Divider {
+  @extend color;
+  background-color: var(--divider-color);
+}
+
+.direction {
+  &Horizontal {
+    width: 100%;
+    height: 1px;
+  }
+
+  &Vertical {
+    width: 1px;
+    height: 100%;
+  }
+}
+
+.Wysiwyg {
+  @extend color;
+
+  position: relative;
+  width: 100%;
+  padding: var(--spacing-2) 0;
+  border: none;
+  cursor: pointer;
+
+  &:global(.selected) {
+    @include focus;
+  }
+
+  &::after {
+    display: block;
+    height: 1px;
+    background-color: var(--divider-color);
+    content: '';
+    line-height: 2px;
+  }
+}

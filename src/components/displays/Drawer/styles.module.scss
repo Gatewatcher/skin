@@ -1,0 +1,74 @@
+@import '@/styles/mixins';
+
+.Panel {
+  z-index: var(--z-index-drawer-panel);
+}
+
+.inner {
+  position: fixed;
+  z-index: var(--z-index-drawer-container);
+  width: 100%;
+  background-color: var(--body-background-color);
+  overflow-y: auto;
+
+  > * {
+    display: flex;
+    height: inherit;
+    flex-direction: column;
+  }
+
+  @include deep('TabsPanel') {
+    overflow: visible;
+  }
+}
+
+.DrawerFitContent {
+  height: fit-content;
+}
+
+.HeaderSticky {
+  position: sticky;
+  z-index: var(--z-index-sticky-header);
+  top: 0;
+  background-color: var(--body-background-color);
+
+  &BoxShadow {
+    box-shadow: 0 8px 8px -8px var(--shadow-color-elevation-2);
+  }
+}
+
+.Footer {
+  position: sticky;
+  bottom: 0;
+  background-color: var(--body-background-color);
+
+  &::before {
+    position: absolute;
+    top: 0;
+    right: -24px;
+    left: -24px;
+    height: 1px;
+    background-color: var(--color-neutral-200);
+    content: '';
+
+    @include on-dark-theme {
+      background-color: var(--color-neutral-600);
+    }
+  }
+}
+
+.Icon {
+  line-height: 0;
+}
+
+.Fill {
+  flex: 1 1 auto;
+
+  & > * {
+    display: flex;
+    // Firefox: the default `min-width: auto` makes the target overflow its parent if it contains large children.
+    min-width: 0;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+}

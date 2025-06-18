@@ -1,0 +1,18 @@
+@import '@/styles/mixins';
+
+.w-md-editor {
+  &-content,
+  &-area {
+    border-radius: 0;
+  }
+
+  &-text {
+    height: 100%;
+    padding: 0;
+  }
+
+  textarea {
+    padding: 0 !important;
+    border-radius: 0;
+  }
+}

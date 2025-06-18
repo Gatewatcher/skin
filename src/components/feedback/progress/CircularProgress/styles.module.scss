@@ -1,0 +1,14 @@
+.CircularProgress {
+  width: fit-content;
+}
+
+.reference {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

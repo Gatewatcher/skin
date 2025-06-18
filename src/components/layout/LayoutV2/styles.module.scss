@@ -1,0 +1,30 @@
+.LayoutV2 {
+  display: flex;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  flex-flow: row nowrap;
+  align-items: stretch;
+}
+
+.sideNavZone {
+  flex: 0 1 auto;
+}
+
+.mainZone {
+  position: relative;
+  flex-grow: 1;
+}
+
+.topNavAndMainZone {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  flex: 1 0 0;
+  flex-direction: column;
+}
+
+.contentContainer {
+  position: absolute;
+  inset: 0;
+}

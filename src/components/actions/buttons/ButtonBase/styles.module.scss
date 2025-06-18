@@ -1,0 +1,186 @@
+@import '@/styles/mixins';
+@import '@/styles/functions';
+
+@mixin button-contained($className, $color) {
+  &#{$className} {
+    border: var(--border-regular);
+    border-color: color-variant($color);
+    background-color: color-variant($color);
+    color: var(--color-white);
+
+    &:hover {
+      border-color: color-variant($color, 600);
+      background-color: color-variant($color, 600);
+    }
+
+    &:active {
+      border-color: color-variant($color, 700);
+      background-color: color-variant($color, 700);
+    }
+
+    &:disabled {
+      @include disabled;
+    }
+  }
+}
+
+@mixin button-outlined($className, $color) {
+  &#{$className} {
+    border: var(--border-regular);
+    border-color: color-variant($color);
+    background-color: transparent;
+    color: color-variant($color);
+
+    @include on-dark-theme {
+      border-color: color-variant($color, 100);
+      color: color-variant($color, 100);
+    }
+
+    &:hover {
+      background-color: var(--color-neutral-50);
+
+      @include on-dark-theme {
+        background-color: var(--color-neutral-700);
+      }
+    }
+
+    &:active {
+      border-color: color-variant($color, 700);
+      color: color-variant($color, 700);
+
+      @include on-dark-theme {
+        border-color: color-variant($color, 200);
+        background-color: var(--color-neutral-700);
+        color: color-variant($color, 200);
+      }
+    }
+
+    &:disabled {
+      @include disabled;
+    }
+  }
+}
+
+@mixin button-ghosted($className, $color) {
+  &#{$className} {
+    border: var(--border-regular);
+    border-color: transparent;
+    background-color: transparent;
+    color: color-variant($color);
+
+    @include on-dark-theme {
+      color: color-variant($color, 100);
+    }
+
+    &:hover {
+      background-color: var(--color-neutral-50);
+
+      @include on-dark-theme {
+        background-color: var(--color-neutral-700);
+      }
+    }
+
+    &:active {
+      color: color-variant($color, 700);
+
+      @include on-dark-theme {
+        color: color-variant($color, 200);
+      }
+    }
+
+    &:disabled {
+      @include disabled;
+    }
+  }
+}
+
+@mixin button-transparent($className, $color) {
+  &#{$className} {
+    padding: 0;
+    border: var(--border-regular);
+    border-color: transparent;
+    background-color: transparent;
+    color: color-variant($color);
+
+    @include on-dark-theme {
+      color: color-variant($color, 100);
+    }
+
+    &:hover {
+      color: color-variant($color, 600);
+
+      @include on-dark-theme {
+        color: color-variant($color, 200);
+      }
+    }
+
+    &:active {
+      color: color-variant($color, 700);
+
+      @include on-dark-theme {
+        color: color-variant($color, 200);
+      }
+    }
+
+    &:disabled {
+      @include disabled;
+    }
+  }
+}
+
+.ButtonBase {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  padding: var(--spacing-4) var(--spacing-7);
+  border: none;
+  border-radius: var(--border-radius-regular);
+  cursor: pointer;
+  font-weight: var(--font-weight-medium);
+
+  @include font-regular;
+
+  @include transition(
+    'fast',
+    'regular',
+    background-color,
+    border-color,
+    color,
+    opacity,
+    width
+  );
+
+  &:focus-visible {
+    @include focus;
+  }
+
+  &:disabled {
+    cursor: default;
+    pointer-events: none;
+  }
+}
+
+.contained {
+  @include button-contained('Primary', 'primary');
+  @include button-contained('Danger', 'danger');
+}
+
+.outlined {
+  @include button-outlined('Primary', 'primary');
+  @include button-outlined('Danger', 'danger');
+}
+
+.ghosted {
+  @include button-ghosted('Primary', 'primary');
+  @include button-ghosted('Danger', 'danger');
+}
+
+.transparent {
+  @include button-transparent('Primary', 'primary');
+  @include button-transparent('Danger', 'danger');
+}
+
+.bared {
+  all: unset;
+  cursor: pointer;
+}

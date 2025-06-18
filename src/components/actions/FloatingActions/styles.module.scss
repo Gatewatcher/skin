@@ -1,0 +1,33 @@
+@import '@/styles/mixins';
+
+.FloatingActions {
+  @include childInclude('OverflownText', 'OverflownLink') {
+    line-height: 0;
+  }
+}
+
+.FitParent {
+  width: 100%;
+}
+
+.Inherit {
+  width: inherit;
+}
+
+.Body {
+  @include divider;
+}
+
+.Link {
+  display: flex;
+
+  > a {
+    padding: var(--spacing-3);
+  }
+}
+
+.Button {
+  display: flex;
+  align-items: center;
+  padding: 0;
+}

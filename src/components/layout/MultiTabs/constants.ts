@@ -1,0 +1,1 @@
+export const DEFAULT_TOOLBAR_GROUP_GAP = 4;

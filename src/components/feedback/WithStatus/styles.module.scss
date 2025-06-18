@@ -1,0 +1,13 @@
+.WithStatus {
+  position: relative;
+  display: inline-block;
+}
+
+.StatusWrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: block;
+  line-height: 0;
+  transform: translate(50%, -50%);
+}

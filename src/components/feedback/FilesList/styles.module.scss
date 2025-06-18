@@ -1,0 +1,29 @@
+@import '@/styles/mixins';
+
+.Item {
+  &Full {
+    width: 100%;
+  }
+
+  &ModalTrigger {
+    @include child('TriggerElement') {
+      display: none;
+    }
+  }
+}
+
+.withoutPadding {
+  > ul > li {
+    &:first-of-type {
+      @include deepInclude('ItemFull') {
+        padding-top: 0;
+      }
+    }
+
+    &:last-of-type {
+      @include deepInclude('ItemFull') {
+        padding-bottom: 0;
+      }
+    }
+  }
+}

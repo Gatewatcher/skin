@@ -1,0 +1,243 @@
+@import '@/styles/mixins';
+
+.tabs {
+  position: relative;
+}
+
+.TitlesList {
+  width: fit-content;
+  gap: var(--spacing-4);
+  list-style: none;
+
+  &.primary {
+    padding: var(--spacing-4) var(--spacing-6);
+    border-radius: var(--border-radius-rounded);
+    background-color: var(--color-neutral-100);
+    gap: var(--spacing-4);
+
+    @include on-dark-theme {
+      background-color: var(--color-neutral);
+    }
+  }
+
+  &.pills {
+    gap: var(--spacing-7);
+  }
+
+  &.full {
+    position: relative;
+    width: 100%;
+
+    &.main {
+      &::before {
+        height: 1px;
+        @include on-dark-theme {
+          background-color: var(--color-neutral-400);
+        }
+      }
+    }
+
+    &::before {
+      position: absolute;
+      z-index: -1;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: var(--color-neutral-200);
+      content: '';
+
+      @include on-dark-theme {
+        background-color: var(--color-neutral-600);
+      }
+    }
+  }
+}
+
+.Title {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+
+  &.pills {
+    padding: 0 !important;
+  }
+
+  &.padding {
+    padding: var(--spacing-2) var(--spacing-6);
+  }
+
+  &:focus-visible {
+    @include focus;
+  }
+
+  &.active {
+    background-color: var(--color-primary);
+
+    @include child('Text') {
+      color: var(--color-white);
+    }
+  }
+
+  &.disabled {
+    pointer-events: none;
+
+    @include disabled;
+  }
+
+  &.primary {
+    border-radius: var(--border-radius-rounded);
+  }
+
+  &.secondary {
+    padding: var(--spacing-6) var(--spacing-8);
+    border-bottom: 2px solid;
+    border-bottom-color: var(--color-neutral-200);
+    font-weight: var(--font-weight-medium);
+
+    @include child('Text') {
+      color: var(--color-neutral-400);
+    }
+
+    @include on-dark-theme {
+      border-color: var(--color-neutral-600);
+    }
+
+    &.active {
+      border-color: var(--color-primary);
+      border-radius: var(--border-radius-small);
+      background-color: transparent;
+
+      @include child('Text') {
+        color: var(--color-primary);
+      }
+
+      @include on-dark-theme {
+        border-color: var(--color-primary-300);
+
+        @include child('Text') {
+          color: var(--color-primary-300);
+        }
+      }
+    }
+  }
+
+  &.main {
+    position: relative;
+    padding: var(--spacing-6) var(--spacing-8);
+    background: none;
+
+    @include child('Text') {
+      @include transition('regular', 'ease-in-out', color);
+    }
+
+    &.active {
+      @include child('Text') {
+        color: var(--color-primary);
+      }
+
+      @include on-dark-theme {
+        @include child('Text') {
+          color: var(--color-primary-300);
+        }
+      }
+    }
+  }
+}
+
+.TitleLink {
+  display: flex;
+  padding: var(--spacing-2) var(--spacing-6);
+  text-decoration: none;
+}
+
+.TabsPanel {
+  overflow: clip;
+  max-width: 100%;
+  color: var(--text-color);
+  overflow-clip-margin: var(--outline-width);
+}
+
+.tabIndicator {
+  position: absolute;
+  width: 100%;
+  height: 48px;
+  container-type: inline-size;
+  pointer-events: none;
+}
+
+.indicator {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 100%;
+  border: 1px solid var(--color-neutral-200);
+  border-radius: 12px 12px 0 0;
+  border-bottom-color: var(--body-background-color);
+  opacity: 0;
+  transition: none;
+  visibility: hidden;
+  @include on-dark-theme {
+    border-color: var(--color-neutral-400);
+    border-bottom-color: var(--body-background-color);
+  }
+
+  &EnableAnimation {
+    @include transition('regular', 'ease-in-out', translate);
+  }
+
+  &Visible {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+.indicatorPart {
+  position: absolute;
+  bottom: -1px;
+  width: 20px;
+  aspect-ratio: 1;
+  opacity: 0;
+  transition: none;
+  visibility: hidden;
+
+  &::before {
+    position: absolute;
+    box-sizing: border-box;
+    background: var(--body-background-color);
+    clip-path: inset(50% 50% 0 0);
+    content: '';
+    inset: -1px;
+  }
+
+  &::after {
+    position: absolute;
+    box-sizing: border-box;
+    border: 1px solid var(--color-neutral-200);
+    border-radius: 50%;
+    clip-path: inset(50% 50% 0 0);
+    content: '';
+    inset: 0;
+    @include on-dark-theme {
+      border-color: var(--color-neutral-400);
+    }
+  }
+
+  &EnableAnimation {
+    @include transition('regular', 'ease-in-out', all);
+  }
+
+  &Visible {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+.indicatorPartLeft {
+  right: 100%;
+  scale: -1 1;
+}
+
+.indicatorPartRight {
+  left: 100%;
+}

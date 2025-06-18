@@ -1,0 +1,12 @@
+@import '@/styles/mixins';
+
+.iconColorContainer {
+  color: var(--color-neutral-400);
+
+  @include disabled;
+
+  &.isSelected {
+    color: var(--color-primary);
+    opacity: 1;
+  }
+}

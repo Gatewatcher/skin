@@ -1,0 +1,95 @@
+@import '@/styles/mixins';
+
+.InlineCode {
+  padding: var(--spacing-1) var(--spacing-2);
+  border-radius: var(--border-radius-regular);
+  background-color: var(--color-neutral-400-a25);
+  font-size: 78%;
+  overflow-x: auto;
+}
+
+.CodeBlock {
+  display: flex;
+  overflow: hidden;
+  flex-direction: column;
+  border: 1px solid var(--color-neutral-200);
+  border-radius: var(--border-radius-large);
+  background-color: var(--body-background-color) !important;
+
+  &Inner {
+    padding: var(--spacing-5);
+    overflow-x: auto;
+  }
+
+  @include on-dark-theme {
+    border: 1px solid var(--color-neutral-600);
+  }
+
+  &Head {
+    padding: var(--spacing-5) var(--spacing-6);
+    background-color: var(--color-neutral-50);
+
+    @include on-dark-theme {
+      background-color: var(--color-neutral-700);
+    }
+  }
+}
+
+.table {
+  width: 100%;
+  min-width: min-content;
+  margin-top: var(--spacing-2);
+  margin-bottom: var(--spacing-2);
+  border-collapse: separate;
+  border-spacing: 0;
+  table-layout: auto;
+
+  th:first-child {
+    border-left-width: 1px;
+    border-top-left-radius: var(--border-radius-large);
+  }
+
+  th:last-child {
+    border-top-right-radius: var(--border-radius-large);
+  }
+
+  tbody tr:last-child td:first-child {
+    border-bottom-left-radius: var(--border-radius-large);
+  }
+
+  tbody td:first-child {
+    border-left-width: 1px;
+  }
+
+  tbody tr:last-child td:last-child {
+    border-bottom-right-radius: var(--border-radius-large);
+  }
+
+  tbody tr:last-child td {
+    border-bottom-width: 1px;
+  }
+
+  th,
+  td {
+    padding: var(--spacing-5) var(--spacing-6);
+    border-width: 0;
+    border-style: solid;
+    border-color: var(--color-neutral-200);
+    border-top-width: 1px;
+    border-right-width: 1px;
+
+    @include on-dark-theme {
+      border-color: var(--color-neutral-600);
+    }
+
+    text-align: left;
+  }
+
+  thead {
+    background-color: var(--color-neutral-50);
+
+    @include on-dark-theme {
+      background-color: var(--color-neutral-700);
+    }
+  }
+}

@@ -1,0 +1,86 @@
+@import '@/styles/breakpoints';
+
+.Grid {
+  display: grid;
+}
+
+.columns {
+  grid-template-columns: repeat(var(--grid-columns), 1fr);
+
+  @include generate-variables-from-breakpoints('--grid-columns');
+
+  &EqualWidth {
+    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+  }
+}
+
+.rows {
+  grid-template-rows: repeat(var(--grid-rows), 1fr);
+
+  @include generate-variables-from-breakpoints('--grid-rows');
+}
+
+.gap {
+  gap: var(--grid-gap-y, 0) var(--grid-gap-x, 0);
+
+  @include generate-variables-from-breakpoints('--grid-gap-y');
+  @include generate-variables-from-breakpoints('--grid-gap-x');
+}
+
+.minmax {
+  grid-template-columns: repeat(
+    var(--grid-repeat),
+    minmax(
+      min(var(--grid-columns-min-size), 100%),
+      var(--grid-columns-max-size, 1fr)
+    )
+  );
+}
+
+.column {
+  grid-column: var(--grid-column);
+
+  @include generate-variables-from-breakpoints('--grid-column');
+}
+
+.colSpan {
+  grid-column: span var(--grid-col-span);
+
+  @include generate-variables-from-breakpoints('--grid-col-span');
+}
+
+.row {
+  grid-row: var(--grid-row);
+
+  @include generate-variables-from-breakpoints('--grid-row');
+}
+
+.rowSpan {
+  grid-row: span var(--grid-row-span);
+
+  @include generate-variables-from-breakpoints('--grid-row-span');
+}
+
+.alignItems {
+  align-items: var(--grid-align-items);
+
+  @include generate-variables-from-breakpoints('--grid-align-items');
+}
+
+.alignSelf {
+  align-self: var(--grid-align-self);
+
+  @include generate-variables-from-breakpoints('--grid-align-self');
+}
+
+.justifyContent {
+  justify-content: var(--grid-justify-content);
+
+  @include generate-variables-from-breakpoints('--grid-justify-content');
+}
+
+.fill {
+  > * {
+    height: 100%;
+  }
+}

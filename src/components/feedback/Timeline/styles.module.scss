@@ -1,0 +1,45 @@
+@import '@/styles/mixins';
+
+$iconSize: 24px;
+
+.IconContainer {
+  position: relative;
+  width: $iconSize;
+  height: $iconSize;
+  flex-shrink: 0;
+  border-radius: var(--border-radius-rounded);
+  background-color: var(--color-neutral-50);
+  color: var(--color-neutral-400);
+
+  @include on-dark-theme {
+    background-color: var(--color-neutral-700);
+  }
+}
+
+.Bar {
+  width: 2px;
+  height: 100%;
+  background: var(--color-neutral-100);
+
+  @include on-dark-theme {
+    background-color: var(--color-neutral-600);
+  }
+}
+
+.BodyContainer {
+  width: calc(100% - var(--spacing-3) - $iconSize);
+  max-width: fit-content;
+}
+
+.Date {
+  padding-bottom: var(--spacing-7);
+  color: var(--color-neutral-400);
+}
+
+.Item {
+  &:last-of-type {
+    .Bar {
+      display: none;
+    }
+  }
+}

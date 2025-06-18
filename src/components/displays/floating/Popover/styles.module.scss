@@ -1,0 +1,62 @@
+@import '@/styles/mixins';
+
+.Popover {
+  border: var(--border-regular);
+  border-color: var(--color-neutral-200);
+  border-radius: var(--border-radius-large);
+  background: var(--color-white);
+
+  @include on-dark-theme {
+    border-color: var(--color-neutral-600);
+    background-color: var(--color-neutral-900);
+  }
+}
+
+.arrow {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border: var(--border-regular);
+  border-color: var(--color-neutral-200);
+  background: var(--color-white);
+
+  @include on-dark-theme {
+    border-color: var(--color-neutral-600);
+    background-color: var(--color-neutral-900);
+  }
+
+  &Top {
+    border-top: none;
+    border-left: none;
+  }
+
+  &Bottom {
+    border-right: none;
+    border-bottom: none;
+  }
+
+  &Right {
+    border-top: none;
+    border-right: none;
+  }
+
+  &Left {
+    border-bottom: none;
+    border-left: none;
+  }
+}
+
+.Header {
+  @include child('Title') {
+    color: var(--color-light);
+  }
+
+  &Divider {
+    border-bottom: solid 1px;
+    border-bottom-color: var(--color-neutral-200);
+
+    @include on-dark-theme {
+      border-color: var(--color-neutral-600);
+    }
+  }
+}

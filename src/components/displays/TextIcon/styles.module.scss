@@ -1,0 +1,16 @@
+@import '@/styles/mixins';
+
+.TextIcon {
+  display: flex;
+  align-items: center;
+  color: var(--text-color);
+}
+
+.icon {
+  &Start {
+    margin-right: var(--spacing-4);
+  }
+  &End {
+    margin-left: var(--spacing-4);
+  }
+}

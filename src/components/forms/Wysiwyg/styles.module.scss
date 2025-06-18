@@ -1,0 +1,27 @@
+@import '@/styles/mixins';
+
+.container {
+  border: solid 1px;
+  border-color: var(--color-neutral-200);
+  border-radius: var(--border-radius-large);
+}
+
+.input {
+  min-height: 200px;
+  max-height: 80vh;
+  padding: var(--spacing-7);
+  background: var(--body-background-color);
+  border-bottom-left-radius: var(--border-radius-large);
+  border-bottom-right-radius: var(--border-radius-large);
+  overflow-y: auto;
+  resize: vertical;
+
+  &:focus {
+    @include focus;
+  }
+}
+
+.toolbar {
+  border-bottom: solid 1px;
+  border-bottom-color: var(--color-neutral-200);
+}

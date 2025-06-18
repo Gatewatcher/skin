@@ -1,0 +1,220 @@
+@import '@/styles/mixins';
+
+.SelectableCardITem {
+  --border-color: var(--color-neutral-200);
+  --hover-border-color: var(--color-neutral-300);
+  --selected-border-color: var(--color-primary-500);
+  --disabled-border-color: var(--color-neutral-300);
+  --description-text-color: var(--color-neutral-500);
+
+  @include on-dark-theme {
+    --border-color: var(--color-neutral-600);
+    --hover-border-color: var(--color-neutral-500);
+    --description-text-color: var(--color-neutral-300);
+  }
+
+  padding: var(--spacing-7) var(--spacing-8);
+  border: var(--border-regular);
+  border-color: var(--border-color);
+  border-radius: var(--border-radius-regular);
+  cursor: pointer;
+
+  &Text {
+    color: var(--description-text-color);
+  }
+
+  &:hover {
+    border-color: var(--hover-border-color);
+  }
+
+  &:has(* input:disabled) {
+    pointer-events: none;
+    @include disabled;
+  }
+
+  &:has(* input:checked) {
+    border-color: var(--selected-border-color);
+  }
+}
+
+.RadioCardInput {
+  --unckecked-color: var(--color-neutral-400);
+  --checked-color: var(--color-primary);
+
+  @include on-dark-theme {
+    --checked-color: var(--color-primary-400);
+  }
+
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  &:has(> input:disabled) {
+    pointer-events: none;
+
+    @include disabled;
+  }
+
+  > input {
+    display: grid;
+    width: 1rem;
+    height: 1rem;
+    flex-shrink: 0;
+    border: var(--border-regular);
+    border-color: var(--unckecked-color);
+    border-radius: 50%;
+    margin: 0 0 0 auto;
+    appearance: none;
+    cursor: pointer;
+    place-content: center;
+
+    @include transition('regular', 'regular', border-color);
+
+    ~ label {
+      padding-left: var(--spacing-4);
+      margin-right: auto;
+      cursor: pointer;
+
+      @include child('Text') {
+        @include transition('regular', 'regular', color);
+      }
+    }
+
+    &::before {
+      width: 1rem;
+      height: 1rem;
+      border-radius: 50%;
+      background-color: var(--checked-color);
+      content: '';
+      transform: scale(0);
+
+      @include transition('fast', 'regular', transform);
+    }
+
+    &:checked {
+      border-color: var(--checked-color);
+
+      ~ label {
+        @include child('Text') {
+          color: var(--checked-color);
+        }
+      }
+
+      &::before {
+        transform: scale(0.6);
+      }
+    }
+
+    &:focus-visible {
+      outline-offset: 0;
+
+      @include focus;
+    }
+
+    &:active {
+      &:not(:checked) {
+        &::before {
+          transform: scale(0.2);
+        }
+      }
+    }
+  }
+}
+
+.CheckboxCardInput {
+  --unckecked-color: var(--color-neutral-400);
+  --checked-color: var(--color-primary);
+
+  @include on-dark-theme {
+    --checked-color: var(--color-primary-400);
+  }
+
+  display: flex;
+  max-width: 100%;
+  align-items: baseline;
+  cursor: pointer;
+  gap: var(--spacing-4);
+
+  @include child('Text') {
+    @include transition('regular', 'regular', color);
+  }
+
+  @include font-regular;
+
+  &:has(> input:checked) {
+    @include child('Text') {
+      color: var(--checked-color);
+    }
+  }
+
+  &:has(> input:disabled) {
+    pointer-events: none;
+
+    @include disabled;
+  }
+
+  > input {
+    display: grid;
+    width: 1rem;
+    height: 1rem;
+    flex-shrink: 0;
+    border: var(--border-regular);
+    border-color: var(--unckecked-color);
+    border-radius: var(--border-radius-small);
+    margin: 0 0 0 auto;
+    appearance: none;
+    cursor: pointer;
+    place-content: center;
+
+    @include transition('regular', 'regular', border-color, background-color);
+
+    &::before {
+      width: 0.6rem;
+      height: 0.6rem;
+      box-shadow: inset 1rem 1rem var(--color-white);
+      clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+
+      content: '';
+      transform: scale(0);
+      transform-origin: center;
+
+      @include transition('fast', 'regular', transform);
+    }
+
+    &:checked {
+      border-color: var(--checked-color);
+      background-color: var(--checked-color);
+
+      &::before {
+        transform: scale(1);
+      }
+    }
+
+    &:focus-visible {
+      outline-offset: 0;
+
+      @include focus;
+    }
+  }
+
+  &Indeterminate {
+    > input {
+      &::before {
+        border: none;
+        background-color: var(--checked-color);
+        box-shadow: none;
+        clip-path: none;
+        transform: scale(1);
+      }
+    }
+  }
+
+  &Empty {
+    align-items: center;
+    gap: 0;
+
+    @include child('Text') {
+      width: 0;
+    }
+  }
+}

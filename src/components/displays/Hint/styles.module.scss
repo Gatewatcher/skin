@@ -1,0 +1,28 @@
+@import '@/styles/mixins';
+
+.Hint {
+  display: inline-flex;
+  align-items: flex-start;
+  font-weight: var(--font-weight-medium);
+  white-space: pre-wrap;
+
+  @include font-extra-small;
+}
+
+.size {
+  &Medium {
+    align-items: center;
+
+    @include font-regular;
+  }
+}
+
+.variant {
+  &Neutral {
+    color: var(--color-neutral-400) !important;
+  }
+}
+
+.icon {
+  margin-right: var(--spacing-2);
+}

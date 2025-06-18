@@ -1,0 +1,11 @@
+.revealButton {
+  padding: 0 var(--spacing-2);
+}
+
+.input {
+  -webkit-text-security: disc;
+
+  &.revealed {
+    -webkit-text-security: none;
+  }
+}

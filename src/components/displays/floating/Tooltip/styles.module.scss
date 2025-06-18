@@ -1,0 +1,16 @@
+@import '@/styles/mixins';
+@import '@/styles/colors';
+
+.Tooltip {
+  z-index: var(--z-index-tooltip) !important;
+  border-radius: var(--border-radius-regular);
+  background-color: var(--color-neutral-600);
+  color: var(--color-white);
+}
+
+.arrow {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background-color: var(--color-neutral-600);
+}

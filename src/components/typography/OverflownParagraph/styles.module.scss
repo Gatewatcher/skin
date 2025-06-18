@@ -1,0 +1,39 @@
+@import '@/styles/mixins';
+
+.OverflownParagraph {
+  overflow-y: hidden;
+
+  &Full {
+    height: 100% !important;
+    overflow-y: initial;
+  }
+}
+
+.container {
+  position: relative;
+}
+
+.buttonContainer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  padding: var(--spacing-7) 0;
+  background: linear-gradient(
+    0deg,
+    var(--color-white-a100) 0%,
+    var(--color-white-a75) 85%,
+    var(--color-white-a0) 100%
+  );
+
+  @include on-dark-theme {
+    background: linear-gradient(
+      0deg,
+      #{rgba($color-neutral-900, var(--alpha-100))} 0%,
+      #{rgba($color-neutral-900, var(--alpha-75))} 85%,
+      #{rgba($color-neutral-900, var(--alpha-0))} 100%
+    );
+  }
+}

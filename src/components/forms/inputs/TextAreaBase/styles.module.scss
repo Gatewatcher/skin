@@ -1,0 +1,33 @@
+@import '@/styles/mixins';
+
+.Textarea {
+  @include font-regular;
+
+  min-width: 120px;
+  max-width: 100%;
+
+  min-height: 42px;
+  max-height: 100%;
+
+  &::placeholder {
+    color: var(--color-neutral-400);
+  }
+}
+
+.relative {
+  position: relative;
+}
+
+.count {
+  position: absolute;
+  top: 100%;
+  right: 0;
+
+  &WithPadding {
+    top: calc(100% - var(--spacing-9));
+  }
+}
+
+.withMaxLength {
+  padding-bottom: var(--spacing-9);
+}

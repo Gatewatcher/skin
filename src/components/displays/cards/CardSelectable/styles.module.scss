@@ -1,0 +1,20 @@
+@import '@/styles/mixins';
+
+.Card {
+  cursor: pointer;
+}
+
+.selected {
+  border-color: var(--color-primary);
+  background-color: var(--color-primary-50-a25);
+
+  @include on-dark-theme {
+    border-color: var(--color-primary-400);
+    background-color: var(--color-primary-900-a25);
+  }
+}
+
+.disabled {
+  opacity: var(--alpha-disabled);
+  pointer-events: none;
+}

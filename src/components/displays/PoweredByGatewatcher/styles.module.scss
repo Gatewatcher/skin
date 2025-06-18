@@ -1,0 +1,19 @@
+@import '@/styles/mixins';
+
+.poweredByContainer {
+  & svg path {
+    @include on-dark-theme {
+      fill: var(--color-white);
+    }
+  }
+}
+
+.poweredByText {
+  color: var(--color-neutral-600);
+  font-size: var(--font-size-small);
+  white-space: nowrap;
+
+  @include on-dark-theme {
+    color: white;
+  }
+}
