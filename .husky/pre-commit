@@ -1,5 +1,4 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-npm run generate:gitlab-ci-jobs && git add .gitlab-ci-e2e-visual.yml
 npx --no-install lint-staged --config lint-staged.json
