@@ -1044,7 +1044,7 @@ describe('Form', () => {
   });
 
   it('should have default settings with file type', async () => {
-    const file = new File([faker.lorem.paragraphs(50000)], 'img.png', {
+    const file = new File([faker.lorem.paragraphs(100)], 'img.png', {
       type: 'image/png',
     });
     const onSubmit = vi.fn();

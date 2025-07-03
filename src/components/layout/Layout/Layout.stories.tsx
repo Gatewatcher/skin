@@ -2,7 +2,7 @@ import type { Meta, StoryFn, StoryObj } from '@storybook/react';
 import {
   reactRouterParameters,
   withRouter,
-} from 'storybook-addon-react-router-v6';
+} from 'storybook-addon-remix-react-router';
 
 import { Button } from '@/skin/actions';
 import { Section } from '@/skin/displays';

@@ -7,6 +7,7 @@ import Actions from './compounds/Actions';
 import Body from './compounds/Body';
 import Footer from './compounds/Footer';
 import Header from './compounds/Header';
+import SubHeader from './compounds/SubHeader';
 import Title from './compounds/Title';
 
 import styles from './styles.module.scss';
@@ -41,5 +42,6 @@ PanelContentLayout.Body = Body;
 PanelContentLayout.Footer = Footer;
 PanelContentLayout.Header = Header;
 PanelContentLayout.Title = Title;
+PanelContentLayout.SubHeader = SubHeader;
 
 export default PanelContentLayout;

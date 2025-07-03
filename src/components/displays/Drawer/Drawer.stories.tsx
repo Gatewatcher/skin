@@ -6,7 +6,7 @@ import {
   reactRouterOutlets,
   reactRouterParameters,
   withRouter,
-} from 'storybook-addon-react-router-v6';
+} from 'storybook-addon-remix-react-router';
 
 import type { PaginatedApiResponse, Todo } from '@/mocks/types';
 import { ButtonActions, LinkInternal } from '@/skin/actions';

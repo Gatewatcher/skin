@@ -1,3 +1,4 @@
+import { isFunction } from '@gatewatcher/bistoury/utils-lang';
 import type { ReactNode } from 'react';
 
 import type { Spacings } from '@/hocs';
@@ -16,7 +17,7 @@ export type LayoutProps = {
   children: ReactNode;
   drawer?: ReactNode;
   topNavHeight?: string;
-  contentGridPadding?: Spacings['padding'];
+  contentGridPadding?: Spacings['padding'] | (() => Spacings['padding']);
 };
 
 /**
@@ -33,13 +34,17 @@ const Layout = ({
   topNavHeight = 'var(--navbar-height)',
   contentGridPadding = LAYOUT_CONTENT_GRID_PADDINGS,
 }: LayoutProps) => {
+  const padding = isFunction(contentGridPadding)
+    ? contentGridPadding()
+    : contentGridPadding;
+
   return (
     <div className={styles.Layout}>
       <div className={styles.sideNavZone}>{sideNav}</div>
       <DrawerProvider topNavHeight={topNavHeight} withTopNav={!!topNav}>
         <PanelLayout
           banner={banner}
-          contentGridPadding={contentGridPadding}
+          contentGridPadding={padding}
           drawer={drawer}
           topNav={topNav}
           topNavHeight={topNavHeight}

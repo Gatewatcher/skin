@@ -4,21 +4,17 @@ import { Children, cloneElement } from 'react';
 
 import { Stack } from '@/skin/layout';
 
-import Icon from '../../icons/Icon';
-import type { IconName } from '../../icons/types';
 import type { FinderResumeItemInternalProps } from './ResumeItem';
 
 import styles from '../styles.module.scss';
 
 export type FinderResumeProps = DataTestId & {
   children: ReactNode;
-  icon?: IconName;
 };
 
 const Resume = ({
   children,
   'data-testid': testId = 'finder-resume',
-  icon = 'Wiki',
 }: FinderResumeProps) => {
   const nodes = Children.toArray(children);
 
@@ -30,8 +26,6 @@ const Resume = ({
       flexGrow={1}
       gap={6}
     >
-      <Icon name={icon} />
-
       <Stack alignItems="center">
         {nodes.map((child, index) =>
           cloneElement(child as ReactElement<FinderResumeItemInternalProps>, {

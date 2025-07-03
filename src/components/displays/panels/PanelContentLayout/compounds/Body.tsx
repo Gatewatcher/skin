@@ -12,7 +12,12 @@ export type BodyProps = {
   fitContent?: boolean;
 } & StackProps;
 
-const Body = ({ children, fitContent, ...stackProps }: BodyProps) => {
+const Body = ({
+  children,
+  fitContent,
+  'data-testid': testId = 'panel-content-body',
+  ...stackProps
+}: BodyProps) => {
   const { stickySize } = useStickyContext();
 
   return (
@@ -23,8 +28,9 @@ const Body = ({ children, fitContent, ...stackProps }: BodyProps) => {
         fitContent && styles.fitContent,
         stackProps.className,
       )}
+      data-testid={testId}
       direction="column"
-      style={{ paddingTop: stickySize, ...stackProps.style }}
+      style={{ marginTop: stickySize, ...stackProps.style }}
     >
       {children}
     </Stack>

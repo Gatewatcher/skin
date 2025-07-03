@@ -3,7 +3,7 @@ import type { ReactElement } from 'react';
 import type { MemoryRouterProps } from 'react-router-dom';
 import { MemoryRouter } from 'react-router-dom';
 
-import { Theme, ThemeContext } from '@/skin/navigation/Theme';
+import { type Theme, ThemeContext } from '@/skin/navigation/Theme';
 
 export const renderWithRouter = (
   element: ReactElement,

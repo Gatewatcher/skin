@@ -45,9 +45,12 @@ describe('Stepper', () => {
           submit={
             submit || (
               <ButtonAsync
-                onClick={() =>
-                  new Promise(resolve => setTimeout(resolve, 3000))
-                }
+                onClick={() => {
+                  new Promise(resolve => {
+                    const timeoutId = setTimeout(resolve, 200);
+                    clearTimeout(timeoutId);
+                  });
+                }}
                 data-testid="stepper-submit"
               >
                 Submit

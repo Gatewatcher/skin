@@ -9,6 +9,10 @@
   gap: var(--spacing-4);
   list-style: none;
 
+  &.secondary {
+    gap: 0;
+  }
+
   &.primary {
     padding: var(--spacing-4) var(--spacing-6);
     border-radius: var(--border-radius-rounded);
@@ -105,7 +109,6 @@
 
     &.active {
       border-color: var(--color-primary);
-      border-radius: var(--border-radius-small);
       background-color: transparent;
 
       @include child('Text') {

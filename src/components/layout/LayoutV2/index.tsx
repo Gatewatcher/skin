@@ -1,4 +1,5 @@
 import { useAsyncDebounce } from '@gatewatcher/bistoury/hooks';
+import { isFunction } from '@gatewatcher/bistoury/utils-lang';
 import type { ReactNode } from 'react';
 
 import type { Spacings } from '@/hocs';
@@ -24,7 +25,7 @@ import styles from './styles.module.scss';
 export type LayoutV2Props = {
   banner?: ReactNode;
   children: ReactNode;
-  contentGridPadding?: Spacings['padding'];
+  contentGridPadding?: (() => Spacings['padding']) | Spacings['padding'];
   drawerConfig?: DrawerConfig;
   sideNav?: ReactNode;
   sidePanelConfig?: SidePanelConfig;
@@ -60,11 +61,15 @@ const LayoutV2 = ({
     100,
   );
 
+  const padding = isFunction(contentGridPadding)
+    ? contentGridPadding()
+    : contentGridPadding;
+
   const mainContent = (
     <Grid
       columns={LAYOUT_COLUMNS}
       gap={LAYOUT_GAPS}
-      padding={contentGridPadding}
+      padding={padding}
       isContainer
     >
       {children}

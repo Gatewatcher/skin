@@ -5,7 +5,7 @@ import { THEME_STORAGE_CURRENT_KEY } from './theme.config';
 import { THEMES } from './theme.context';
 import { setThemeAttribute } from './theme.provider';
 
-export const init = () => {
+export const initTheme = () => {
   if (!isSupported()) {
     return;
   }
@@ -24,4 +24,4 @@ export const init = () => {
   }
 };
 
-init();
+initTheme();

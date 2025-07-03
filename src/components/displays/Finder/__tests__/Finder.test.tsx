@@ -186,5 +186,15 @@ describe('Finder', () => {
 
       await expectToBeVisibleInTheDocument('icon-Slash');
     });
+
+    it('should render start element', async () => {
+      render(
+        <Finder.ResumeItem startElement="start element">
+          Item
+        </Finder.ResumeItem>,
+      );
+
+      await expectToBeVisibleInTheDocument('start element', screen.findByText);
+    });
   });
 });

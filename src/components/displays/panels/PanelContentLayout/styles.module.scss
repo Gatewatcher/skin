@@ -17,7 +17,7 @@
 
 .Body {
   flex-grow: 1;
-  padding: 0 var(--spacing-9) var(--spacing-9) var(--spacing-9);
+  padding: var(--spacing-9) var(--spacing-9) var(--spacing-9) var(--spacing-9);
   background-color: var(--body-background-color);
 
   &.fitContent {
@@ -44,6 +44,11 @@
   }
 }
 
+.SubHeader {
+  width: 100%;
+  padding: 0 var(--spacing-9);
+}
+
 .Header {
   // Stay on top of the Body.
   z-index: 1;
@@ -64,7 +69,17 @@
   flex: 1 1 auto;
 
   // Every element under .Fill that is not or contained in a Drawer layout element.
-  & :not(.Header, .Footer, .Body, .Header *, .Footer *, .Body *) {
+  &
+    :not(
+      .Header,
+      .Footer,
+      .Body,
+      .SubHeader,
+      .Header *,
+      .Footer *,
+      .Body *,
+      .SubHeader *
+    ) {
     display: flex;
     // Firefox: the default `min-width: auto` makes the target overflow its parent if it contains large children.
     min-width: 0;

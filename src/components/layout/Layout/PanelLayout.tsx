@@ -4,7 +4,7 @@ import type { ReactNode } from 'react';
 
 import type { Spacings } from '@/hocs';
 import { useDrawerContext } from '@/skin/displays/Drawer/context';
-import Panels from '@/skin/displays/panels';
+import Panels from '@/skin/displays/Panels';
 
 import Grid from '../Grid';
 import {

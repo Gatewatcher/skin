@@ -1,4 +1,4 @@
-import type { LogicalGroupType } from './types';
+import type { ConditionType, LogicalGroupType } from './types';
 
 export const traverseArray = (
   logicalGroupId: LogicalGroupType['id'],
@@ -13,4 +13,12 @@ export const traverseArray = (
     return traverseArray(subGroup.subGroupOf, logicalGroups, depth);
   }
   return depth;
+};
+
+export const checkAreAllConditionsDefined = (conditions: ConditionType[]) => {
+  return conditions.every(condition => isConditionDefined(condition));
+};
+
+export const isConditionDefined = (condition: ConditionType) => {
+  return condition?.observable && condition?.operator && condition?.value;
 };
