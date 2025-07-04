@@ -2,7 +2,7 @@ import { faker } from '@faker-js/faker';
 import { useToggle } from '@gatewatcher/bistoury/hooks';
 import { range } from '@gatewatcher/bistoury/utils-lang';
 import type { Meta, StoryObj } from '@storybook/react';
-import { withRouter } from 'storybook-addon-react-router-v6';
+import { withRouter } from 'storybook-addon-remix-react-router';
 
 import type { User } from '@/mocks/types';
 import { Button } from '@/skin/actions';

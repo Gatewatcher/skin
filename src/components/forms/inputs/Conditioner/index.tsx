@@ -63,8 +63,12 @@ const Conditioner = ({
 }: ConditionerProps) => {
   const [initConditions, initLogicalGroups] = initialValues;
 
-  let conditionsState = useState<ConditionType[]>(initConditions);
-  let logicalGroupsState = useState<LogicalGroupType[]>(initLogicalGroups);
+  let conditionsState = useState<ConditionType[]>([
+    ...initConditions.map(condition => ({ ...condition })),
+  ]);
+  let logicalGroupsState = useState<LogicalGroupType[]>([
+    ...initLogicalGroups.map(logicalGroup => ({ ...logicalGroup })),
+  ]);
 
   if (controlledStates) {
     const [

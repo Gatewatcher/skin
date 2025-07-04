@@ -13,6 +13,7 @@ export type FinderResumeItemProps = DataTestId & {
   children: ReactNode;
   icon?: IconName;
   maxWidth?: number;
+  startElement?: ReactNode;
 };
 
 export type FinderResumeItemInternalProps = {
@@ -24,17 +25,22 @@ const ResumeItem = ({
   'data-testid': testId = 'finder-resume-item',
   icon = 'Slash',
   maxWidth = 250,
+  startElement,
   ...rest
 }: FinderResumeItemProps) => {
   const { isLastItem } = rest as FinderResumeItemInternalProps;
 
   return (
     <Stack
-      alignItems="baseline"
+      alignItems="center"
       className={styles.ResumeItem}
       data-testid={testId}
     >
-      <Stack.Item style={{ maxWidth }}>
+      {startElement}
+      <Stack.Item
+        margin={{ ...(startElement && { left: 6 }) }}
+        style={{ maxWidth }}
+      >
         <OverflownText as={isLastItem ? 'strong' : 'span'}>
           {children}
         </OverflownText>

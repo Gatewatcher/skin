@@ -7,7 +7,7 @@ import { Route, Routes } from 'react-router-dom';
 import {
   reactRouterParameters,
   withRouter,
-} from 'storybook-addon-react-router-v6';
+} from 'storybook-addon-remix-react-router';
 
 import type { ApiError, PaginatedApiResponse, User } from '@/mocks/types';
 import { Link } from '@/skin/actions';

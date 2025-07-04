@@ -13,7 +13,7 @@ import { renderWithRouter } from '@/tests';
 import type { DrawerProps } from '..';
 import Drawer from '..';
 import { drawerPersistence } from '../..';
-import Panels from '../../panels';
+import Panels from '../../Panels';
 import { useDrawer } from '../hooks/useDrawer';
 import DrawerProvider from '../provider';
 

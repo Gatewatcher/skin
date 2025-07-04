@@ -74,6 +74,22 @@ describe('AdvancedFilter render', async () => {
     await expectToBeVisibleInTheDocument(TEST_IDS.addFilter);
   });
 
+  it('should close empty filter on cancel', async () => {
+    renderComponent({});
+
+    const filterButton = await screen.findByTestId(TEST_IDS.filterButton);
+    await user.click(filterButton);
+
+    await expectToBeVisibleInTheDocument(TEST_IDS.addFilter);
+
+    const cancelButton = await screen.findByTestId(
+      TEST_IDS.advancedFilterConditionerCancel,
+    );
+    await user.click(cancelButton);
+
+    expect(await screen.findByTestId(TEST_IDS.addFilter)).not.toBeVisible();
+  });
+
   it('should open advancedFilter', async () => {
     renderComponentWithAdvancedFilter();
 
@@ -90,7 +106,7 @@ describe('AdvancedFilter render', async () => {
     await user.click(filterButton);
 
     const addFilterButton = await screen.findByTestId(
-      TEST_IDS.advancedFilterFooterActionAddFitler,
+      TEST_IDS.advancedFilterFooterActionAddFilter,
     );
     await user.click(addFilterButton);
 

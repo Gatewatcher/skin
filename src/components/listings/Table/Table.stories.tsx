@@ -12,7 +12,7 @@ import {
   reactRouterOutlets,
   reactRouterParameters,
   withRouter,
-} from 'storybook-addon-react-router-v6';
+} from 'storybook-addon-remix-react-router';
 
 import type { ApiError, PaginatedApiResponse, Todo, User } from '@/mocks/types';
 import {

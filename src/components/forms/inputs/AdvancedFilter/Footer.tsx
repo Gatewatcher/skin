@@ -8,7 +8,13 @@ import type {
 import { Stack } from '@/skin/layout';
 
 import type { AdvancedFilters } from './AdvancedFilter';
-import { TEST_IDS } from './constants';
+import {
+  DEFAULT_ADVANCED_FILTER_FOOTER_ADD_TEXT,
+  DEFAULT_ADVANCED_FILTER_FOOTER_CLEAR_TEXT,
+  DEFAULT_ADVANCED_FILTER_FOOTER_DISABLE_TEXT,
+  DEFAULT_ADVANCED_FILTER_FOOTER_ENABLE_TEXT,
+  TEST_IDS,
+} from './constants';
 import { generateNewFilter } from './utils';
 
 type FooterProps = {
@@ -19,9 +25,19 @@ type FooterProps = {
   >;
   setAddFilterMode: Dispatch<SetStateAction<boolean>>;
   setAdvancedFilters: Dispatch<SetStateAction<AdvancedFilters>>;
+  onSave: (advancedFilters: AdvancedFilters) => void;
+  clearText?: string;
+  disableText?: string;
+  enableText?: string;
+  addText?: string;
 };
 
 const Footer = ({
+  addText = DEFAULT_ADVANCED_FILTER_FOOTER_ADD_TEXT,
+  clearText = DEFAULT_ADVANCED_FILTER_FOOTER_CLEAR_TEXT,
+  disableText = DEFAULT_ADVANCED_FILTER_FOOTER_DISABLE_TEXT,
+  enableText = DEFAULT_ADVANCED_FILTER_FOOTER_ENABLE_TEXT,
+  onSave,
   setInitialValues,
   setAddFilterMode,
   setAdvancedFilters,
@@ -35,6 +51,7 @@ const Footer = ({
 
   const handleClearAll = () => {
     setAdvancedFilters({});
+    onSave({});
     handleAddFilter();
   };
 
@@ -48,7 +65,7 @@ const Footer = ({
           disabled,
         };
       });
-
+      onSave(newAdvancedFilters);
       return newAdvancedFilters;
     });
   };
@@ -61,7 +78,7 @@ const Footer = ({
         startIcon="Update"
         variant="ghosted"
       >
-        Clear all
+        {clearText}
       </Button>
       <ButtonActions
         actions={[
@@ -70,14 +87,14 @@ const Footer = ({
             icon="View"
             onClick={() => handleEnableDisableAll(false)}
           >
-            Enabled
+            {enableText}
           </ButtonActions.Button>,
           <ButtonActions.Button
             key="disabled"
             icon="ViewOff"
             onClick={() => handleEnableDisableAll(true)}
           >
-            Disabled
+            {disableText}
           </ButtonActions.Button>,
         ]}
         variant="ghosted"
@@ -85,12 +102,12 @@ const Footer = ({
         Actions
       </ButtonActions>
       <Button
-        data-testid={TEST_IDS.advancedFilterFooterActionAddFitler}
+        data-testid={TEST_IDS.advancedFilterFooterActionAddFilter}
         onClick={handleAddFilter}
         startIcon="Add"
         variant="outlined"
       >
-        Add filter
+        {addText}
       </Button>
     </Stack>
   );

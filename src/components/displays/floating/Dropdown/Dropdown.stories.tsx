@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker/locale/fr';
 import type { Meta, StoryFn, StoryObj } from '@storybook/react';
-import { withRouter } from 'storybook-addon-react-router-v6';
+import { withRouter } from 'storybook-addon-remix-react-router';
 
 import { Button } from '@/skin/actions';
 import { Chip, Icon } from '@/skin/displays';

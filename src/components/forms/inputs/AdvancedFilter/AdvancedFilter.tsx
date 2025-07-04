@@ -24,6 +24,7 @@ import { findMainGroupId } from './utils';
 
 export type AdvancedFilterItemType = {
   disabled?: boolean;
+  excluded?: boolean;
   conditions: ConditionerConditionType[];
   logicalGroups: ConditionerLogicalGroupType[];
 };
@@ -74,6 +75,9 @@ const AdvancedFilter = ({
   const handleCancel = () => {
     setAddFilterMode(false);
     setInitialValues(undefined);
+    if (!Object.keys(advancedFilters).length) {
+      setIsOpened(false);
+    }
   };
 
   const handleClear = () => {
@@ -124,6 +128,8 @@ const AdvancedFilter = ({
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const { [mainGroupId]: _, ...remainingFilters } = advancedFilters;
 
+        onSave(remainingFilters);
+
         return remainingFilters;
       });
     }
@@ -142,6 +148,29 @@ const AdvancedFilter = ({
         return { ...advancedFilters };
       });
     }
+    setAddFilterMode(false);
+    setInitialValues(undefined);
+
+    onSave(advancedFilters);
+  };
+
+  const handleExcluded = (logicalGroups: ConditionerLogicalGroupType[]) => {
+    const mainGroupId = findMainGroupId(logicalGroups);
+
+    if (mainGroupId) {
+      setAdvancedFilters(advancedFilters => {
+        advancedFilters[mainGroupId] = {
+          ...advancedFilters[mainGroupId],
+          excluded: !advancedFilters[mainGroupId].excluded,
+        };
+
+        return { ...advancedFilters };
+      });
+    }
+    setAddFilterMode(false);
+    setInitialValues(undefined);
+
+    onSave(advancedFilters);
   };
 
   const advancedFilterLength = Object.keys(advancedFilters).length;
@@ -173,9 +202,11 @@ const AdvancedFilter = ({
                   onDelete={handleDelete}
                   onDisabled={handleDisabled}
                   onEditFilter={handleEditFilter}
+                  onExcluded={handleExcluded}
                 />
               ))}
               <Footer
+                onSave={onSave}
                 setAddFilterMode={setAddFilterMode}
                 setAdvancedFilters={setAdvancedFilters}
                 setInitialValues={setInitialValues}
@@ -199,7 +230,11 @@ const AdvancedFilter = ({
                 <Input.Conditioner.Footer>
                   <Stack flexGrow={1} gap={4} justifyContent="flex-end">
                     <Input.Conditioner.ClearAll onClick={handleClear} />
-                    <Button onClick={handleCancel} variant="outlined">
+                    <Button
+                      data-testid={TEST_IDS.advancedFilterConditionerCancel}
+                      onClick={handleCancel}
+                      variant="outlined"
+                    >
                       Cancel
                     </Button>
                     <Input.Conditioner.Save

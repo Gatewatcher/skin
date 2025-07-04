@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker';
 import type { Meta, StoryFn, StoryObj } from '@storybook/react';
-import { withRouter } from 'storybook-addon-react-router-v6';
+import { withRouter } from 'storybook-addon-remix-react-router';
 import { mockDateDecorator } from 'storybook-mock-date-decorator';
 
 import { OverflownText, Paragraph } from '@/skin/typography';

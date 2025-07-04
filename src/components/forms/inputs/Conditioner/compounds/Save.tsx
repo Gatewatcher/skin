@@ -1,4 +1,5 @@
 import { Button } from '@/skin/actions';
+import { checkAreAllConditionsDefined } from '@/skin/forms/inputs/Conditioner/utils';
 import { buildTestIds } from '@/utils/testIds';
 
 import { SUFFIX_TEST_IDS, TEST_ID } from '../constants';
@@ -22,10 +23,12 @@ export const Save = ({ onClick, label = 'Save' }: SaveProps) => {
 
   const handleClick = () => onClick({ conditions, logicalGroups });
 
+  const areAllConditionsDefined = checkAreAllConditionsDefined(conditions);
+
   return (
     <Button
       data-testid={TEST_IDS.save}
-      disabled={readonly}
+      disabled={readonly || !areAllConditionsDefined}
       onClick={handleClick}
     >
       {label}

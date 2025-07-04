@@ -21,7 +21,11 @@ describe('ButtonAsync', () => {
       <ButtonAsync
         onClick={
           onClick ||
-          (() => new Promise<void>(resolve => setTimeout(resolve, 3000)))
+          (() =>
+            new Promise<void>(resolve => {
+              const timeoutId = setTimeout(resolve, 200);
+              clearTimeout(timeoutId);
+            }))
         }
         data-testid={TEST_ID}
         {...props}

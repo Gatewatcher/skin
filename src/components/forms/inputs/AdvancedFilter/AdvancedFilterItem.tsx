@@ -12,6 +12,7 @@ import { TEST_IDS } from './constants';
 export type AdvancedFilterItemsProps = {
   advancedFilter: AdvancedFilterItemType;
   onEditFilter: (logicalGroups: ConditionerLogicalGroupType[]) => void;
+  onExcluded: (logicalGroups: ConditionerLogicalGroupType[]) => void;
   onDelete: (logicalGroups: ConditionerLogicalGroupType[]) => void;
   onDisabled: (logicalGroups: ConditionerLogicalGroupType[]) => void;
 };
@@ -19,10 +20,11 @@ export type AdvancedFilterItemsProps = {
 const AdvancedFilterItem = ({
   advancedFilter,
   onEditFilter,
+  onExcluded,
   onDelete,
   onDisabled,
 }: AdvancedFilterItemsProps) => {
-  const { conditions, logicalGroups, disabled } = advancedFilter;
+  const { conditions, logicalGroups, disabled, excluded } = advancedFilter;
 
   const mainGroup = logicalGroups.find(
     logicalGroup => !logicalGroup.subGroupOf,
@@ -54,8 +56,10 @@ const AdvancedFilterItem = ({
           <Dropdown
             content={
               <DropdownActions
+                excluded={excluded}
                 onDelete={() => onDelete(logicalGroups)}
                 onEditFilter={() => onEditFilter(logicalGroups)}
+                onExcluded={() => onExcluded(logicalGroups)}
               />
             }
             placement="bottom-end"

@@ -1,4 +1,5 @@
 import { classNames } from '@gatewatcher/bistoury/utils-dom';
+import type { DataTestId } from '@gatewatcher/bistoury/utils-types';
 import { type ReactNode, useCallback } from 'react';
 
 import { useStickyContext } from '../components/StickyProvider';
@@ -9,12 +10,16 @@ export type DynamicContentProps = {
   scrollTop: number;
 };
 
-export type HeaderProps = {
+export type HeaderProps = DataTestId & {
   children?: ReactNode;
   dynamicContent?: (props: DynamicContentProps) => ReactNode;
 };
 
-const Header = ({ children, dynamicContent }: HeaderProps) => {
+const Header = ({
+  children,
+  dynamicContent,
+  'data-testid': testId = 'panel-content-header',
+}: HeaderProps) => {
   const { scrollTop, setStickySize } = useStickyContext();
 
   const handleMountAndUnmount = useCallback(
@@ -33,6 +38,7 @@ const Header = ({ children, dynamicContent }: HeaderProps) => {
   return (
     <header
       className={classNames(styles.Header, children && styles.paddingTop)}
+      data-testid={testId}
     >
       {children}
       {dynamicElement}

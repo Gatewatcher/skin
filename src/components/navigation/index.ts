@@ -13,8 +13,9 @@ import {
   useThemeContext,
 } from './Theme';
 import type { Theme } from './Theme';
+import { initTheme } from './Theme/theme';
 
-export { useThemeContext };
+export { useThemeContext, initTheme };
 
 export {
   NavBar,

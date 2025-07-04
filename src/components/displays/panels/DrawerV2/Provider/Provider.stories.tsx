@@ -3,7 +3,7 @@ import {
   reactRouterOutlets,
   reactRouterParameters,
   withRouter,
-} from 'storybook-addon-react-router-v6';
+} from 'storybook-addon-remix-react-router';
 
 import { Button, LinkInternal } from '@/skin/actions';
 import {

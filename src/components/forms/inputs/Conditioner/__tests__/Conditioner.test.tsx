@@ -57,6 +57,14 @@ describe('Conditioner filter', () => {
     await expectToBeVisibleInTheDocument(TEST_IDS.operator);
   });
 
+  it('should have save button disabled when empty', async () => {
+    renderComponent({});
+
+    const saveButton = await screen.findByTestId(TEST_IDS.save);
+
+    expect(saveButton).toBeDisabled();
+  });
+
   it('should have avdanced inputs', async () => {
     renderComponent({
       formatsOptions: [

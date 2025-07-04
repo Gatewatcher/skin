@@ -50,16 +50,23 @@ const Icon = ({
   };
 
   useLayoutEffect(() => {
+    let isMounted = true;
     if (componentCache.has(name)) {
-      setComponent(componentCache.get(name));
+      if (isMounted) setComponent(componentCache.get(name));
       return;
     }
 
     import(`./../../../../icons/${name}.tsx`).then(importedComponent => {
-      const Component = importedComponent.default;
-      componentCache.set(name, Component);
-      setComponent(Component);
+      if (isMounted) {
+        const Component = importedComponent.default;
+        componentCache.set(name, Component);
+        setComponent(Component);
+      }
     });
+
+    return () => {
+      isMounted = false;
+    };
   }, [name]);
 
   const { theme } = useThemeContext();

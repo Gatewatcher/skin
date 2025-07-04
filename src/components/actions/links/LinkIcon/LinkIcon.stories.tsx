@@ -1,5 +1,5 @@
 import type { Meta, StoryFn, StoryObj } from '@storybook/react';
-import { withRouter } from 'storybook-addon-react-router-v6';
+import { withRouter } from 'storybook-addon-remix-react-router';
 
 import { ICON_SIZES } from '@/constants';
 import { DEFAULT_ICON_SIZE } from '@/skin/displays/InfoTooltip/constants';

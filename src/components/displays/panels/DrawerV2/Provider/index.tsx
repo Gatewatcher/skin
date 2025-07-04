@@ -46,6 +46,7 @@ const Provider = ({ children, matches }: DrawerV2ProviderProps) => {
 
   const optionsStore = useDrawerOptions();
   const { keepOn, closeOn, encode, clean } = optionsStore.get(currentId ?? '');
+
   const canBeKeptOpen =
     (!keepOn || keepOn.test(pathname)) && !closeOn?.test(pathname);
 
@@ -117,17 +118,10 @@ const Provider = ({ children, matches }: DrawerV2ProviderProps) => {
   ]);
 
   useEffect(() => {
-    if (currentId && !drawerSearchParams.getId() && canBeKeptOpen) {
+    if (currentId && !drawerSearchParams.getId()) {
       persistenceRef.current.encode?.(currentId, props as SearchParamsObject);
     }
-  }, [
-    currentId,
-    props,
-    pathname,
-    drawerSearchParams,
-    optionsStore,
-    canBeKeptOpen,
-  ]);
+  }, [currentId, props, pathname, drawerSearchParams, optionsStore]);
 
   return (
     <DrawerProvider

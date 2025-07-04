@@ -2,9 +2,24 @@
 
 Gatewatcher Design System
 
-## Figma
+## Third-Party Licenses
 
-[Maquettes Figma](https://www.figma.com/file/xRJI6rsiEX2A89W4iTpBLG/Gatewatcher---Design-system?t=MQMleY89hVv9KtdV-0)
+This project includes third-party resources licensed under their respective terms:
+
+- **IBM Carbon Icons**  
+  Icons are from the [IBM Carbon Design System](https://www.carbondesignsystem.com/),  
+  licensed under the [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0).  
+  © 2024 IBM Corp. — See `https://github.com/carbon-design-system/carbon/blob/main/LICENSE` for details or `licenses/IBM.md`.
+
+- **react-resizable-panels**  
+  Some UI functionality is adapted from [react-resizable-panels](https://github.com/bvaughn/react-resizable-panels)  
+  by Brian Vaughn, licensed under the MIT License.  
+  See `https://github.com/bvaughn/react-resizable-panels/blob/main/LICENSE` or `licenses/BRIAN_VAUGHN.md`.
+
+- **field-form**  
+  Some form logic is based on [field-form](https://github.com/react-component/field-form),  
+  licensed under the MIT License.  
+  See `https://github.com/react-component/field-form/blob/master/LICENSE` or `licenses/REACT_COMPONENT.md`.
 
 ## Linters
 

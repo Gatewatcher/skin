@@ -100,15 +100,16 @@ export const Default: Story = {
             </>
           )}
         </PanelContentLayout.Header>
-        <PanelContentLayout.Body fitContent={fitContent} margin={{ top: 8 }}>
-          <Tabs>
+        <Tabs>
+          <PanelContentLayout.SubHeader>
             <Tabs.TitleList variant="secondary" full>
               {range({ start: 1, stop: TABS_COUNT + 1 }).map(item => (
                 <Tabs.Title key={item}>Tab {item}</Tabs.Title>
               ))}
             </Tabs.TitleList>
-
-            <Stack padding={{ y: 8 }}>
+          </PanelContentLayout.SubHeader>
+          <PanelContentLayout.Body fitContent={fitContent} margin={{ top: 8 }}>
+            <Stack>
               <Tabs.PanelList>
                 {range({ start: 1, stop: TABS_COUNT + 1 }).map(item => (
                   <Tabs.Panel key={item}>
@@ -117,8 +118,8 @@ export const Default: Story = {
                 ))}
               </Tabs.PanelList>
             </Stack>
-          </Tabs>
-        </PanelContentLayout.Body>
+          </PanelContentLayout.Body>
+        </Tabs>
         <PanelContentLayout.Footer>
           <Button size="small" variant="outlined">
             Secondary&nbsp;action

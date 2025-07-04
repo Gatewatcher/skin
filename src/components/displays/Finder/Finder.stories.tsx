@@ -9,6 +9,7 @@ import { Stack } from '@/skin/layout';
 import { Text } from '@/skin/typography';
 
 import Finder from '.';
+import Icon from '../icons/Icon';
 
 faker.seed(10);
 
@@ -134,7 +135,9 @@ export const Default: Story = {
             resume={
               <Finder.Resume>
                 {panel1?.id && (
-                  <Finder.ResumeItem>{panel1?.name}</Finder.ResumeItem>
+                  <Finder.ResumeItem startElement={<Icon name="Wiki" />}>
+                    {panel1?.name}
+                  </Finder.ResumeItem>
                 )}
                 {panel2?.id && (
                   <Finder.ResumeItem>{panel2?.name}</Finder.ResumeItem>

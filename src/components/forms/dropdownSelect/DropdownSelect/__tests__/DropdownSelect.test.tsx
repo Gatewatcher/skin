@@ -69,8 +69,10 @@ describe('DropdownSelect', () => {
     await open();
     await selectItem(1);
     expect(onChange).toHaveBeenNthCalledWith(1, 1);
+
     await selectItem(3);
     expect(onChange).toHaveBeenNthCalledWith(2, 3);
+
     await selectItem(3);
     expect(onChange).toHaveBeenNthCalledWith(3, undefined);
   });

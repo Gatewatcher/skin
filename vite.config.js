@@ -18,35 +18,6 @@ export default defineConfig(({ mode }) => {
   );
 
   return {
-    // test: {
-    //   minThreads: 2,
-    //   maxThreads: 6,
-    //   testTimeout: 20000,
-    //   globals: true,
-    //   setupFiles: './src/__tests__/setupTests.js',
-    //   globalSetup: './src/__tests__/globalSetup.js',
-    //   css: {
-    //     modules: {
-    //       classNameStrategy: 'non-scoped',
-    //     },
-    //   },
-    //   deps: {
-    //     optimizer: {
-    //       web: {
-    //         include: ['vitest-canvas-mock'],
-    //       },
-    //     },
-    //   },
-    //   environment: 'jsdom',
-    //   coverage: {
-    //     exclude: [
-    //       './src/icons/*',
-    //       '**/__tests__/**/*',
-    //       './src/__mocks__/*',
-    //       './src/displays/panels/**/*',
-    //     ],
-    //   },
-    // },
     define: {
       ...envWithProcessPrefix,
       ...(process.env.VITEST && { global: 'window' }),
@@ -113,6 +84,7 @@ export default defineConfig(({ mode }) => {
     },
     plugins: [
       dts({
+        entryRoot: 'src',
         outputDir: 'dist',
         copyDtsFiles: true,
         skipDiagnostics: true,
@@ -122,12 +94,11 @@ export default defineConfig(({ mode }) => {
     ],
     build: {
       lib: {
-        entry: {
-          index: './src/index.ts',
-        },
+        entry: path.resolve(__dirname, 'src/index.ts'),
         name: 'skin',
         fileName: format => `index.${format}.js`,
         formats: ['es', 'umd'],
+        cssFileName: 'style',
       },
       rollupOptions: {
         // make sure to externalize deps that shouldn't be bundled

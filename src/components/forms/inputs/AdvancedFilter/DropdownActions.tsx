@@ -6,10 +6,14 @@ export type DropdownActionsProps = {
   onEditFilter: () => void;
   onDelete: () => void;
   onDisabled?: () => void;
+  onExcluded?: () => void;
+  excluded?: boolean;
 };
 
 const DropdownActions = ({
+  excluded,
   onEditFilter,
+  onExcluded,
   onDelete,
   onDisabled,
 }: DropdownActionsProps) => {
@@ -22,9 +26,15 @@ const DropdownActions = ({
       >
         Edit
       </ButtonActions.Button>
-      <ButtonActions.Button icon="TextHorizontalRule">
-        Exclude results
-      </ButtonActions.Button>
+      {onExcluded && (
+        <ButtonActions.Button
+          data-testid={TEST_IDS.dropdownActionExclude}
+          icon={excluded ? 'Add' : 'TextHorizontalRule'}
+          onClick={onExcluded}
+        >
+          {excluded ? 'Include results' : 'Exclude results'}
+        </ButtonActions.Button>
+      )}
       {onDisabled && (
         <ButtonActions.Button
           data-testid={TEST_IDS.dropdownActionDisable}

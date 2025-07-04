@@ -1,7 +1,7 @@
 import { faker } from '@faker-js/faker/locale/en';
 import type { Meta, StoryFn, StoryObj } from '@storybook/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
-import { withRouter } from 'storybook-addon-react-router-v6';
+import { withRouter } from 'storybook-addon-remix-react-router';
 
 import { Stack } from '@/skin/layout';
 import { Paragraph, Title } from '@/skin/typography';
