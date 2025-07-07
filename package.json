@@ -57,7 +57,6 @@
     "@commitlint/config-conventional": "18.0.0",
     "@faker-js/faker": "8.1.0",
     "@gatewatcher/bistoury": "1.7.3",
-    "@gw/cacatoes": "0.2.1",
     "@storybook/addon-actions": "8.6.12",
     "@storybook/addon-essentials": "8.6.12",
     "@storybook/addon-interactions": "8.6.12",
