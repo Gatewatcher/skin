@@ -3,13 +3,14 @@ import type { ReactNode } from 'react';
 import { memo } from 'react';
 
 import PanelsGroup from './compounds/PanelsGroup';
-import PanelsItem from './compounds/PanelsItem';
+import PanelsItem, { ImperativePanelHandle } from './compounds/PanelsItem';
 import PanelsResizeHandle from './compounds/PanelsResizeHandle';
 
 export type PanelsProps = DataTestId & {
   children: ReactNode;
 };
 
+export type { ImperativePanelHandle };
 const Panels = ({
   children,
   'data-testid': testId = 'panels',

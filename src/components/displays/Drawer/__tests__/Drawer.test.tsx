@@ -12,8 +12,7 @@ import { renderWithRouter } from '@/tests';
 
 import type { DrawerProps } from '..';
 import Drawer from '..';
-import { drawerPersistence } from '../..';
-import Panels from '../../Panels';
+import { Panels, drawerPersistence } from '../..';
 import { useDrawer } from '../hooks/useDrawer';
 import DrawerProvider from '../provider';
 

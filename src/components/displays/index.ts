@@ -24,7 +24,6 @@ import Label, { type LabelProps } from './Label';
 import Markdown, { type MarkdownProps } from './Markdown';
 import ObfuscatedText, { type ObfuscatedTextProps } from './ObfuscatedText';
 import ObjectGrid, { type ObjectGridProps } from './ObjectGrid';
-import Panels, { type PanelsProps } from './Panels';
 import Pill, { type PillProps } from './Pill';
 import PoweredByGatewatcher, {
   type PoweredByGatewatcherProps,
@@ -71,6 +70,7 @@ import IconAttachment, {
   type IconAttachmentProps,
 } from './icons/IconAttachment';
 import IconContained, { type IconContainedProps } from './icons/IconContained';
+import Panels, { ImperativePanelHandle, PanelsProps } from './panels';
 import DrawerV2 from './panels/DrawerV2';
 import {
   DRAWER_CLOSE_EVERYWHERE,
@@ -196,6 +196,7 @@ export type {
   IconContainedProps,
   IconProps,
   IllustrationProps,
+  ImperativePanelHandle,
   InfoTooltipProps,
   KeyValueDisplayProps,
   KeyValueProps,

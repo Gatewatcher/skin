@@ -3,8 +3,8 @@ import type { DataTestId } from '@gatewatcher/bistoury/utils-types';
 import type { ReactNode } from 'react';
 
 import type { Spacings } from '@/hocs';
+import { Panels } from '@/skin/displays';
 import { useDrawerContext } from '@/skin/displays/Drawer/context';
-import Panels from '@/skin/displays/Panels';
 
 import Grid from '../Grid';
 import {
