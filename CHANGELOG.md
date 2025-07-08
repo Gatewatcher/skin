@@ -1,3 +1,11 @@
+## [1.0.1](https://github.com/Gatewatcher/skin/compare/v1.0.0...v1.0.1) (2025-07-08)
+
+
+### Bug Fixes
+
+* add licenses to package ([#4](https://github.com/Gatewatcher/skin/issues/4)) ([20a0edc](https://github.com/Gatewatcher/skin/commit/20a0edc9969f4c602a418e308d16dc4548ad44a0))
+* release ([bb24449](https://github.com/Gatewatcher/skin/commit/bb244498f2469901a97fe7d6f06512c187d53e34))
+
 # 1.0.0 (2025-07-07)
 
 
