@@ -8,7 +8,7 @@ import type { ColumnResizingData } from '../types';
 import styles from '../styles.module.scss';
 
 export type ColumnResizerProps = {
-  column: RefObject<HTMLTableCellElement>;
+  column: RefObject<HTMLTableCellElement | null>;
   headerTextWidth?: number;
   minWidth?: number;
   userCanPin?: boolean;

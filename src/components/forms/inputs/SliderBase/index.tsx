@@ -88,7 +88,7 @@ const SliderBase = ({
 
       newValue = Array.isArray(marksProps)
         ? marksProps[index]
-        : parseInt(Object.keys(marksProps || {})[index], 10);
+        : Number(Object.keys(marksProps || {})[index]);
     }
 
     if (onChange) {
@@ -159,7 +159,7 @@ const SliderBase = ({
   const valuePosition = useMemo(() => {
     if (withConstantIntervals) {
       const index = Object.keys(tempMarks || {}).findIndex(
-        key => parseInt(key, 10) === valueProps,
+        key => Number(key) === valueProps,
       );
       return index + 1;
     }
@@ -174,8 +174,8 @@ const SliderBase = ({
 
     return (
       withConstantIntervals ||
-      (min === parseInt(marksAsArray[0], 10) &&
-        max === parseInt(marksAsArray.at(-1) as string, 10))
+      (min === Number(marksAsArray[0]) &&
+        max === Number(marksAsArray.at(-1) as string))
     );
   }, [tempMarks, withConstantIntervals, min, max]);
 

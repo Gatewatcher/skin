@@ -103,7 +103,7 @@ export default defineConfig(({ mode }) => {
       rollupOptions: {
         // make sure to externalize deps that shouldn't be bundled
         // into your library
-        external: ['react', 'react-router-dom'],
+        external: ['react', 'react-router-dom', 'react/jsx-runtime'],
       },
       chunkSizeWarningLimit: 2500,
     },

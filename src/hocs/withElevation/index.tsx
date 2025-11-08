@@ -11,14 +11,15 @@ import styles from './styles.module.scss';
 
 export type { Elevation, ElevationProps };
 
-export const withElevation = (
-  BaseComponent: ReactElement,
+export const withElevation = <T extends { className?: string }>(
+  BaseComponent: ReactElement<T>,
   elevation?: Elevation,
 ) => {
+  const props = BaseComponent.props;
   return cloneElement(BaseComponent, {
-    ...BaseComponent.props,
+    ...props,
     className: classNames(
-      BaseComponent.props.className,
+      props.className,
       elevation && [
         styles.Elevation,
         stylesToPascalCase(styles, 'Elevation', elevation.toString()),

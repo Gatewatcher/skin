@@ -8,7 +8,7 @@ import { buildItemClassName, getAttritbutes } from './utils';
 
 export type ItemButtonProps = DataTestId &
   ItemContentProps &
-  Omit<ComponentProps<'button'>, 'className' | 'style' | 'type'>;
+  Omit<ComponentProps<'button'>, 'className' | 'style' | 'type' | 'ref'>;
 
 export const SelectableItemButton = ({
   children,

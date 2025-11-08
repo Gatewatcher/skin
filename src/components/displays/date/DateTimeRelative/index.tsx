@@ -4,7 +4,7 @@ import { DATE_LONG_FORMAT } from '../DateTime/constants';
 
 export type DateTimeRelativeProps = Omit<
   DateTimeProps,
-  Exclude<keyof DateTimeBaseProps, 'date'>
+  Exclude<keyof DateTimeBaseProps, 'date' | 'withTooltip'>
 >;
 
 const DateTimeRelative = ({

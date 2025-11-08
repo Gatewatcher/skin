@@ -2,7 +2,7 @@ import { mergeRefs } from '@gatewatcher/bistoury/utils-react';
 import { suffixTestId } from '@gatewatcher/bistoury/utils-tests';
 import type { DataTestId } from '@gatewatcher/bistoury/utils-types';
 import type { ChangeEvent, Ref } from 'react';
-import { forwardRef, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
 import type { ButtonAsyncProps } from '@/skin/actions';
 import { ButtonAsync } from '@/skin/actions';
@@ -33,84 +33,79 @@ export type FileProps = DataTestId &
     label: string;
     onChange?: FileChangeEvent;
     resetOnClick?: boolean;
+    ref?: Ref<HTMLInputElement>;
   };
 
-const File = forwardRef(
-  (
-    {
-      'data-testid': testId = DEFAULT_TEST_ID,
-      disabled,
-      endIcon,
-      isLoading,
-      label,
-      onChange,
-      resetOnClick = true,
-      startIcon,
-      type = DEFAULT_BUTTON_TYPE,
-      variant = DEFAULT_BUTTON_VARIANT,
-      ...inputProps
-    }: FileProps,
-    forwardedRef: Ref<HTMLInputElement>,
-  ) => {
-    const inputRef = useRef<HTMLInputElement>();
-    const inputRefs = mergeRefs([inputRef, forwardedRef]);
+const File = ({
+  'data-testid': testId = DEFAULT_TEST_ID,
+  disabled,
+  endIcon,
+  isLoading,
+  label,
+  onChange,
+  resetOnClick = true,
+  startIcon,
+  type = DEFAULT_BUTTON_TYPE,
+  variant = DEFAULT_BUTTON_VARIANT,
+  ref,
+  ...inputProps
+}: FileProps) => {
+  const inputRef = useRef<HTMLInputElement>(null);
+  const inputRefs = mergeRefs(ref ? [inputRef, ref] : [inputRef]);
 
-    const selectFiles = () => {
-      if (inputRef.current && resetOnClick) {
-        inputRef.current.value = '';
-      }
-      inputRef.current?.click();
-    };
+  const selectFiles = () => {
+    if (inputRef.current && resetOnClick) {
+      inputRef.current.value = '';
+    }
+    inputRef.current?.click();
+  };
 
-    const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-      if (onChange) {
-        const files = [...(event.currentTarget.files ?? [])];
-        onChange({ event, files });
-      }
-    };
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    if (onChange) {
+      const files = [...(event.currentTarget.files ?? [])];
+      onChange({ event, files });
+    }
+  };
 
-    useEffect(() => {
-      const { value } = inputProps;
-      const valueFile = value as unknown as File;
+  useEffect(() => {
+    const { value } = inputProps;
+    const valueFile = value as unknown as File;
 
-      if (valueFile?.name && onChange) {
-        onChange({
-          event: new Event(
-            'change',
-          ) as unknown as ChangeEvent<HTMLInputElement>,
-          files: [valueFile],
-        });
-      }
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [inputProps.value]);
+    if (valueFile?.name && onChange) {
+      onChange({
+        event: new Event('change') as unknown as ChangeEvent<HTMLInputElement>,
+        files: [valueFile],
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [inputProps.value]);
 
-    return (
-      <>
-        <ButtonAsync
-          data-testid={suffixTestId(testId, 'button')}
-          disabled={disabled}
-          endIcon={endIcon}
-          isLoading={isLoading}
-          onClick={selectFiles}
-          startIcon={startIcon}
-          type={type}
-          variant={variant}
-        >
-          {label}
-        </ButtonAsync>
-        <input
-          ref={inputRefs}
-          data-testid={suffixTestId(testId, 'input')}
-          disabled={disabled}
-          onChange={handleChange}
-          {...inputProps}
-          type="file"
-          value={undefined}
-          hidden
-        />
-      </>
-    );
-  },
-);
+  return (
+    <>
+      <ButtonAsync
+        data-testid={suffixTestId(testId, 'button')}
+        disabled={disabled}
+        endIcon={endIcon}
+        isLoading={isLoading}
+        onClick={selectFiles}
+        startIcon={startIcon}
+        type={type}
+        variant={variant}
+      >
+        {label}
+      </ButtonAsync>
+      <input
+        ref={inputRefs}
+        data-testid={suffixTestId(testId, 'input')}
+        disabled={disabled}
+        onChange={handleChange}
+        {...inputProps}
+        type="file"
+        value={undefined}
+        hidden
+      />
+    </>
+  );
+};
 
 export default File;

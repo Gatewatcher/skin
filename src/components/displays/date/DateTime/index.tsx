@@ -24,6 +24,7 @@ export type DateTimeBaseProps = {
   mode?: DateMode;
   tooltipFormat?: string;
   withEllipsis?: boolean;
+  withTooltip?: boolean;
 };
 
 export type DateTimeProps = DataTestId &
@@ -45,6 +46,7 @@ export const InternalDateTime = ({
   tooltipFormat,
   variant,
   withEllipsis = false,
+  withTooltip = true,
   ...textProps
 }: DateTimeProps & InternalDateTimeProps) => {
   const isAbsolute = mode === 'absolute';
@@ -59,6 +61,7 @@ export const InternalDateTime = ({
       <Tooltip
         content={content}
         data-testid={testId}
+        isDisabled={!withTooltip}
         triggerClassName={withEllipsis ? styles.fullWidth : styles.DateTime}
         triggerOn="hover"
         withStopPropagation={false}

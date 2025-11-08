@@ -9,12 +9,13 @@ import {
 
 import { Button, LinkInternal } from '@/skin/actions';
 import {
+  Banner,
   type DrawerMatches,
   DrawerV2,
-  Helper,
   Section,
   SidePanel,
   useCurrentDrawer,
+  useDrawerPersistence,
   useDrawerV2,
   useSidePanel,
 } from '@/skin/displays';
@@ -250,8 +251,11 @@ const FakeMainContent = ({
 }: {
   initialOpenSidePanel?: boolean;
 }) => {
+  const { clean, encode } = useDrawerPersistence();
   const drawer1 = useDrawerV2<{ body: ReactNode }>('drawer1', {
     keepOn: /\/(?!close)/,
+    encode,
+    clean,
   });
   const drawer2 = useDrawerV2('drawer2', { closeOn: /\/close/ });
   const currentDrawer = useCurrentDrawer();
@@ -383,11 +387,7 @@ const FakeMainContent = ({
 
 export const Default: Story = {
   args: {
-    banner: (
-      <Helper>
-        <Helper.Title>Important information</Helper.Title>
-      </Helper>
-    ),
+    banner: <Banner variant="warning">Important information</Banner>,
     children: <FakeMainContent />,
     drawerConfig: { matches: drawerMatches },
     sideNav: (

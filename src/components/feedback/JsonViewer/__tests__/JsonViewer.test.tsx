@@ -150,4 +150,18 @@ describe('JsonViewer', () => {
       '{{ object.prop.subProp }}',
     );
   });
+
+  it('should "expand all" and "collapse all" when forceToState is changed', async () => {
+    const { rerender } = render(
+      <JsonViewer data={DATA} data-testid={TEST_ID} forceToState="collapsed" />,
+    );
+
+    await expectNotToBeVisibleInTheDocument('leaf:', screen.queryByText);
+
+    rerender(
+      <JsonViewer data={DATA} data-testid={TEST_ID} forceToState="expanded" />,
+    );
+
+    await expectToBeVisibleInTheDocument('leaf:', screen.findByText);
+  });
 });

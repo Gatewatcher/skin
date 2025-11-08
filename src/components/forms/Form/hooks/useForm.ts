@@ -6,7 +6,7 @@ import type { FormInstance } from '../interface';
 const useForm = <Values = unknown>(
   form?: FormInstance<Values>,
 ): [FormInstance<Values>] => {
-  const formRef = useRef<FormInstance>();
+  const formRef = useRef<FormInstance>(undefined);
   const [, forceUpdate] = useState({});
 
   if (!formRef.current) {

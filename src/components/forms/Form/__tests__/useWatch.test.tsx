@@ -395,7 +395,7 @@ describe('useWatch', () => {
   it('first undefined', async () => {
     const Demo = () => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const formRef = useRef<any>();
+      const formRef = useRef<any>(undefined);
       const name = useWatch('name', formRef.current);
       const [, setUpdate] = useState({});
 

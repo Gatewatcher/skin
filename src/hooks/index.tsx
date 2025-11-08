@@ -5,3 +5,4 @@ export * from './useOnScreen';
 export * from './colors';
 export * from './useBreakpoint';
 export * from './useSingleAndDoubleClick';
+export * from './useOnResizeElement';

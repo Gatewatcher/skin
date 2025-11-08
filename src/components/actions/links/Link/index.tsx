@@ -1,5 +1,5 @@
 import { withoutKey } from '@gatewatcher/bistoury/utils-lang';
-import { forwardRef } from 'react';
+import type { Ref } from 'react';
 
 import type { LinkExternalProps } from '../LinkExternal';
 import LinkExternal from '../LinkExternal';
@@ -11,31 +11,37 @@ export type LinkProps = LinkInternalProps &
   LinkExternalProps & {
     isExternal?: boolean;
     isInline?: boolean;
+    ref?: Ref<HTMLAnchorElement>;
   };
 
-const Link = forwardRef<HTMLAnchorElement, LinkProps>(
-  ({ isExternal, to, withIcon, isInline = false, ...rest }, ref) => {
-    const isAnExternalLink = isExternalLink(to) || isExternal;
+const Link = ({
+  isExternal,
+  to,
+  withIcon,
+  isInline = false,
+  ref,
+  ...rest
+}: LinkProps) => {
+  const isAnExternalLink = isExternalLink(to) || isExternal;
 
-    if (!isAnExternalLink) {
-      return <LinkInternal ref={ref} inline={isInline} to={to} {...rest} />;
-    }
+  if (!isAnExternalLink) {
+    return <LinkInternal ref={ref} inline={isInline} to={to} {...rest} />;
+  }
 
-    const externalProps = withoutKey(rest, [
-      'preventScrollReset',
-      'relative',
-    ]) as Omit<LinkExternalProps, 'to' | 'variant'>;
+  const externalProps = withoutKey(rest, [
+    'preventScrollReset',
+    'relative',
+  ]) as Omit<LinkExternalProps, 'to' | 'variant'>;
 
-    return (
-      <LinkExternal
-        ref={ref}
-        inline={isInline}
-        to={to}
-        withIcon={withIcon}
-        {...externalProps}
-      />
-    );
-  },
-);
+  return (
+    <LinkExternal
+      ref={ref}
+      inline={isInline}
+      to={to}
+      withIcon={withIcon}
+      {...externalProps}
+    />
+  );
+};
 
 export default Link;

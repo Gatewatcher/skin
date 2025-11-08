@@ -16,8 +16,13 @@ const toArray = (children: ReactNode, option: Option = {}): ReactElement[] => {
 
     if (Array.isArray(child)) {
       ret = ret.concat(toArray(child));
-    } else if (isFragment(child) && child.props) {
-      ret = ret.concat(toArray((child as ReactElement).props.children, option));
+    } else if (isFragment(child) && (child as ReactElement).props) {
+      ret = ret.concat(
+        toArray(
+          ((child as ReactElement).props as { children?: ReactNode }).children,
+          option,
+        ),
+      );
     } else {
       ret.push(child as ReactElement);
     }

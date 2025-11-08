@@ -1,6 +1,5 @@
 import { classNames, stylesToCamelCase } from '@gatewatcher/bistoury/utils-dom';
-import type { CSSProperties } from 'react';
-import { forwardRef } from 'react';
+import type { CSSProperties, Ref } from 'react';
 
 import type { Spacings } from '@/hocs';
 import { withSpacing } from '@/hocs';
@@ -24,82 +23,75 @@ export type TextProps = TypographyGenericProps<TextTag> &
     display?: TextDisplay;
     italic?: boolean;
     underline?: boolean;
+    ref?: Ref<HTMLElement>;
   } & Spacings;
 
 export type InternalTextProps = {
   className?: string;
   style?: CSSProperties;
+  ref?: Ref<HTMLElement>;
 };
 
-export const InternalText = forwardRef<
-  HTMLElement,
-  TextProps & InternalTextProps
->(
-  (
-    {
-      alignment,
-      as: Component = DEFAULT_TAG,
-      children,
-      className,
-      currentColor,
-      color: colorProps,
-      'data-testid': testId = 'text',
-      display = DEFAULT_TEXT_DISPLAY,
-      italic,
-      overflowHidden,
-      overflowWrap,
-      underline,
-      size = DEFAULT_SIZE,
-      style,
-      type,
-      textEllipsis,
-      transform,
-      weight = DEFAULT_WEIGHT,
-      whiteSpace,
-      wordBreak,
-      ...rest
-    },
-    ref,
-  ) => {
-    const typeColor = useTypeColor({ type, currentColor });
-    const themeColor = useThemeColor({ color: colorProps, currentColor });
+export const InternalText = ({
+  alignment,
+  as: Component = DEFAULT_TAG,
+  children,
+  className,
+  currentColor,
+  color: colorProps,
+  'data-testid': testId = 'text',
+  display = DEFAULT_TEXT_DISPLAY,
+  italic,
+  overflowHidden,
+  overflowWrap,
+  underline,
+  size = DEFAULT_SIZE,
+  style,
+  type,
+  textEllipsis,
+  transform,
+  weight = DEFAULT_WEIGHT,
+  whiteSpace,
+  wordBreak,
+  ref,
+  ...rest
+}: TextProps & InternalTextProps) => {
+  const typeColor = useTypeColor({ type, currentColor });
+  const themeColor = useThemeColor({ color: colorProps, currentColor });
 
-    return withSpacing(
-      <Component
-        ref={ref}
-        className={classNames(
-          styles.Text,
-          styles[Component],
-          italic && styles.italic,
-          overflowHidden && styles.overflowHidden,
-          underline && styles.underline,
-          textEllipsis && styles.textEllipsis,
-          alignment && styles.alignment,
-          getVariantClassNames({
-            alignment,
-            overflowWrap,
-            size,
-            transform,
-            weight,
-            whiteSpace,
-            wordBreak,
-          }),
-          stylesToCamelCase(styles, 'display', display),
-          className,
-        )}
-        data-testid={testId}
-        style={{ color: themeColor || typeColor, ...style }}
-        {...rest}
-      >
-        {children}
-      </Component>,
-      rest,
-    );
-  },
-);
+  return withSpacing(
+    <Component
+      ref={ref}
+      className={classNames(
+        styles.Text,
+        styles[Component],
+        italic && styles.italic,
+        overflowHidden && styles.overflowHidden,
+        underline && styles.underline,
+        textEllipsis && styles.textEllipsis,
+        alignment && styles.alignment,
+        getVariantClassNames({
+          alignment,
+          overflowWrap,
+          size,
+          transform,
+          weight,
+          whiteSpace,
+          wordBreak,
+        }),
+        stylesToCamelCase(styles, 'display', display),
+        className,
+      )}
+      data-testid={testId}
+      style={{ color: themeColor || typeColor, ...style }}
+      {...rest}
+    >
+      {children}
+    </Component>,
+    rest,
+  );
+};
 
-const Text = forwardRef<HTMLElement, TextProps>((props, ref) => (
-  <InternalText ref={ref} {...props} />
-));
+const Text = (props: TextProps) => <InternalText {...props} />;
 
 export default Text;

@@ -1,3 +1,4 @@
+import type { RefObject } from 'react';
 import { useEffect, useState } from 'react';
 
 import { getOffsetForPinnedColumn } from './columnPinningUtils';
@@ -14,7 +15,7 @@ import type { PinnedColumns, TableColumn } from './types';
 
 type UsePinnedColumnsParams<T> = {
   persistenceKey?: string;
-  tableRef: React.RefObject<HTMLTableElement>;
+  tableRef: RefObject<HTMLTableElement | null>;
   columns: TableColumn<T>[] | undefined;
   columnsProp: TableColumn<T>[] | undefined;
   setColumns: (

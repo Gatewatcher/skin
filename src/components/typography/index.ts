@@ -1,3 +1,5 @@
+import MetricsText from './MetricsText';
+import type { MetricsTextProps } from './MetricsText';
 import type { NeutralTextProps } from './NeutralText';
 import NeutralText from './NeutralText';
 import type { OverflownParagraphProps } from './OverflownParagraph';
@@ -14,6 +16,7 @@ import type { TitleProps } from './Title';
 import Title from './Title';
 
 export {
+  MetricsText,
   NeutralText,
   OverflownParagraph,
   OverflownText,
@@ -23,6 +26,7 @@ export {
   Title,
 };
 export type {
+  MetricsTextProps,
   NeutralTextProps,
   OverflownParagraphProps,
   OverflownTextProps,

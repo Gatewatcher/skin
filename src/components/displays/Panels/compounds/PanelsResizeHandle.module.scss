@@ -1,0 +1,55 @@
+@import '@/styles/mixins';
+
+@mixin resizable-shadow {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  bottom: 0;
+  width: 24px;
+  content: '';
+  pointer-events: none;
+
+  @content;
+}
+
+.PanelsResizeHandle {
+  position: relative;
+  left: -24px;
+  display: flex;
+  flex: 0 0 0;
+  align-items: stretch;
+  justify-content: stretch;
+  pointer-events: none;
+
+  &::before {
+    @include resizable-shadow {
+      left: 0;
+      box-shadow: inset -10px 0 8px -8px var(--shadow-color-elevation-2);
+
+      @include on-dark-theme {
+        box-shadow: inset -10px 0 8px -8px var(--shadow-color-elevation-2);
+      }
+    }
+  }
+}
+
+.inner {
+  $width: 20px;
+
+  position: fixed;
+  z-index: 1;
+  display: flex;
+  width: $width;
+  height: 100%;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  margin-left: calc($width / 2);
+  outline: none;
+  pointer-events: all;
+  transition: background-color 0.2s linear;
+}
+
+.icon {
+  margin-right: -0.4rem;
+}

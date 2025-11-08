@@ -266,8 +266,14 @@ export const TableContent = <T extends TableDataItem>({
     }
 
     // set tableLayout to fixed to respect max-width
-    if (tableRef.current && tableHeaders?.length && !columnsResizingData) {
-      if (data?.length) {
+    const shouldSetFixedLayout =
+      tableRef.current &&
+      tableHeaders?.length &&
+      !columnsResizingData &&
+      isResizable;
+
+    if (shouldSetFixedLayout) {
+      if (data?.length && tableRef.current) {
         tableHeaders.forEach(header => {
           const width = getComputedStyle(header).width;
           header.style.width = width;

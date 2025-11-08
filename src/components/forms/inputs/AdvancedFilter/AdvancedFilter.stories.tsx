@@ -19,14 +19,14 @@ const Template: StoryFn<typeof AdvancedFilter> = (
   args: AdvancedFilterProps,
 ) => <AdvancedFilter {...args} onSave={console.log} />;
 
-export const WithObservables: Meta<typeof Template> = {
+export const WithObservables: Story = {
   render: Template,
   args: {
     observables,
   },
 };
 
-export const WithNestedFilters: Meta<typeof Template> = {
+export const WithNestedFilters: Story = {
   render: Template,
   args: {
     observables,

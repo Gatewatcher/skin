@@ -32,7 +32,7 @@ const InfiniteScroll = ({
       {(isLoading || hasNextPage) && (
         <>
           {loader ? (
-            cloneElement(loader, { ref })
+            cloneElement(loader, { ref } as Partial<unknown>)
           ) : (
             <div ref={ref as Ref<HTMLDivElement>} data-testid={testId}>
               <Loader className={styles.Loader} />

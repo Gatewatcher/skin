@@ -47,14 +47,7 @@ const SelectControl = ({
 };
 
 const getInitialValue = (schema: JsonSchema) => {
-  const item = schema.oneOf?.find(item => item.const === schema.default);
-
-  if (item) {
-    return {
-      label: item.title ?? item.const,
-      value: item.const,
-    };
-  }
+  return schema.oneOf?.find(item => item.const === schema.default)?.const;
 };
 
 const SelectControlRenderer = withJsonFormsControlProps(SelectControl);

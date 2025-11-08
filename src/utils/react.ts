@@ -4,15 +4,22 @@ import { Fragment } from 'react';
 
 export const isFragment = (
   variableToInspect?: unknown,
-): variableToInspect is ReactElement => {
-  if ((variableToInspect as ReactElement)?.type) {
+): variableToInspect is ReactElement<{ children?: unknown }> => {
+  if (
+    variableToInspect &&
+    typeof variableToInspect === 'object' &&
+    'type' in variableToInspect &&
+    'props' in variableToInspect
+  ) {
     return (variableToInspect as ReactElement).type === Fragment;
   }
 
   return variableToInspect === Fragment;
 };
 
-export const isEmptyFragment = (fragment?: unknown) => {
+export const isEmptyFragment = (
+  fragment?: unknown,
+): fragment is ReactElement<{ children?: never }> => {
   if (!isFragment(fragment)) return false;
 
   const children = fragment.props.children;

@@ -1,6 +1,7 @@
-import { faker } from '@faker-js/faker/locale/en';
+import { faker } from '@faker-js/faker';
 import { generateUniqId } from '@gatewatcher/bistoury/utils-lang';
-import type { Meta, StoryFn, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
+import { fn } from '@storybook/test';
 import type { ComponentProps, DragEvent } from 'react';
 import { useRef, useState } from 'react';
 
@@ -8,7 +9,6 @@ import { withControlledValue } from '@/hocs';
 import { ButtonIcon } from '@/skin/actions';
 import { Stack } from '@/skin/layout';
 
-import type { ChatBoxProps } from '.';
 import ChatBox from '.';
 
 faker.seed(10);
@@ -55,12 +55,6 @@ const ControlledText = withControlledValue<
   valuePropName: 'value',
 });
 
-const Template: StoryFn<
-  typeof ChatBox<FileWithId, CustomAutoCompletionOption>
-> = (args: ChatBoxProps<FileWithId, CustomAutoCompletionOption>) => (
-  <ControlledText {...args} />
-);
-
 export const Default: Story = {
   render: args => {
     const [files, setFiles] = useState<FileWithId[]>([]);
@@ -75,7 +69,7 @@ export const Default: Story = {
       }
     };
 
-    return <Template {...args} attachments={files} onDrop={handleDrop} />;
+    return <ControlledText {...args} attachments={files} onDrop={handleDrop} />;
   },
 };
 
@@ -105,7 +99,7 @@ export const WithErrors: Story = {
     };
 
     return (
-      <Template
+      <ControlledText
         {...args}
         attachments={files}
         onAttachmentError={handleFileError}
@@ -149,7 +143,7 @@ export const WithDefaultFile: Story = {
     };
 
     return (
-      <Template
+      <ControlledText
         {...args}
         attachments={files}
         onAttachmentError={handleFileError}
@@ -201,7 +195,7 @@ export const WithLongFileNameAndSubmitButton: Story = {
     };
 
     return (
-      <Template
+      <ControlledText
         {...args}
         elementAfter={
           <Stack.Item alignSelf="flex-end">
@@ -224,12 +218,18 @@ const DEFAULT_LOADING_FILES = DEFAULT_FILES.map(file => ({
 }));
 
 export const WithLoadingAttachment: Story = {
+  args: {
+    onAttachmentError: fn(),
+  },
   render: args => {
-    return <Template {...args} attachments={DEFAULT_LOADING_FILES} />;
+    return <ControlledText {...args} attachments={DEFAULT_LOADING_FILES} />;
   },
 };
 
 export const WithDelete: Story = {
+  args: {
+    onAttachmentError: fn(),
+  },
   render: args => {
     const [files, setFiles] = useState<FileWithId[]>(DEFAULT_FILES);
 
@@ -248,7 +248,7 @@ export const WithDelete: Story = {
     };
 
     return (
-      <Template
+      <ControlledText
         {...args}
         attachments={files}
         onAttachmentDelete={handleDelete}
@@ -259,6 +259,9 @@ export const WithDelete: Story = {
 };
 
 export const WithRef: Story = {
+  args: {
+    onAttachmentError: fn(),
+  },
   render: args => {
     const [files, setFiles] = useState<FileWithId[]>(DEFAULT_FILES);
     const ref = useRef<HTMLTextAreaElement>(null);
@@ -320,7 +323,7 @@ export const WithAutoCompletion: Story = {
     };
 
     return (
-      <Template
+      <ControlledText
         {...args}
         autoCompletionSettings={{
           options: [

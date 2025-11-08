@@ -10,6 +10,7 @@ export const observables: Observable[] = [
   { name: 'ip', type: 'IP' },
   { name: 'boolean', type: 'BOOLEAN' },
   { name: 'number', type: 'NUMBER' },
+  { name: 'enum', type: 'ENUM', enum: ['value1', 'value2', 'value3'] },
 ];
 
 export const uidLogicalGroup1 = 'idDeTestLogicalGroup1';

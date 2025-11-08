@@ -1,11 +1,11 @@
-import type { Meta, StoryFn, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
 
 import { Form } from '@/skin/forms';
 import { FormStore } from '@/skin/forms/Form/FormStore';
 import { Stack } from '@/skin/layout';
 
-import SimpleScheduler, { type SchedulerProps } from '.';
+import SimpleScheduler from '.';
 import type { Schedule } from '../../types';
 
 type Story = StoryObj<typeof SimpleScheduler>;
@@ -24,10 +24,6 @@ export default {
   argTypes: { onChange: { action: 'change' } },
 } satisfies Meta<typeof SimpleScheduler>;
 
-const Template: StoryFn<typeof SimpleScheduler> = (args: SchedulerProps) => (
-  <SimpleScheduler {...args} />
-);
-
 export const Default: Story = {
   render: args => {
     const [schedule, setSchedule] = useState(args.value);
@@ -37,7 +33,9 @@ export const Default: Story = {
       setSchedule(schedule);
     };
 
-    return <Template {...args} onChange={handleChange} value={schedule} />;
+    return (
+      <SimpleScheduler {...args} onChange={handleChange} value={schedule} />
+    );
   },
 };
 

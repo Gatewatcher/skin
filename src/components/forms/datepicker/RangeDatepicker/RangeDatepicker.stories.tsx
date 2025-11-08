@@ -1,7 +1,10 @@
 import type { Meta, StoryFn, StoryObj } from '@storybook/react';
+import { useState } from 'react';
 import { mockDateDecorator } from 'storybook-mock-date-decorator';
 
 import { Button } from '@/skin/actions';
+import { Input } from '@/skin/forms';
+import { Stack } from '@/skin/layout';
 
 import type { RangeDatepickerProps } from '.';
 import RangeDatepicker from '.';
@@ -71,6 +74,40 @@ export const Floating: Story = {
 
 export const WithInitialDates: Story = {
   render: Template,
+  args: {
+    initialValue: [
+      new Date('March 14, 2024 12:00:00'),
+      new Date('March 19, 2024 18:30:00'),
+    ],
+  },
+};
+
+export const ResetOnMinMaxChange: Story = {
+  render: (args, context) => {
+    const [date1, setDate1] = useState('2024-02-15');
+    const [date2, setDate2] = useState('2024-03-25');
+
+    return (
+      <Stack direction="column" gap={6}>
+        <Stack gap={3}>
+          <Input.Date
+            label="Min date"
+            onChange={event => setDate1(event.target.value)}
+            value={date1}
+          />
+          <Input.Date
+            label="Max date"
+            onChange={event => setDate2(event.target.value)}
+            value={date2}
+          />
+        </Stack>
+        {Template(
+          { ...args, max: new Date(date2), min: new Date(date1) },
+          context,
+        )}
+      </Stack>
+    );
+  },
   args: {
     initialValue: [
       new Date('March 14, 2024 12:00:00'),

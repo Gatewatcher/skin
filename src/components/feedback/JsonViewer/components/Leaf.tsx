@@ -15,6 +15,7 @@ import styles from '../styles.module.scss';
 type JsonViewerLeafProps = {
   arrayLength?: number;
   depth: number;
+  isArrayItem?: boolean;
   label: string;
   path: string;
   value: string | number | boolean | null;
@@ -24,6 +25,7 @@ type JsonViewerLeafProps = {
 const Leaf = ({
   arrayLength,
   depth,
+  isArrayItem,
   label,
   path,
   value,
@@ -31,6 +33,11 @@ const Leaf = ({
 }: JsonViewerLeafProps) => {
   const id = useId();
   const isLink = value && isExternalLink(value.toString());
+
+  let jmesPath = path.replace(/\[\d+]/g, '[]');
+  if (isArrayItem) {
+    jmesPath = jmesPath.replace(/\[]$/, `[${label}]`);
+  }
 
   return (
     <InternalTreeNode
@@ -44,7 +51,10 @@ const Leaf = ({
           style={{ marginLeft: calcOffset(depth) }}
         >
           <FoldIndicator {...props} />
-          <Draggable data={`{{ ${path} }}`} disabled={!withJmesPathDragging}>
+          <Draggable
+            data={`{{ ${jmesPath} }}`}
+            disabled={!withJmesPathDragging}
+          >
             <InternalText
               style={{
                 ...(arrayLength && {

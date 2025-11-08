@@ -88,7 +88,7 @@ const Listing = <T extends DataItem>({
       {cloneElement(renderRoot(rows, rest), {
         className,
         'data-testid': testId,
-      })}
+      } as Partial<unknown>)}
       {!isFirstLoading && endElement}
     </>
   );

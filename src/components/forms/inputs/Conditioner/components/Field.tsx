@@ -167,9 +167,10 @@ export const Field = ({ condition }: FieldProps) => {
         />
       </Grid>
       <Grid colSpan={isMulti ? 7 : 6} isItem>
-        {!observables ||
-        observableType === 'TEXT' ||
-        observableType === 'IP' ? (
+        {(!observables ||
+          !condition.observable ||
+          observableType === 'TEXT' ||
+          observableType === 'IP') && (
           <Input.Text
             disabled={
               (observables && !observableType) ||
@@ -183,20 +184,22 @@ export const Field = ({ condition }: FieldProps) => {
             value={condition.value}
             withLabel={false}
           />
-        ) : observableType === 'BOOLEAN' ? (
+        )}
+        {observableType === 'BOOLEAN' && (
           <Input.Select
             options={[
               { value: 'true', label: 'True' },
               { value: 'false', label: 'False' },
             ]}
-            data-testid={TEST_IDS.inputText}
+            data-testid={TEST_IDS.inputSelect}
             disabled={!observableType || areFormatAndValueDisabled || readonly}
             onChange={value => handleSelectChange(value, 'value')}
             placeholder={DEFAULT_VALUE_PLACEHOLDER}
             value={condition.value}
             withLabel={false}
           />
-        ) : observableType === 'DATE' ? (
+        )}
+        {observableType === 'DATE' && (
           <Input.Date
             className={styles.input}
             data-testid={TEST_IDS.inputText}
@@ -206,12 +209,28 @@ export const Field = ({ condition }: FieldProps) => {
             value={condition.value}
             withLabel={false}
           />
-        ) : (
+        )}
+        {observableType === 'NUMBER' && (
           <Input.Number
             className={styles.input}
-            data-testid={TEST_IDS.inputText}
+            data-testid={TEST_IDS.inputNumber}
             disabled={!observableType || areFormatAndValueDisabled || readonly}
             onChange={event => handleInputChange(event, 'value')}
+            placeholder={DEFAULT_VALUE_PLACEHOLDER}
+            value={condition.value}
+            withLabel={false}
+          />
+        )}
+        {observableType === 'ENUM' && (
+          <Input.Select
+            options={observables
+              ?.find(
+                observable => observable.name === condition.observable?.value,
+              )
+              ?.enum?.map(value => ({ label: value, value }))}
+            data-testid={TEST_IDS.inputSelect}
+            disabled={!observableType || areFormatAndValueDisabled || readonly}
+            onChange={value => handleSelectChange(value, 'value')}
             placeholder={DEFAULT_VALUE_PLACEHOLDER}
             value={condition.value}
             withLabel={false}

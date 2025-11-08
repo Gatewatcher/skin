@@ -569,8 +569,10 @@ class Field
       | ((control: ChildProps, meta: Meta, context: FormInstance) => ReactNode),
   ): { child: ReactNode | null; isFunction: boolean } => {
     // Support render props
+
     if (isFunction(children)) {
       const meta = this.getMeta();
+
       return {
         ...this.getOnlyChild(
           children(
@@ -609,6 +611,7 @@ class Field
       getValueProps,
       fieldContext,
       type,
+      required,
     } = this.props;
 
     let normalizeFn = normalize;
@@ -643,6 +646,8 @@ class Field
       ...childProps,
       ...mergedGetValueProps(value),
     };
+
+    control.required = required;
 
     // Add trigger
     control[trigger as string] = (...args: EventArgs) => {
@@ -734,11 +739,12 @@ class Field
     if (isFunction) {
       returnChildNode = child;
     } else if (isValidElement(child)) {
-      returnChildNode = cloneElement(child as ReactElement, {
-        ...this.getControlled((child as ReactElement).props),
-        meta: { ...this.getMeta(), helpers: child.props?.meta?.helpers },
+      const childProps = child.props as ChildProps;
+      returnChildNode = cloneElement(child, {
+        ...this.getControlled(childProps),
+        meta: { ...this.getMeta(), helpers: childProps?.meta?.helpers },
         form: this.props.fieldContext as InternalFormInstance,
-      });
+      } as Partial<unknown>);
     } else {
       consoleWarn('`children` of Field is not valid ReactElement.');
       returnChildNode = child;

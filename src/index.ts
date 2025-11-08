@@ -16,4 +16,5 @@ export * from './components/pagination';
 export * from './components/typography';
 export * from './types';
 
+export { isSkinColor, isThemeColor } from './utils';
 export { useBreakpoint, useSingleAndDoubleClick };

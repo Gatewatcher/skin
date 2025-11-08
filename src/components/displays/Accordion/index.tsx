@@ -1,4 +1,3 @@
-import { useOnWindowResize } from '@gatewatcher/bistoury/hooks';
 import { classNames } from '@gatewatcher/bistoury/utils-dom';
 import { isString } from '@gatewatcher/bistoury/utils-lang';
 import type { DataTestId } from '@gatewatcher/bistoury/utils-types';
@@ -7,6 +6,7 @@ import { memo, useEffect, useMemo, useState } from 'react';
 import { animated, useSpring } from 'react-spring';
 
 import { ANIMATION_SHARED_CONFIG } from '@/constants';
+import { useOnResizeElement } from '@/hooks';
 import { Stack } from '@/skin/layout';
 import { Title } from '@/skin/typography';
 import { buildTestIds } from '@/utils/testIds';
@@ -53,16 +53,19 @@ const Accordion = ({
     api.start(animationStyleOptions);
   }, [api, animationStyleOptions]);
 
-  useOnWindowResize(() => {
-    if (opened) {
-      api.set({ height: offsetHeight });
-    }
+  const { setElement } = useOnResizeElement(size => {
+    const height = size?.height ?? 0;
+    if (opened) api.set({ height });
+    setOffsetHeight(height);
   });
 
   return (
     <animated.div className={styles.Accordion} style={animation}>
       <div
-        ref={element => setOffsetHeight(element?.offsetHeight ?? 0)}
+        ref={element => {
+          setElement(element);
+          setOffsetHeight(element?.offsetHeight ?? 0);
+        }}
         data-testid={testId}
       >
         <Stack

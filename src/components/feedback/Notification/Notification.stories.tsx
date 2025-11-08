@@ -1,4 +1,4 @@
-import { faker } from '@faker-js/faker/locale/en';
+import { faker } from '@faker-js/faker';
 import type { Meta, StoryObj } from '@storybook/react';
 import { withRouter } from 'storybook-addon-remix-react-router';
 import { mockDateDecorator } from 'storybook-mock-date-decorator';

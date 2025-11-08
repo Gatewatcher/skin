@@ -102,9 +102,8 @@ const TableHeaderCell = ({
   } = useTableContext();
 
   const tableHeaderCell = useRef<HTMLTableCellElement>(null);
-  const headerTextContainerRef = useRef<
-    OverflownTextExposedUtilities | HTMLElement
-  >(null);
+  const overflownTextRef = useRef<OverflownTextExposedUtilities>(null);
+  const textRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     if (columnPinConfig?.isPinned) {
@@ -266,17 +265,13 @@ const TableHeaderCell = ({
       >
         {withOverflownText ? (
           <OverflownText
-            ref={
-              headerTextContainerRef as React.RefObject<OverflownTextExposedUtilities>
-            }
+            ref={overflownTextRef}
             transform="capitalizeFirstLetter"
           >
             {children}
           </OverflownText>
         ) : (
-          <Text ref={headerTextContainerRef as React.RefObject<HTMLElement>}>
-            {children}
-          </Text>
+          <Text ref={textRef}>{children}</Text>
         )}
 
         {id && <Sort isActive={isActive} order={currentOrder} />}
@@ -284,8 +279,12 @@ const TableHeaderCell = ({
 
       {isResizable && isColumnResizable && columnKey ? (
         <ColumnResizer
+          headerTextWidth={
+            withOverflownText
+              ? overflownTextRef.current?.scrollWidth
+              : textRef.current?.scrollWidth
+          }
           column={tableHeaderCell}
-          headerTextWidth={headerTextContainerRef.current?.scrollWidth}
           minWidth={minWidth}
           userCanPin={userCanPin}
         />

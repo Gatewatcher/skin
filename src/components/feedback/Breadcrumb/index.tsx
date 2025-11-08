@@ -32,9 +32,12 @@ const Breadcrumb = ({
         </Stack>
       ))}
       <Stack alignItems="center" as="li">
-        {cloneElement(children.at(-1) as ReactElement, {
-          weight: 'semibold',
-        })}
+        {cloneElement(
+          children.at(-1) as ReactElement<LinkInternalProps | TextProps>,
+          {
+            weight: 'semibold',
+          },
+        )}
       </Stack>
     </Stack>
   );

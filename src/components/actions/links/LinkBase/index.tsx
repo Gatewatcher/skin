@@ -6,8 +6,8 @@ import type {
   HTMLAttributeAnchorTarget,
   MouseEventHandler,
   ReactNode,
+  Ref,
 } from 'react';
-import { forwardRef } from 'react';
 import type { To } from 'react-router-dom';
 import { Link, NavLink, createPath } from 'react-router-dom';
 
@@ -45,6 +45,7 @@ export type LinkBaseProps = DataTestId &
     isAlwaysUnderlined?: boolean;
     italic?: boolean;
     onClick?: MouseEventHandler<HTMLAnchorElement>;
+    ref?: Ref<HTMLAnchorElement>;
     size?: LinkSize;
     startIcon?: IconName;
     target?: HTMLAttributeAnchorTarget;
@@ -82,90 +83,83 @@ const LinkContent = ({
   );
 };
 
-const LinkBase = forwardRef<
-  HTMLAnchorElement,
-  LinkBaseProps & LinkBaseInternalProps
->(
-  (
-    {
-      as,
-      activeClassName,
-      children,
-      className: classNameProps,
-      'data-testid': testId = 'link-base',
-      isAlwaysUnderlined,
-      inline = false,
-      italic,
-      to,
-      size = DEFAULT_SIZE,
-      startIcon,
-      variant = DEFAULT_VARIANT,
-      endIcon,
-      ...rest
-    },
-    ref,
-  ) => {
-    const className = classNames(
-      stylesToCamelCase(styles, 'variant', variant),
-      variant === 'bared'
-        ? classNameProps
-        : [
-            styles.LinkBase,
-            italic && styles.italic,
-            stylesToCamelCase(styles, 'size', size),
-            isAlwaysUnderlined && styles.underlined,
-          ],
-      inline && styles.inline,
-    );
+const LinkBase = ({
+  as,
+  activeClassName,
+  children,
+  className: classNameProps,
+  'data-testid': testId = 'link-base',
+  isAlwaysUnderlined,
+  inline = false,
+  italic,
+  ref,
+  to,
+  size = DEFAULT_SIZE,
+  startIcon,
+  variant = DEFAULT_VARIANT,
+  endIcon,
+  ...rest
+}: LinkBaseProps & LinkBaseInternalProps) => {
+  const className = classNames(
+    stylesToCamelCase(styles, 'variant', variant),
+    variant === 'bared'
+      ? classNameProps
+      : [
+          styles.LinkBase,
+          italic && styles.italic,
+          stylesToCamelCase(styles, 'size', size),
+          isAlwaysUnderlined && styles.underlined,
+        ],
+    inline && styles.inline,
+  );
 
-    const linkContent = (
-      <LinkContent endIcon={endIcon} inline={inline} startIcon={startIcon}>
-        {children}
-      </LinkContent>
-    );
+  const linkContent = (
+    <LinkContent endIcon={endIcon} inline={inline} startIcon={startIcon}>
+      {children}
+    </LinkContent>
+  );
 
-    if (as === 'a') {
-      return (
-        <a
-          ref={ref}
-          className={className}
-          data-testid={testId}
-          href={isString(to) ? to : createPath(to)}
-          rel="noopener noreferrer"
-          {...rest}
-        >
-          {linkContent}
-        </a>
-      );
-    }
-    if (as === 'navlink') {
-      return (
-        <NavLink
-          ref={ref}
-          className={({ isActive }) =>
-            classNames(className, isActive && activeClassName)
-          }
-          data-testid={suffixTestId(testId, 'nav')}
-          to={to}
-          {...rest}
-        >
-          {linkContent}
-        </NavLink>
-      );
-    } else {
-      return (
-        <Link
-          ref={ref}
-          className={className}
-          data-testid={testId}
-          to={to}
-          {...rest}
-        >
-          {linkContent}
-        </Link>
-      );
-    }
-  },
-);
+  if (as === 'a') {
+    return (
+      <a
+        ref={ref}
+        className={className}
+        data-testid={testId}
+        href={isString(to) ? to : createPath(to)}
+        rel="noopener noreferrer"
+        {...rest}
+      >
+        {linkContent}
+      </a>
+    );
+  }
+  if (as === 'navlink') {
+    return (
+      <NavLink
+        ref={ref}
+        className={({ isActive }) =>
+          classNames(className, isActive && activeClassName)
+        }
+        data-testid={suffixTestId(testId, 'nav')}
+        to={to}
+        {...rest}
+      >
+        {linkContent}
+      </NavLink>
+    );
+  } else {
+    return (
+      <Link
+        ref={ref}
+        className={className}
+        data-testid={testId}
+        to={to}
+        {...rest}
+      >
+        {linkContent}
+      </Link>
+    );
+  }
+};
 
 export default LinkBase;

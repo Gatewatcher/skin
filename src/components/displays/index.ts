@@ -1,13 +1,23 @@
 import type { StatusIndicatorProps } from '@/skin/displays/StatusIndicator';
 import StatusIndicator from '@/skin/displays/StatusIndicator';
+import DrawerV2 from '@/skin/displays/drawerPanels/DrawerV2';
+import {
+  DRAWER_CLOSE_EVERYWHERE,
+  DRAWER_KEEP_EVERYWHERE,
+} from '@/skin/displays/drawerPanels/DrawerV2/constants';
+import SidePanel, {
+  type SidePanelProps,
+} from '@/skin/displays/drawerPanels/SidePanel';
 
 import Accordion, { type AccordionProps } from './Accordion';
 import Avatar, { type AvatarProps } from './Avatar';
 import AvatarUsername, { type AvatarUsernameProps } from './AvatarUsername';
 import Badge, { type BadgeProps } from './Badge';
+import Banner, { type BannerProps } from './Banner';
 import Carousel, { type CarouselProps } from './Carousel';
 import Changelog, { type ChangelogProps } from './Changelog';
 import Code, { type CodeProps } from './Code';
+import CodeBlock, { type CodeBlockProps } from './CodeBlock';
 import ColorIndicator, { type ColorIndicatorProps } from './ColorIndicator';
 import Comments, { type CommentsProps } from './Comments';
 import Divider, { type DividerProps } from './Divider';
@@ -22,8 +32,11 @@ import KeyValue, { type KeyValueProps } from './KeyValue';
 import KeyValueDisplay, { type KeyValueDisplayProps } from './KeyValueDisplay';
 import Label, { type LabelProps } from './Label';
 import Markdown, { type MarkdownProps } from './Markdown';
+import MermaidViewer, { type MermaidViewerProps } from './MermaidViewer';
+import Navigator, { type NavigatorProps } from './Navigator';
 import ObfuscatedText, { type ObfuscatedTextProps } from './ObfuscatedText';
 import ObjectGrid, { type ObjectGridProps } from './ObjectGrid';
+import Panels, { type PanelsProps } from './Panels';
 import Pill, { type PillProps } from './Pill';
 import PoweredByGatewatcher, {
   type PoweredByGatewatcherProps,
@@ -61,6 +74,7 @@ import EllipsisDataModal, {
 import EllipsisDataPopover, {
   type EllipsisDataPopoverProps,
 } from './ellipsis/EllipsisDataPopover';
+import Backdrop, { type BackdropProps } from './floating/Backdrop';
 import Dropdown, { type DropdownProps } from './floating/Dropdown';
 import Modal, { type ModalProps } from './floating/Modal';
 import Popover, { type PopoverProps } from './floating/Popover';
@@ -70,13 +84,6 @@ import IconAttachment, {
   type IconAttachmentProps,
 } from './icons/IconAttachment';
 import IconContained, { type IconContainedProps } from './icons/IconContained';
-import Panels, { ImperativePanelHandle, PanelsProps } from './panels';
-import DrawerV2 from './panels/DrawerV2';
-import {
-  DRAWER_CLOSE_EVERYWHERE,
-  DRAWER_KEEP_EVERYWHERE,
-} from './panels/DrawerV2/constants';
-import SidePanel, { type SidePanelProps } from './panels/SidePanel';
 import SelectableTree, {
   type SelectableTreeProps,
 } from './tree/SelectableTree';
@@ -89,9 +96,9 @@ export {
   type DrawerMatches,
   type UseDrawerV2Options,
   type UseDrawerV2Return,
-} from './panels/DrawerV2';
+} from '@/skin/displays/drawerPanels/DrawerV2';
 
-export { useSidePanel } from './panels/SidePanel/Provider';
+export { useSidePanel } from '@/skin/displays/drawerPanels/SidePanel/Provider';
 export type { IconName } from './icons/types';
 export type { IllustrationName } from './Illustration/types';
 export type { TreeNodeId } from './tree/SelectableTree/types';
@@ -105,7 +112,9 @@ export {
   Accordion,
   Avatar,
   AvatarUsername,
+  Backdrop,
   Badge,
+  Banner,
   Card,
   CardSelectable,
   Carousel,
@@ -113,6 +122,7 @@ export {
   Chip,
   ChipCustom,
   Code,
+  CodeBlock,
   ColorIndicator,
   Comments,
   DateTime,
@@ -138,7 +148,9 @@ export {
   KeyValueDisplay,
   Label,
   Markdown,
+  MermaidViewer,
   Modal,
+  Navigator,
   ObfuscatedText,
   ObjectGrid,
   Panels,
@@ -169,7 +181,9 @@ export type {
   AccordionProps,
   AvatarProps,
   AvatarUsernameProps,
+  BackdropProps,
   BadgeProps,
+  BannerProps,
   CardProps,
   CardSelectableProps,
   CarouselProps,
@@ -177,6 +191,7 @@ export type {
   ChipCustomProps,
   ChipProps,
   CodeProps,
+  CodeBlockProps,
   ColorIndicatorProps,
   CommentsProps,
   DateTimeAbsoluteProps,
@@ -196,13 +211,14 @@ export type {
   IconContainedProps,
   IconProps,
   IllustrationProps,
-  ImperativePanelHandle,
   InfoTooltipProps,
   KeyValueDisplayProps,
   KeyValueProps,
   LabelProps,
   MarkdownProps,
+  MermaidViewerProps,
   ModalProps,
+  NavigatorProps,
   ObfuscatedTextProps,
   ObjectGridProps,
   PanelsProps,

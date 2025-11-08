@@ -7,7 +7,7 @@ import { DEFAULT_PADDING_Y } from './constants';
 import styles from './styles.module.scss';
 
 export type ParentScrollProps = {
-  parentRef: RefObject<HTMLElement>;
+  parentRef: RefObject<HTMLElement | null>;
   children: ({ isSticky }: { isSticky: boolean }) => ReactNode;
 };
 

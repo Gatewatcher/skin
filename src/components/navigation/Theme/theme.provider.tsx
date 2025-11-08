@@ -1,9 +1,11 @@
 import { useMatchMedia } from '@gatewatcher/bistoury/hooks';
 import { get, set } from '@gatewatcher/bistoury/utils-web-storage';
-import { ReactNode, useEffect, useState } from 'react';
+import type { ReactNode } from 'react';
+import { useEffect, useState } from 'react';
 
 import { THEME_STORAGE_CURRENT_KEY } from './theme.config';
-import { THEMES, Theme, ThemeContext, ThemeContextType } from './theme.context';
+import type { Theme, ThemeContextType } from './theme.context';
+import { THEMES, ThemeContext } from './theme.context';
 
 export const setThemeAttribute = (theme: string) => {
   document.documentElement.setAttribute('data-theme', theme);

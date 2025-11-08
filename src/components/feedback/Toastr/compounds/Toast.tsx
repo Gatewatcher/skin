@@ -1,7 +1,6 @@
 import { isFunction, isString } from '@gatewatcher/bistoury/utils-lang';
 import { suffixTestId } from '@gatewatcher/bistoury/utils-tests';
-import type { MouseEvent } from 'react';
-import { forwardRef } from 'react';
+import type { MouseEvent, Ref } from 'react';
 
 import { withElevation } from '@/hocs';
 import { ButtonClose } from '@/skin/actions';
@@ -24,60 +23,53 @@ import styles from '../styles.module.scss';
 
 type ToastInternalProps = {
   onRemove: (e: MouseEvent, id: ToastProps['id']) => void;
+  ref?: Ref<HTMLDivElement>;
 };
 
-const Toast = forwardRef<HTMLDivElement, ToastProps & ToastInternalProps>(
-  (
-    {
-      content,
-      'data-testid': testId,
-      id,
-      onRemove,
-      title,
-      type,
-    }: ToastProps & ToastInternalProps,
-    ref,
-  ) => {
-    return withElevation(
-      <div
-        ref={ref}
-        className={styles.Toast}
-        data-testid={testId || (type ? suffixTestId('toast', type) : 'toast')}
+const Toast = ({
+  content,
+  'data-testid': testId,
+  id,
+  onRemove,
+  ref,
+  title,
+  type,
+}: ToastProps & ToastInternalProps) => {
+  return withElevation(
+    <div
+      ref={ref}
+      className={styles.Toast}
+      data-testid={testId || (type ? suffixTestId('toast', type) : 'toast')}
+    >
+      <Stack
+        alignItems="flex-start"
+        gap={2}
+        justifyContent="space-between"
+        margin={{ bottom: 2 }}
       >
-        <Stack
-          alignItems="flex-start"
-          gap={2}
-          justifyContent="space-between"
-          margin={{ bottom: 2 }}
-        >
-          <Stack alignItems="center" gap={6}>
-            {type && (
-              <>
-                {isFunction(TOAST_ICONS[type]) ? (
-                  TOAST_TYPES_BY_FUNCTIONS[type as ToastTypeAsFunction]()
-                ) : (
-                  <Icon
-                    color={type as ToastTypeAsIcon}
-                    name={TOAST_ICONS_BY_ICONS[type as ToastTypeAsIcon]}
-                  />
-                )}
-              </>
-            )}
-            <Text>{title}</Text>
-          </Stack>
-
-          <ButtonClose data-testid="close" onClick={ev => onRemove(ev, id)} />
+        <Stack alignItems="center" gap={6}>
+          {type && (
+            <>
+              {isFunction(TOAST_ICONS[type]) ? (
+                TOAST_TYPES_BY_FUNCTIONS[type as ToastTypeAsFunction]()
+              ) : (
+                <Icon
+                  color={type as ToastTypeAsIcon}
+                  name={TOAST_ICONS_BY_ICONS[type as ToastTypeAsIcon]}
+                />
+              )}
+            </>
+          )}
+          <Text>{title}</Text>
         </Stack>
 
-        {isString(content) ? (
-          <Text size="small">{content}</Text>
-        ) : (
-          <>{content}</>
-        )}
-      </div>,
-      1,
-    );
-  },
-);
+        <ButtonClose data-testid="close" onClick={ev => onRemove(ev, id)} />
+      </Stack>
+
+      {isString(content) ? <Text size="small">{content}</Text> : <>{content}</>}
+    </div>,
+    1,
+  );
+};
 
 export default Toast;

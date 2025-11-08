@@ -5,8 +5,15 @@ import {
   DEFAULT_COLOR_NEUTRAL_SCALE,
   DEFAULT_COLOR_SCALE,
   RISK_TYPES,
+  THEME_COLORS,
+  TYPES_WITH_NEUTRAL,
 } from '@/constants';
-import type { ColorsScale, ColorsWithNeutral, RiskType } from '@/types';
+import type {
+  ColorsScale,
+  ColorsWithNeutral,
+  RiskType,
+  ThemeColor,
+} from '@/types';
 
 export const getThemeValue = (property = ''): string => {
   return getPropertyValue(`--${property.replace(/^--/, '')}`);
@@ -54,4 +61,13 @@ export const getColor = (
   ].join('-');
 
   return getThemeValue(value) ? `var(--${value})` : '';
+};
+
+export const isThemeColor = (color: string): color is ThemeColor => {
+  return THEME_COLORS.includes(color as ThemeColor);
+};
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const isSkinColor = (color: any): color is ColorsWithNeutral => {
+  return [...THEME_COLORS, ...TYPES_WITH_NEUTRAL].includes(color);
 };

@@ -8,33 +8,6 @@
   overflow-x: auto;
 }
 
-.CodeBlock {
-  display: flex;
-  overflow: hidden;
-  flex-direction: column;
-  border: 1px solid var(--color-neutral-200);
-  border-radius: var(--border-radius-large);
-  background-color: var(--body-background-color) !important;
-
-  &Inner {
-    padding: var(--spacing-5);
-    overflow-x: auto;
-  }
-
-  @include on-dark-theme {
-    border: 1px solid var(--color-neutral-600);
-  }
-
-  &Head {
-    padding: var(--spacing-5) var(--spacing-6);
-    background-color: var(--color-neutral-50);
-
-    @include on-dark-theme {
-      background-color: var(--color-neutral-700);
-    }
-  }
-}
-
 .table {
   width: 100%;
   min-width: min-content;

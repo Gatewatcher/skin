@@ -1,6 +1,6 @@
 import { generateUniqId } from '@gatewatcher/bistoury/utils-lang';
 import { suffixTestId } from '@gatewatcher/bistoury/utils-tests';
-import { forwardRef } from 'react';
+import type { Ref } from 'react';
 
 import type { InputSharedProps } from '@/skin/forms';
 import InputBaseLabel, {
@@ -12,45 +12,42 @@ import { Title } from '@/skin/typography';
 
 type RadioCardInputProps = Omit<InputSharedProps, 'label'> & {
   label?: string;
+  ref?: Ref<HTMLInputElement>;
 };
 
-export const RadioCardInput = forwardRef<HTMLInputElement, RadioCardInputProps>(
-  (
-    {
-      'data-testid': testId = 'selectable-card-radio',
-      id,
-      label,
-      preventAutocomplete,
-      ...rest
-    },
-    ref,
-  ) => {
-    const uuid = id ?? generateUniqId();
+export const RadioCardInput = ({
+  'data-testid': testId = 'selectable-card-radio',
+  id,
+  label,
+  preventAutocomplete,
+  ref,
+  ...rest
+}: RadioCardInputProps) => {
+  const uuid = id ?? generateUniqId();
 
-    return (
-      <InputBaseLabel
-        className={styles.spacing}
-        preventAutocomplete={preventAutocomplete}
-        withFormatting={false}
-        withLabel={false}
-        {...rest}
-      >
-        {(props: InputBaseRenderProps) => (
-          <div className={styles.RadioCardInput} data-testid={testId}>
-            <label htmlFor={uuid}>
-              <Title as="h3" data-testid={suffixTestId(testId, 'label')}>
-                {label}
-              </Title>
-            </label>
-            <input
-              ref={ref}
-              id={uuid}
-              type="radio"
-              {...getInputBaseRenderProps(props)}
-            />
-          </div>
-        )}
-      </InputBaseLabel>
-    );
-  },
-);
+  return (
+    <InputBaseLabel
+      className={styles.spacing}
+      preventAutocomplete={preventAutocomplete}
+      withFormatting={false}
+      withLabel={false}
+      {...rest}
+    >
+      {(props: InputBaseRenderProps) => (
+        <div className={styles.RadioCardInput} data-testid={testId}>
+          <label htmlFor={uuid}>
+            <Title as="h3" data-testid={suffixTestId(testId, 'label')}>
+              {label}
+            </Title>
+          </label>
+          <input
+            ref={ref}
+            id={uuid}
+            type="radio"
+            {...getInputBaseRenderProps(props)}
+          />
+        </div>
+      )}
+    </InputBaseLabel>
+  );
+};

@@ -5,7 +5,7 @@ import type { Format } from './types';
 
 export type DateTimeAbsoluteProps = Omit<
   DateTimeProps,
-  Exclude<keyof DateTimeBaseProps, 'date' | 'withEllipsis'>
+  Exclude<keyof DateTimeBaseProps, 'date' | 'withEllipsis' | 'withTooltip'>
 > & {
   format?: Format;
 };

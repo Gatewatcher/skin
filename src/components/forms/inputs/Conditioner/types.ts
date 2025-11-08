@@ -6,6 +6,7 @@ export type ConditionType = {
   format?: Option;
   value?: string;
   id: string;
+  isElse?: boolean;
 };
 
 export type LogicalGroupType = {
@@ -19,9 +20,9 @@ export type LogicalGroupType = {
 
 export type LogicType = 'and' | 'or';
 
-export type Operator = 'TEXT' | 'DATE' | 'NUMBER' | 'IP' | 'BOOLEAN';
+export type Operator = 'TEXT' | 'DATE' | 'NUMBER' | 'IP' | 'BOOLEAN' | 'ENUM';
 
-export type Observable = { name: string; type: Operator };
+export type Observable = { name: string; type: Operator; enum?: string[] };
 
 export type Operators = {
   all?: OptionsOrGroups;

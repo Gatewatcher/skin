@@ -1,6 +1,7 @@
 import { expectToBeVisibleInTheDocument } from '@gatewatcher/bistoury/utils-tests';
 import type { TestId } from '@gatewatcher/bistoury/utils-types';
-import { ByRoleMatcher, render, screen } from '@testing-library/react';
+import type { ByRoleMatcher } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import type { FormEventHandler } from 'react';
 

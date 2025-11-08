@@ -1,4 +1,5 @@
 import { classNames } from '@gatewatcher/bistoury/utils-dom';
+import type { ReactElement } from 'react';
 import { Fragment } from 'react';
 import type { OptionProps } from 'react-select';
 import { components } from 'react-select';
@@ -78,7 +79,8 @@ const Option = <OptionValue extends string | number, OptionMeta>(
       >
         <CreateOptionComponent>{props.label}</CreateOptionComponent>
 
-        {footer && withStopPropagation(footer)}
+        {footer &&
+          withStopPropagation(footer as ReactElement<{ onClick: () => void }>)}
       </CustomOption>
     );
   }

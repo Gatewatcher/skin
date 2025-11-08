@@ -1,8 +1,8 @@
+import { useDrawerPersistence } from '@/skin/displays/drawerPanels/DrawerV2';
 import { Layout } from '@/skin/layout';
 
 import Drawer from '..';
 import { Card, drawerPersistence } from '../..';
-import { useDrawerPersistence } from '../../panels/DrawerV2';
 import { useDrawer } from '../hooks/useDrawer';
 
 export type DrawerTestProps = {

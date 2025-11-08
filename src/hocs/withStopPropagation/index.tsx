@@ -8,11 +8,12 @@ export type WithStopPropagationProps = {
 export const withStopPropagation = <T extends WithStopPropagationProps>(
   BaseComponent: ReactElement<T>,
 ) => {
+  const props = BaseComponent.props;
   return cloneElement(BaseComponent, {
-    ...BaseComponent.props,
+    ...props,
     onClick: (event: MouseEvent) => {
       event.stopPropagation();
-      BaseComponent.props.onClick?.(event);
+      props.onClick?.(event);
     },
   });
 };

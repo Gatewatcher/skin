@@ -20,5 +20,12 @@ export const checkAreAllConditionsDefined = (conditions: ConditionType[]) => {
 };
 
 export const isConditionDefined = (condition: ConditionType) => {
-  return condition?.observable && condition?.operator && condition?.value;
+  return (
+    isElse(condition) ||
+    (condition?.observable && condition?.operator && condition?.value)
+  );
+};
+
+export const isElse = (condition: ConditionType) => {
+  return condition.isElse;
 };

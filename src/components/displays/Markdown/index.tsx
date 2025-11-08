@@ -1,16 +1,14 @@
-import { Highlight, themes } from 'prism-react-renderer';
 import type { ComponentProps } from 'react';
 import type { Options } from 'react-markdown';
 import ReactMarkdown, { defaultUrlTransform } from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 
-import { CopyToClipboard, Link } from '@/skin/actions';
-import { Stack } from '@/skin/layout';
-import { useThemeContext } from '@/skin/navigation/Theme';
-import { Paragraph, Text, Title } from '@/skin/typography';
+import { Link } from '@/skin/actions';
+import { Paragraph, Title } from '@/skin/typography';
 
+import CodeBlock from '../CodeBlock';
 import Divider from '../Divider';
-import { Prism } from './Prism';
+import MermaidViewer from '../MermaidViewer';
 
 import styles from './styles.module.scss';
 
@@ -26,8 +24,6 @@ export const InternalMarkdown = ({
   children,
   components,
 }: MarkdownProps & InternalMarkdownProps) => {
-  const { theme } = useThemeContext();
-
   return (
     <ReactMarkdown
       components={{
@@ -79,47 +75,18 @@ export const InternalMarkdown = ({
         },
         code({ className, children, node }) {
           const match = /language-(\w+)/.exec(className || '');
+          const code = String(children).trim();
+          const language = match?.[1] ?? '';
           const isMultiline =
             node?.position &&
             node.position.end.line - node.position.start.line >= 1;
 
           if (isMultiline) {
-            return (
-              <Highlight
-                code={String(children).trim()}
-                language={match?.[1] ?? ''}
-                prism={Prism}
-                theme={theme === 'light' ? themes.vsLight : themes.vsDark}
-              >
-                {({ style, tokens, getTokenProps, getLineProps }) => {
-                  return (
-                    <div className={styles.CodeBlock} style={style}>
-                      <Stack
-                        alignItems="center"
-                        className={styles.CodeBlockHead}
-                        justifyContent="space-between"
-                        padding={{ bottom: 2 }}
-                      >
-                        <Text currentColor>{match?.[1] ?? ''}</Text>
-                        <CopyToClipboard
-                          clipText={String(children).trim()}
-                          alwaysVisible
-                        />
-                      </Stack>
-                      <div className={styles.CodeBlockInner}>
-                        {tokens.map((line, i) => (
-                          <div key={i} {...getLineProps({ line })}>
-                            {line.map((token, key) => (
-                              <span key={key} {...getTokenProps({ token })} />
-                            ))}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  );
-                }}
-              </Highlight>
-            );
+            if (language === 'mermaid') {
+              return <MermaidViewer.Tabs code={code} />;
+            } else {
+              return <CodeBlock code={code} language={language} />;
+            }
           } else {
             return <code className={styles.InlineCode}>{children}</code>;
           }
@@ -145,5 +112,7 @@ export const InternalMarkdown = ({
 };
 
 const Markdown = (props: MarkdownProps) => <InternalMarkdown {...props} />;
+
+Markdown.Mermaid = MermaidViewer.Tabs;
 
 export default Markdown;

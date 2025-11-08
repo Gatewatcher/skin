@@ -1,4 +1,4 @@
-import { faker } from '@faker-js/faker/locale/en';
+import { faker } from '@faker-js/faker';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { ButtonAsync } from '@/skin/actions';

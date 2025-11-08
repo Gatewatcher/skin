@@ -16,7 +16,7 @@ const DEFAULT_OPTIONS: UseIsOverflownOptions = {
 };
 
 export const useIsOverflown = (
-  ref: RefObject<HTMLElement>,
+  ref: RefObject<HTMLElement | null>,
   options?: UseIsOverflownOptions,
 ) => {
   const [isOverflown, setIsOverflown] = useState(false);
@@ -25,7 +25,7 @@ export const useIsOverflown = (
     ...options,
   };
 
-  useOnElementResize(ref, () => {
+  useOnElementResize(ref as RefObject<HTMLElement>, () => {
     const element = ref.current;
     if (element && direction === 'horizontal') {
       setIsOverflown(element?.scrollWidth > element?.clientWidth);

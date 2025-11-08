@@ -11,13 +11,12 @@ import type {
   ComponentProps,
   DragEvent,
   FocusEvent,
-  ForwardedRef,
   MouseEvent,
   ReactElement,
   Ref,
 } from 'react';
 import type React from 'react';
-import { forwardRef, useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { withElevation } from '@/hocs';
 import { Icon } from '@/skin/displays';
@@ -68,34 +67,33 @@ export type ChatBoxProps<
     onAttachmentDelete?: (attachment: T) => void;
     maxRows?: number;
     autoCompletionSettings?: AutoCompletionSettings<U>;
+    ref?: Ref<HTMLTextAreaElement>;
   };
 
-const ChatBox = <T extends ChatBoxAttachment, U extends AutoCompletionOption>(
-  {
-    'data-testid': testId = 'input-chat-box',
-    disabled,
-    readOnly,
-    autoComplete = 'off',
-    attachments,
-    onAttachmentError,
-    onFocus,
-    onBlur,
-    onAttachmentDelete,
-    attachmentOptions,
-    elementBefore = <DEFAULT_ELEMENT_BEFORE />,
-    elementAfter,
-    value,
-    maxRows = DEFAULT_MAX_ROWS,
-    onDrop,
-    autoCompletionSettings,
-    onKeyDown,
-    ...rest
-  }: ChatBoxProps<T, U>,
-  forwardedRef: ForwardedRef<HTMLTextAreaElement>,
-) => {
-  const inputRef = useRef<HTMLTextAreaElement | null>();
-  const chatBoxRef = useRef<HTMLElement | null>();
-  const optionsRef = useRef<(HTMLElement | null)[]>([]);
+const ChatBox = <T extends ChatBoxAttachment, U extends AutoCompletionOption>({
+  'data-testid': testId = 'input-chat-box',
+  disabled,
+  readOnly,
+  autoComplete = 'off',
+  attachments,
+  onAttachmentError,
+  onFocus,
+  onBlur,
+  onAttachmentDelete,
+  attachmentOptions,
+  elementBefore = <DEFAULT_ELEMENT_BEFORE />,
+  elementAfter,
+  value,
+  maxRows = DEFAULT_MAX_ROWS,
+  onDrop,
+  autoCompletionSettings,
+  onKeyDown,
+  ref,
+  ...rest
+}: ChatBoxProps<T, U>): ReactElement => {
+  const inputRef = useRef<HTMLTextAreaElement>(null);
+  const chatBoxRef = useRef<HTMLElement>(null);
+  const optionsRef = useRef<HTMLElement[]>([]);
 
   const [isFocused, setIsFocused] = useState(false);
   const [listPosition, setListPosition] = useState({ top: 0, left: 0 });
@@ -368,13 +366,13 @@ const ChatBox = <T extends ChatBoxAttachment, U extends AutoCompletionOption>(
               <TextAreaBase
                 ref={element => {
                   inputRef.current = element;
-                  if (!forwardedRef) {
+                  if (!ref) {
                     return;
                   }
-                  if (isFunction(forwardedRef)) {
-                    forwardedRef(element);
+                  if (isFunction(ref)) {
+                    ref(element);
                   } else {
-                    forwardedRef.current = element;
+                    ref.current = element;
                   }
                 }}
                 autoComplete={autoComplete}
@@ -446,9 +444,4 @@ const ChatBox = <T extends ChatBoxAttachment, U extends AutoCompletionOption>(
   );
 };
 
-export default forwardRef(ChatBox) as <
-  T extends ChatBoxAttachment,
-  U extends AutoCompletionOption,
->(
-  p: ChatBoxProps<T, U> & { ref?: Ref<HTMLTextAreaElement> },
-) => ReactElement;
+export default ChatBox;

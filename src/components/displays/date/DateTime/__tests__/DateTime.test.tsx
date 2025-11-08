@@ -6,6 +6,8 @@ import type { TestId } from '@gatewatcher/bistoury/utils-types';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
+import { DATE_LONG_FORMAT } from '@/skin/displays/date/DateTime/constants';
+
 import type { DateTimeProps } from '..';
 import DateTime from '..';
 
@@ -66,5 +68,14 @@ describe('DateTime', () => {
 
     await user.click(await screen.findByTestId('date-time-trigger'));
     expect(onClick).toHaveBeenCalled();
+  });
+
+  it('should not display the tooltip', async () => {
+    renderComponent({
+      tooltipFormat: DATE_LONG_FORMAT,
+      withTooltip: false,
+    });
+    await trigger();
+    await expect(screen.findByText('22/09/2023 13:00:00')).rejects.toThrow();
   });
 });
