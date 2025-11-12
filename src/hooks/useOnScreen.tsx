@@ -6,7 +6,7 @@ export type UseOnScreenOptions = Omit<IntersectionObserverInit, 'root'> & {
 };
 
 export const useOnScreen = (
-  ref: RefObject<HTMLElement>,
+  ref: RefObject<HTMLElement | null>,
   options?: UseOnScreenOptions,
 ): boolean | undefined => {
   const observerRef = useRef<IntersectionObserver | null>(null);

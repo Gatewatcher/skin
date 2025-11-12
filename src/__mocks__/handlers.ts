@@ -1,4 +1,4 @@
-import { faker } from '@faker-js/faker/locale/en';
+import { faker } from '@faker-js/faker';
 
 import type { Comment, Todo, User, Workspace, WorkspaceType } from './types';
 import { generateApiMocks } from './utils';

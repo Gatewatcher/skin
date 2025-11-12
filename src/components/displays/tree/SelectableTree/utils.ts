@@ -1,4 +1,5 @@
 import { Children } from 'react';
+import type { JSX } from 'react';
 
 import type { NodeDataType, TreeNodeId } from './types';
 

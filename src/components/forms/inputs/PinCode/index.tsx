@@ -174,7 +174,9 @@ const PinCode = ({
                 <InputBase {...props}>
                   {({ className, ...props }) => (
                     <input
-                      ref={ref => (inputsRef.current[index] = ref)}
+                      ref={ref => {
+                        inputsRef.current[index] = ref;
+                      }}
                       className={classNames(
                         className,
                         styles.input,

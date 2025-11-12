@@ -73,6 +73,43 @@ const DatepickerBase = <TMode extends DPDatesMode = 'range'>({
 
   const { trigger, ...floatingProps } = floating || {};
 
+  useDidMountEffect(() => {
+    setSelectedDates(dates => {
+      switch (dates.length) {
+        case 0:
+          return [];
+        case 1:
+          if (
+            mode === 'range' ||
+            (min && dates[0] < min) ||
+            (max && dates[0] > max)
+          ) {
+            return [];
+          }
+          return dates;
+        case 2:
+          const [start, end] = dates;
+
+          if (mode === 'range') {
+            return [
+              min ? (start < min ? min : start) : start,
+              max ? (end > max ? max : end) : end,
+            ];
+          }
+          if (mode === 'multiple') {
+            return dates.filter(
+              date => (!min || date >= min) && (!max || date <= max),
+            );
+          }
+          return [];
+        default:
+          return dates.filter(
+            date => (!min || date >= min) && (!max || date <= max),
+          );
+      }
+    });
+  }, [min, max, setSelectedDates]);
+
   const { data, propGetters } = useDatePicker({
     offsetDate,
     onDatesChange: setSelectedDates,

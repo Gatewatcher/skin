@@ -1,7 +1,7 @@
 import { FloatingFocusManager, useTransitionStyles } from '@floating-ui/react';
 import { classNames, stylesToCamelCase } from '@gatewatcher/bistoury/utils-dom';
 import type { ReactElement, Ref } from 'react';
-import { Fragment, forwardRef, useState } from 'react';
+import { Fragment, useState } from 'react';
 
 import Backdrop from '../Backdrop';
 import type { FloatingProps } from '../Floating';
@@ -65,64 +65,60 @@ const Modal = (props: ModalProps) => {
 type WrapperComponentType = FloatingWrapperType &
   Required<Pick<ModalProps, 'size' | 'scrollOn' | 'withBackdrop'>>;
 
-const WrapperComponent = forwardRef(
-  (
-    {
-      ctx,
-      children,
-      duration,
-      'data-testid': testId,
-      scrollOn,
-      size,
-      withBackdrop,
-    }: WrapperComponentType,
-    ref,
-  ) => {
-    const transition = useTransitionStyles(ctx, {
-      duration,
-    });
+const WrapperComponent = ({
+  ctx,
+  children,
+  duration,
+  'data-testid': testId,
+  scrollOn,
+  size,
+  withBackdrop,
+  ref,
+}: WrapperComponentType) => {
+  const transition = useTransitionStyles(ctx, {
+    duration,
+  });
 
-    const slideTransition = useTransitionStyles(ctx, {
-      duration,
-      initial: {
-        transform: 'translateY(-26px)',
-      },
-    });
+  const slideTransition = useTransitionStyles(ctx, {
+    duration,
+    initial: {
+      transform: 'translateY(-26px)',
+    },
+  });
 
-    return (
-      <>
-        <Backdrop
-          isMounted={transition.isMounted}
-          isScrollable={scrollOn === 'body'}
-          isTransparent={!withBackdrop}
-          slideTransition={slideTransition.styles}
-          style={transition.styles}
+  return (
+    <>
+      <Backdrop
+        isMounted={transition.isMounted}
+        isScrollable={scrollOn === 'body'}
+        isTransparent={!withBackdrop}
+        slideTransition={slideTransition.styles}
+        style={transition.styles}
+      >
+        <FloatingFocusManager
+          context={ctx}
+          modal={true}
+          order={['floating', 'content']}
+          returnFocus={false}
         >
-          <FloatingFocusManager
-            context={ctx}
-            modal={true}
-            order={['floating', 'content']}
-            returnFocus={false}
+          <div
+            ref={ref as Ref<HTMLDivElement>}
+            className={classNames(
+              styles.Modal,
+              styles.size,
+              stylesToCamelCase(styles, 'size', size),
+              stylesToCamelCase(styles, 'scroll', 'on', scrollOn),
+            )}
+            data-testid={testId}
+            role="dialog"
           >
-            <div
-              ref={ref as Ref<HTMLDivElement>}
-              className={classNames(
-                styles.Modal,
-                styles.size,
-                stylesToCamelCase(styles, 'size', size),
-                stylesToCamelCase(styles, 'scroll', 'on', scrollOn),
-              )}
-              data-testid={testId}
-              role="dialog"
-            >
-              {children}
-            </div>
-          </FloatingFocusManager>
-        </Backdrop>
-      </>
-    );
-  },
-);
+            {children}
+          </div>
+        </FloatingFocusManager>
+      </Backdrop>
+    </>
+  );
+};
 
 const ModalContent = ({
   content,

@@ -10,7 +10,8 @@ import { useLocation, useSearchParams } from 'react-router-dom';
 
 import { Stack } from '@/skin/layout';
 
-import { type ImperativePanelHandle, Panels } from '..';
+import Panels from '../Panels';
+import type { ImperativePanelHandle } from '../Panels/compounds/PanelsItem';
 import Actions from './compounds/Actions';
 import Body from './compounds/Body';
 import Close from './compounds/Close';

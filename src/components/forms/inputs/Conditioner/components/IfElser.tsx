@@ -15,18 +15,25 @@ type IfElserProps = {
 const TEST_IDS = buildTestIds(TEST_ID, SUFFIX_TEST_IDS);
 
 export const IfElser = ({ logicalGroupIndex, logicalGroup }: IfElserProps) => {
-  const { setLogicalGroups, readonly } = useConditionerContext();
+  const { setLogicalGroups, setConditions, readonly } = useConditionerContext();
 
-  const handleOnClick = () => {
-    setLogicalGroups(logicalGroupsState => {
-      logicalGroupsState.splice(
-        logicalGroupsState.findIndex(
-          logicalGroupValue => logicalGroupValue.id === logicalGroup.id,
-        ),
-        1,
+  const removeCurrentGroupChildren = () => {
+    setConditions(previousConditions => {
+      return previousConditions.filter(
+        ({ id }) => !logicalGroup.conditionsId.includes(id),
       );
-      return [...logicalGroupsState];
     });
+  };
+
+  const removeCurrentGroup = () => {
+    setLogicalGroups(previousGroups => {
+      return previousGroups.filter(({ id }) => id !== logicalGroup.id);
+    });
+  };
+
+  const removeCurrentGroupAndChildren = () => {
+    removeCurrentGroup();
+    removeCurrentGroupChildren();
   };
 
   return (
@@ -53,7 +60,7 @@ export const IfElser = ({ logicalGroupIndex, logicalGroup }: IfElserProps) => {
           }
           disabled={readonly}
           icon="Close"
-          onClick={handleOnClick}
+          onClick={removeCurrentGroupAndChildren}
           variant="ghosted"
         />
       </Stack>

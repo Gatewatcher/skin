@@ -122,6 +122,37 @@ export const InsideForm: StoryObj<SliderProps & { defaultValue: number }> = {
   },
 };
 
+export const WithInfiniteValue: StoryObj<
+  SliderProps & { defaultValue: number }
+> = {
+  render: args => (
+    <Form
+      initialValues={{ slider: args.defaultValue }}
+      onFinish={values => console.log(values)}
+      onValuesChange={(_, values) => console.log('raw : ', values.slider)}
+    >
+      <Form.Field name="slider">
+        <Input.Slider {...args} />
+      </Form.Field>
+
+      <Form.ButtonSubmit>Submit</Form.ButtonSubmit>
+    </Form>
+  ),
+  args: {
+    defaultValue: Infinity,
+    step: 10,
+    withConstantIntervals: true,
+    marks: {
+      1: { label: 1 },
+      10: { label: 10 },
+      30: { label: 30 },
+      60: { label: 60 },
+      80: { label: 80 },
+      Infinity: { label: 'Infinity' },
+    },
+  },
+};
+
 export const WithErrors: Story = {
   args: {
     meta: {

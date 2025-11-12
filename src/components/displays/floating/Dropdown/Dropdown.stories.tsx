@@ -1,4 +1,4 @@
-import { faker } from '@faker-js/faker/locale/fr';
+import { faker } from '@faker-js/faker';
 import type { Meta, StoryFn, StoryObj } from '@storybook/react';
 import { withRouter } from 'storybook-addon-remix-react-router';
 

@@ -4,11 +4,12 @@ import type { DataTestId } from '@gatewatcher/bistoury/utils-types';
 import type {
   FormEvent,
   FormHTMLAttributes,
+  JSX,
   KeyboardEvent,
   ReactNode,
+  Ref,
 } from 'react';
 import {
-  forwardRef,
   useContext,
   useEffect,
   useImperativeHandle,
@@ -75,164 +76,160 @@ export type FormProps<Values = any> = Omit<
     preserve?: boolean;
     withResetOnSuccess?: boolean;
     withSubmitOnEnter?: boolean;
+    ref?: Ref<FormInstance>;
   };
 
-const Form = forwardRef<FormInstance, FormProps>(
-  (
-    {
-      autoComplete = 'off',
-      name = '',
-      initialValues,
-      fields,
-      form,
-      preserve,
-      children,
-      validateMessages,
-      validateTrigger = 'onChange',
-      onValuesChange,
-      onFieldsChange,
-      onFinish,
-      onFinishFailed,
-      withResetOnSuccess,
-      withSubmitOnEnter = true,
-      margin,
-      padding,
-      ...restProps
+const Form = ({
+  autoComplete = 'off',
+  name = '',
+  initialValues,
+  fields,
+  form,
+  preserve,
+  children,
+  validateMessages,
+  validateTrigger = 'onChange',
+  onValuesChange,
+  onFieldsChange,
+  onFinish,
+  onFinishFailed,
+  withResetOnSuccess,
+  withSubmitOnEnter = true,
+  margin,
+  padding,
+  ref,
+  ...restProps
+}: FormProps) => {
+  const formContext: FormContextProps = useContext(FormContext);
+
+  // We customize handle event since Context will make all the consumer re-render:
+  // https://reactjs.org/docs/context.html#contextprovider
+  const [formInstance] = useForm(form);
+  const {
+    useSubscribe,
+    setInitialValues,
+    setCallbacks,
+    setValidateMessages,
+    setPreserve,
+    destroyForm,
+  } = (formInstance as InternalFormInstance).getInternalHooks(HOOK_MARK) || {};
+
+  // Pass ref with form instance
+  useImperativeHandle(ref, () => formInstance);
+
+  // Register form into Context
+  useEffect(() => {
+    formContext.registerForm(name, formInstance);
+    return () => {
+      formContext.unregisterForm(name);
+    };
+  }, [formContext, formInstance, name]);
+
+  // Pass props to store
+  setValidateMessages?.({
+    ...formContext.validateMessages,
+    ...validateMessages,
+  });
+  setCallbacks?.({
+    onValuesChange,
+    onFieldsChange: (changedFields: FieldData[], ...rest) => {
+      formContext.triggerFormChange(name, changedFields);
+
+      if (onFieldsChange) {
+        onFieldsChange(changedFields, ...rest);
+      }
     },
-    ref,
-  ) => {
-    const formContext: FormContextProps = useContext(FormContext);
+    onFinish: async (values: Store) => {
+      formContext.triggerFormFinish(name, values);
 
-    // We customize handle event since Context will make all the consumer re-render:
-    // https://reactjs.org/docs/context.html#contextprovider
-    const [formInstance] = useForm(form);
-    const {
-      useSubscribe,
-      setInitialValues,
-      setCallbacks,
-      setValidateMessages,
-      setPreserve,
-      destroyForm,
-    } =
-      (formInstance as InternalFormInstance).getInternalHooks(HOOK_MARK) || {};
+      if (onFinish) {
+        await onFinish(values);
+        withResetOnSuccess && formInstance.resetFields();
+      }
+    },
+    onFinishFailed,
+  });
+  setPreserve?.(preserve);
+  setInitialValues?.(initialValues as Store, true);
+  useEffect(() => destroyForm, [destroyForm]);
 
-    // Pass ref with form instance
-    useImperativeHandle(ref, () => formInstance);
+  // Prepare children by `children` type
+  let childrenNode: ReactNode;
+  const childrenRenderProps = isFunction(children);
+  if (childrenRenderProps) {
+    const values = formInstance.getFieldsValue(true);
+    childrenNode = (children as RenderProps)(values, formInstance);
+  } else {
+    childrenNode = children;
+  }
 
-    // Register form into Context
-    useEffect(() => {
-      formContext.registerForm(name, formInstance);
-      return () => {
-        formContext.unregisterForm(name);
-      };
-    }, [formContext, formInstance, name]);
+  // Not use subscribe when using render props
+  useSubscribe?.(!childrenRenderProps);
 
-    // Pass props to store
-    setValidateMessages?.({
-      ...formContext.validateMessages,
-      ...validateMessages,
-    });
-    setCallbacks?.({
-      onValuesChange,
-      onFieldsChange: (changedFields: FieldData[], ...rest) => {
-        formContext.triggerFormChange(name, changedFields);
-
-        if (onFieldsChange) {
-          onFieldsChange(changedFields, ...rest);
-        }
-      },
-      onFinish: async (values: Store) => {
-        formContext.triggerFormFinish(name, values);
-
-        if (onFinish) {
-          await onFinish(values);
-          withResetOnSuccess && formInstance.resetFields();
-        }
-      },
-      onFinishFailed,
-    });
-    setPreserve?.(preserve);
-    setInitialValues?.(initialValues as Store, true);
-    useEffect(() => destroyForm, [destroyForm]);
-
-    // Prepare children by `children` type
-    let childrenNode: ReactNode;
-    const childrenRenderProps = isFunction(children);
-    if (childrenRenderProps) {
-      const values = formInstance.getFieldsValue(true);
-      childrenNode = (children as RenderProps)(values, formInstance);
-    } else {
-      childrenNode = children;
+  // Listen if fields provided. We use ref to save prev data here to avoid additional render
+  const prevFieldsRef = useRef<FieldData[] | undefined>(undefined);
+  useEffect(() => {
+    if (!isSimilar(prevFieldsRef.current || [], fields || [])) {
+      formInstance.setFields(fields || []);
     }
+    prevFieldsRef.current = fields;
+  }, [fields, formInstance]);
 
-    // Not use subscribe when using render props
-    useSubscribe?.(!childrenRenderProps);
+  const formContextValue = useMemo(
+    () => ({
+      ...(formInstance as InternalFormInstance),
+      validateTrigger,
+    }),
+    [formInstance, validateTrigger],
+  );
 
-    // Listen if fields provided. We use ref to save prev data here to avoid additional render
-    const prevFieldsRef = useRef<FieldData[] | undefined>();
-    useEffect(() => {
-      if (!isSimilar(prevFieldsRef.current || [], fields || [])) {
-        formInstance.setFields(fields || []);
-      }
-      prevFieldsRef.current = fields;
-    }, [fields, formInstance]);
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    event.stopPropagation();
+    formInstance.submit();
+  };
 
-    const formContextValue = useMemo(
-      () => ({
-        ...(formInstance as InternalFormInstance),
-        validateTrigger,
-      }),
-      [formInstance, validateTrigger],
-    );
+  const handleReset = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    formInstance.resetFields();
+    restProps.onReset?.(event);
+  };
 
-    const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const wrapperNode = (
+    <FieldContext.Provider value={formContextValue}>
+      {childrenNode}
+    </FieldContext.Provider>
+  );
+
+  const handleKeyDown = (event: KeyboardEvent<HTMLFormElement>) => {
+    if (!withSubmitOnEnter && event.key === 'Enter') {
       event.preventDefault();
-      event.stopPropagation();
-      formInstance.submit();
-    };
+    }
+  };
 
-    const handleReset = (event: FormEvent<HTMLFormElement>) => {
-      event.preventDefault();
-      formInstance.resetFields();
-      restProps.onReset?.(event);
-    };
+  const contextValue = useMemo<InternalFormContextType>(
+    () => ({
+      form: formInstance,
+    }),
+    [formInstance],
+  );
 
-    const wrapperNode = (
-      <FieldContext.Provider value={formContextValue}>
-        {childrenNode}
-      </FieldContext.Provider>
-    );
-
-    const handleKeyDown = (event: KeyboardEvent<HTMLFormElement>) => {
-      if (!withSubmitOnEnter && event.key === 'Enter') {
-        event.preventDefault();
-      }
-    };
-
-    const contextValue = useMemo<InternalFormContextType>(
-      () => ({
-        form: formInstance,
-      }),
-      [formInstance],
-    );
-
-    return withSpacing(
-      <InternalFormContext.Provider value={contextValue}>
-        <form
-          {...restProps}
-          autoComplete={autoComplete}
-          data-testid="form"
-          onKeyDown={handleKeyDown}
-          onReset={handleReset}
-          onSubmit={handleSubmit}
-        >
-          {wrapperNode}
-        </form>
-      </InternalFormContext.Provider>,
-      { margin, padding },
-    );
-  },
-);
+  return withSpacing(
+    <InternalFormContext.Provider value={contextValue}>
+      <form
+        {...restProps}
+        autoComplete={autoComplete}
+        data-testid="form"
+        onKeyDown={handleKeyDown}
+        onReset={handleReset}
+        onSubmit={handleSubmit}
+      >
+        {wrapperNode}
+      </form>
+    </InternalFormContext.Provider>,
+    { margin, padding },
+  );
+};
 
 type CompoundedType = typeof Form & {
   Actions: typeof FormActions;

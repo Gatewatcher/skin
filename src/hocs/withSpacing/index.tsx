@@ -20,7 +20,12 @@ import { buildSpacingStyles } from './utils';
 import styles from './styles.module.scss';
 
 export const withSpacing = (
-  BaseComponent: ReactElement,
+  BaseComponent: ReactElement<
+    Record<string, unknown> & {
+      className?: string;
+      style?: Record<string, unknown>;
+    }
+  >,
   spacings?: Spacings,
 ) => {
   const availableSpacings = filterKeys(spacings || {}, ['padding', 'margin']);
@@ -56,9 +61,13 @@ export const withSpacing = (
     return stylesToPascalCase(styles, 'Spacings', key);
   });
 
+  const props = BaseComponent.props;
   return cloneElement(BaseComponent, {
-    ...BaseComponent.props,
-    className: classNames(BaseComponent.props.className, ...spacingsClassNames),
-    style: { ...BaseComponent.props.style, ...spacingStyles },
+    ...props,
+    className: classNames(props.className, ...spacingsClassNames),
+    style: {
+      ...props.style,
+      ...spacingStyles,
+    },
   });
 };

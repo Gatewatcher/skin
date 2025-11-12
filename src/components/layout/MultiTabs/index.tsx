@@ -65,7 +65,7 @@ const MultiTabs = ({
   };
 
   if (!tabs.length || !currentTab) {
-    return placeholder;
+    return <>{placeholder}</>;
   }
 
   const closeCurrentTab = () => {

@@ -126,10 +126,10 @@ export const Condition = ({
         <>
           {restrictedLogicType === 'and' && (
             <Button
-              data-testid={`${TEST_IDS.addOr}-${currentLogicalGroupIndex}-${currentConditionIndex}`}
               disabled={
                 (maxDepthReached && logicalGroup.logic === 'and') || readonly
               }
+              data-testid={`${TEST_IDS.addOr}-${currentLogicalGroupIndex}-${currentConditionIndex}`}
               fill={variant === 'ghosted'}
               onClick={() => handleAdd('or')}
               startIcon="Add"
@@ -140,10 +140,10 @@ export const Condition = ({
           )}
           {restrictedLogicType === 'or' && (
             <Button
-              data-testid={`${TEST_IDS.addAnd}-${currentLogicalGroupIndex}-${currentConditionIndex}`}
               disabled={
                 (maxDepthReached && logicalGroup.logic === 'or') || readonly
               }
+              data-testid={`${TEST_IDS.addAnd}-${currentLogicalGroupIndex}-${currentConditionIndex}`}
               fill={variant === 'ghosted'}
               onClick={() => handleAdd('and')}
               startIcon="Add"
@@ -157,10 +157,10 @@ export const Condition = ({
       {!restrictedLogicType && (
         <>
           <Button
-            data-testid={`${TEST_IDS.addOr}-${currentLogicalGroupIndex}-${currentConditionIndex}`}
             disabled={
               (maxDepthReached && logicalGroup.logic === 'and') || readonly
             }
+            data-testid={`${TEST_IDS.addOr}-${currentLogicalGroupIndex}-${currentConditionIndex}`}
             fill={variant === 'ghosted'}
             onClick={() => handleAdd('or')}
             startIcon="Add"
@@ -169,10 +169,10 @@ export const Condition = ({
             {DEFAULT_ADD_CONDITION_BUTTONS_LABEL.OR}
           </Button>
           <Button
-            data-testid={`${TEST_IDS.addAnd}-${currentLogicalGroupIndex}-${currentConditionIndex}`}
             disabled={
               (maxDepthReached && logicalGroup.logic === 'or') || readonly
             }
+            data-testid={`${TEST_IDS.addAnd}-${currentLogicalGroupIndex}-${currentConditionIndex}`}
             fill={variant === 'ghosted'}
             onClick={() => handleAdd('and')}
             startIcon="Add"

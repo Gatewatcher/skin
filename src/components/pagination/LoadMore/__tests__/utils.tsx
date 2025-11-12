@@ -1,4 +1,4 @@
-import { faker } from '@faker-js/faker/locale/en';
+import { faker } from '@faker-js/faker';
 import { range } from '@gatewatcher/bistoury/utils-lang';
 import { screen, waitForElementToBeRemoved } from '@testing-library/dom';
 

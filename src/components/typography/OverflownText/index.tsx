@@ -1,4 +1,4 @@
-import { forwardRef, useImperativeHandle, useRef } from 'react';
+import { type Ref, useImperativeHandle, useRef } from 'react';
 
 import type { Spacings } from '@/hocs';
 import type { UseIsOverflownOptions } from '@/hooks';
@@ -18,60 +18,59 @@ export type OverflownTextExposedUtilities = {
 export type OverflownTextProps = UseIsOverflownOptions &
   Omit<
     TextProps,
-    'noWrap' | 'overflowHidden' | 'overflowWrap' | 'textEllipsis' | 'wordBreak'
+    | 'noWrap'
+    | 'overflowHidden'
+    | 'overflowWrap'
+    | 'textEllipsis'
+    | 'wordBreak'
+    | 'ref'
   > &
   Pick<TooltipProps, 'placement'> & {
     isDisabled?: boolean;
+    ref?: Ref<OverflownTextExposedUtilities>;
   } & Spacings;
 
-const OverflownText = forwardRef<
-  OverflownTextExposedUtilities,
-  OverflownTextProps
->(
-  (
-    {
-      'data-testid': testId = 'overflown-text',
-      children,
-      isDisabled,
-      placement,
-      withWatchScreenResize,
-      ...props
-    },
-    forwardedRef,
-  ) => {
-    const ref = useRef<HTMLDivElement | null>(null);
+const OverflownText = ({
+  'data-testid': testId = 'overflown-text',
+  children,
+  isDisabled,
+  placement,
+  ref: forwardedRef,
+  withWatchScreenResize,
+  ...props
+}: OverflownTextProps) => {
+  const ref = useRef<HTMLDivElement>(null);
 
-    useImperativeHandle(forwardedRef, () => ({
-      scrollWidth: ref.current?.scrollWidth,
-    }));
+  useImperativeHandle(forwardedRef, () => ({
+    scrollWidth: ref.current?.scrollWidth,
+  }));
 
-    const isOverflown = useIsOverflown(ref, {
-      ...(withWatchScreenResize && { withWatchScreenResize }),
-    });
+  const isOverflown = useIsOverflown(ref, {
+    ...(withWatchScreenResize && { withWatchScreenResize }),
+  });
 
-    return (
-      <Tooltip
-        content={children}
+  return (
+    <Tooltip
+      content={children}
+      data-testid={testId}
+      isDisabled={isDisabled || !isOverflown}
+      placement={placement}
+      triggerClassName={styles.OverflownText}
+      triggerOn="hover"
+      withStopPropagation={false}
+    >
+      <Text
+        ref={ref}
         data-testid={testId}
-        isDisabled={isDisabled || !isOverflown}
-        placement={placement}
-        triggerClassName={styles.OverflownText}
-        triggerOn="hover"
-        withStopPropagation={false}
+        {...props}
+        whiteSpace="nowrap"
+        overflowHidden
+        textEllipsis
       >
-        <Text
-          ref={ref}
-          data-testid={testId}
-          {...props}
-          whiteSpace="nowrap"
-          overflowHidden
-          textEllipsis
-        >
-          {children}
-        </Text>
-      </Tooltip>
-    );
-  },
-);
+        {children}
+      </Text>
+    </Tooltip>
+  );
+};
 
 export default OverflownText;

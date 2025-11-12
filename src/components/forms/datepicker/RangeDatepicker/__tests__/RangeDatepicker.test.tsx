@@ -1,7 +1,9 @@
 import { expectToBeVisibleInTheDocument } from '@gatewatcher/bistoury/utils-tests';
 import type { TestId } from '@gatewatcher/bistoury/utils-types';
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import dayjs from 'dayjs';
+import { act } from 'react';
 
 import { Button } from '@/skin/actions';
 
@@ -15,7 +17,7 @@ describe('RangeDatepicker', () => {
   const user = userEvent.setup();
 
   beforeAll(() => {
-    vi.useFakeTimers({ now: new Date('March 4, 2024 12:00:00').getTime() });
+    vi.useFakeTimers({ now: new Date('March 8, 2024 12:00:00').getTime() });
   });
 
   const renderComponent = (
@@ -71,5 +73,37 @@ describe('RangeDatepicker', () => {
     renderComponent({ floating });
     await openRangeDatePicker();
     await expectToBeVisibleInTheDocument(TEST_ID);
+  });
+
+  it('should reduce range if out of min max', async () => {
+    const { rerender } = renderComponent();
+    let start = await screen.findByTestId(
+      dayjs().subtract(4, 'day').format('DD-MM'),
+    );
+    let end = await screen.findByTestId(dayjs().add(4, 'day').format('DD-MM'));
+    act(() => {
+      fireEvent.click(start);
+    });
+    act(() => {
+      fireEvent.click(end);
+    });
+    expect(start).toHaveClass('DayRangeBounds');
+    expect(end).toHaveClass('DayRangeBounds');
+
+    rerender(
+      <RangeDatepicker
+        max={dayjs().add(2, 'day').toDate()}
+        min={dayjs().subtract(2, 'day').toDate()}
+      >
+        <RangeDatepicker.Calendars />
+      </RangeDatepicker>,
+    );
+
+    start = await screen.findByTestId(
+      dayjs().subtract(2, 'day').format('DD-MM'),
+    );
+    end = await screen.findByTestId(dayjs().add(2, 'day').format('DD-MM'));
+    expect(start).toHaveClass('DayRangeBounds');
+    expect(end).toHaveClass('DayRangeBounds');
   });
 });

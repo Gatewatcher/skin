@@ -6,7 +6,7 @@ import type { ColumnPinConfig, ColumnResizingData, Layout } from './types';
 export type TableContextType = {
   emptyCellFallback?: MutableRefObject<ReactNode>;
   layout: Layout;
-  tableRef: RefObject<HTMLTableElement> | null;
+  tableRef: RefObject<HTMLTableElement | null> | null;
   columnsResizingData: ColumnResizingData | undefined;
   setColumnsResizingData: (resizingData: ColumnResizingData) => void;
   isResizable: boolean;

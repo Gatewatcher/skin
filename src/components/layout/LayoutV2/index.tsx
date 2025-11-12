@@ -7,7 +7,7 @@ import { DrawerV2, SidePanel } from '@/skin/displays';
 import {
   getPersistedPanelWidth,
   persistPanelWidth,
-} from '@/skin/displays/panels/DrawerV2/PanelLayout/utils/drawerPanelWidth';
+} from '@/skin/displays/drawerPanels/DrawerV2/PanelLayout/utils/drawerPanelWidth';
 import { Grid } from '@/skin/layout';
 
 import LayoutRow from './compounds/LayoutRow';
@@ -18,7 +18,7 @@ import {
   LAYOUT_CONTENT_GRID_PADDINGS,
   LAYOUT_GAPS,
 } from './constants';
-import type { DrawerConfig, SidePanelConfig } from './types';
+import type { DrawerConfig, MainContentConfig, SidePanelConfig } from './types';
 
 import styles from './styles.module.scss';
 
@@ -30,6 +30,7 @@ export type LayoutV2Props = {
   sideNav?: ReactNode;
   sidePanelConfig?: SidePanelConfig;
   topNav?: ReactNode;
+  mainContentConfig?: MainContentConfig;
 };
 
 const LayoutV2 = ({
@@ -40,6 +41,7 @@ const LayoutV2 = ({
   sideNav,
   sidePanelConfig,
   topNav,
+  mainContentConfig,
 }: LayoutV2Props) => {
   const { initialWidth, mainContentMinWidth, matches, minWidth } = {
     ...DEFAULT_DRAWER_CONFIG,
@@ -70,6 +72,7 @@ const LayoutV2 = ({
       columns={LAYOUT_COLUMNS}
       gap={LAYOUT_GAPS}
       padding={padding}
+      style={{ height: mainContentConfig?.height }}
       isContainer
     >
       {children}
@@ -81,42 +84,48 @@ const LayoutV2 = ({
       {sidePanelApi => (
         <DrawerV2.Provider matches={matches}>
           {drawerApi => (
-            <div className={styles.LayoutV2}>
-              <div className={styles.sideNavZone}>{sideNav}</div>
-              <div className={styles.topNavAndMainZone}>
-                {topNav}
-                {banner}
-                <SidePanel.Layout>
-                  {sidePanelApi.isOpened && (
-                    <SidePanel.Panel width={sidePanelWidth}>
-                      {sidePanelApi.content}
-                    </SidePanel.Panel>
-                  )}
-                  <div className={styles.mainZone}>
-                    <DrawerV2.Layout
-                      contentPanelMinWidth={
-                        drawerApi.options?.mainContentMinWidth ??
-                        mainContentMinWidth
-                      }
-                      initialDrawerWidth={
-                        (drawerApi.currentId &&
-                          getPersistedPanelWidth(drawerApi.currentId)) ||
-                        initialWidth
-                      }
-                      onResize={width =>
-                        drawerResizeHandlerDebounced(drawerApi.currentId, width)
-                      }
-                      containerClassName={styles.contentContainer}
-                      drawerContent={drawerApi.content}
-                      drawerMinWidth={minWidth}
-                      mainContent={mainContent}
-                      onCloseDrawer={drawerApi.close}
-                      showDrawer={drawerApi.isOpened}
-                    />
-                  </div>
-                </SidePanel.Layout>
+            <>
+              {banner && <div className={styles.Banner}>{banner}</div>}
+              <div className={styles.LayoutV2}>
+                <div className={styles.sideNavZone}>{sideNav}</div>
+                <div className={styles.topNavAndMainZone}>
+                  {topNav}
+                  <SidePanel.Layout>
+                    {sidePanelApi.isOpened && (
+                      <SidePanel.Panel width={sidePanelWidth}>
+                        {sidePanelApi.content}
+                      </SidePanel.Panel>
+                    )}
+                    <div className={styles.mainZone}>
+                      <DrawerV2.Layout
+                        contentPanelMinWidth={
+                          drawerApi.options?.mainContentMinWidth ??
+                          mainContentMinWidth
+                        }
+                        initialDrawerWidth={
+                          (drawerApi.currentId &&
+                            getPersistedPanelWidth(drawerApi.currentId)) ||
+                          initialWidth
+                        }
+                        onResize={width =>
+                          drawerResizeHandlerDebounced(
+                            drawerApi.currentId,
+                            width,
+                          )
+                        }
+                        containerClassName={styles.contentContainer}
+                        drawerContent={drawerApi.content}
+                        drawerMinWidth={minWidth}
+                        mainContent={mainContent}
+                        mainPanelHeight={mainContentConfig?.height}
+                        onCloseDrawer={drawerApi.close}
+                        showDrawer={drawerApi.isOpened}
+                      />
+                    </div>
+                  </SidePanel.Layout>
+                </div>
               </div>
-            </div>
+            </>
           )}
         </DrawerV2.Provider>
       )}

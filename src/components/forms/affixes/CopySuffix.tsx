@@ -21,7 +21,7 @@ const CopySuffix = ({
   label = 'Copy',
   successLabel = 'Copied!',
 }: CopySuffixProps) => {
-  const chrono = useRef<number>();
+  const chrono = useRef<number | undefined>(undefined);
   const [isSuccess, setIsSuccess] = useState(false);
 
   const handleSuccess = () => {

@@ -7,7 +7,7 @@ import { Stack } from '@/skin/layout';
 import { Text } from '@/skin/typography';
 
 import type { JsonViewerProps } from '..';
-import { calcOffset } from '../utils';
+import { calcOffset, getNodeFullPath } from '../utils';
 import Draggable from './Draggable';
 import FoldIndicator from './FoldIndicator';
 import Leaf from './Leaf';
@@ -49,23 +49,23 @@ const Node = ({
   useEffect(() => {
     if (forceToState)
       sortedData.forEach(([label]) => {
-        setExpanded(`${label}-${depth}`, forceToState === 'expanded');
+        const fullPath = getNodeFullPath({ path, label, isArrayItem });
+        setExpanded(fullPath, forceToState === 'expanded');
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [forceToState]);
 
   return sortedData.map(([label, value]) => {
     const childIsArray = Array.isArray(value);
-    const currentItemPath = isArrayItem
-      ? `[${label}]`
-      : path
-      ? `.${label}`
-      : label;
-    const fullPath = `${path}${currentItemPath}`;
-    const fullPathWithArrayWildcards = Array.isArray(data)
-      ? fullPath.replace(/\[\d]$/, '[]')
-      : fullPath;
-    const currentItemAbsolutePath = childIsArray ? `${fullPath}[]` : fullPath;
+    const fullPath = getNodeFullPath({ path, label, isArrayItem });
+
+    let jmesPath = fullPath.replace(/\[\d+]/g, '[]');
+    if (isArrayItem) {
+      jmesPath = jmesPath.replace(/\[]$/, `[${label}]`);
+    }
+    if (Array.isArray(value)) {
+      jmesPath = `${jmesPath}[]`;
+    }
 
     return isObject(value) ? (
       <InternalTreeNode
@@ -100,7 +100,7 @@ const Node = ({
                   isExpandable={isExpandable && !!count}
                 />
                 <Draggable
-                  data={`{{ ${currentItemAbsolutePath} }}`}
+                  data={`{{ ${jmesPath} }}`}
                   disabled={!withJmesPathDragging}
                 >
                   <Text weight="medium">{`${label}:`}</Text>
@@ -118,7 +118,7 @@ const Node = ({
           );
         }}
         element={<Fragment />}
-        id={`${label}-${depth}`}
+        id={fullPath}
       >
         <Node
           arrayLength={childIsArray ? value.length : 0}
@@ -128,7 +128,7 @@ const Node = ({
           forceToState={forceToState}
           isArrayItem={childIsArray}
           onNodeClick={onNodeClick}
-          path={fullPathWithArrayWildcards}
+          path={fullPath}
           sort={sort}
           withJmesPathDragging={withJmesPathDragging}
         />
@@ -138,6 +138,7 @@ const Node = ({
         key={label}
         arrayLength={arrayLength}
         depth={depth}
+        isArrayItem={Array.isArray(data)}
         label={label}
         path={fullPath}
         value={value}

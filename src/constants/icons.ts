@@ -240,6 +240,7 @@ export const ICON_NAMES = [
   'Pin',
   'Play',
   'Plug',
+  'Portrait',
   'Power',
   'Presentation',
   'PreviewCode',

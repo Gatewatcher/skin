@@ -1,4 +1,6 @@
-import type { DrawerMatches } from '@/skin/displays/panels/DrawerV2';
+import type { CSSProperties } from 'react';
+
+import type { DrawerMatches } from '@/skin/displays/drawerPanels/DrawerV2';
 
 export type DrawerConfig = {
   initialWidth?: number;
@@ -9,4 +11,8 @@ export type DrawerConfig = {
 
 export type SidePanelConfig = {
   width?: number;
+};
+
+export type MainContentConfig = {
+  height?: CSSProperties['height'];
 };

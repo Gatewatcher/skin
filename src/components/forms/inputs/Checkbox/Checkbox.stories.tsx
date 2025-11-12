@@ -1,4 +1,4 @@
-import { faker } from '@faker-js/faker/locale/en';
+import { faker } from '@faker-js/faker';
 import type { Meta, StoryFn, StoryObj } from '@storybook/react';
 
 import { withControlledValue } from '@/hocs';
@@ -73,7 +73,7 @@ export const WithOverflownText: Story = {
   render: args => {
     return (
       <OverflownText padding={{ x: 2 }}>
-        <Template {...args} />
+        <ControlledCheckbox value="value 1" {...args} />
       </OverflownText>
     );
   },

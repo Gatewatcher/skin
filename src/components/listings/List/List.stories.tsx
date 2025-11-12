@@ -1,4 +1,4 @@
-import { faker } from '@faker-js/faker/locale/fr';
+import { faker } from '@faker-js/faker';
 import { range } from '@gatewatcher/bistoury/utils-lang';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';

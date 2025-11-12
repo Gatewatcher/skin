@@ -1,0 +1,21 @@
+.size {
+  &Small {
+    font-size: var(--font-size-metrics-small);
+    line-height: var(--font-size-metrics-small);
+  }
+
+  &Medium {
+    font-size: var(--font-size-metrics-medium);
+    line-height: var(--font-size-metrics-medium);
+  }
+
+  &Large {
+    font-size: var(--font-size-metrics-large);
+    line-height: var(--font-size-metrics-large);
+  }
+
+  &ExtraLarge {
+    font-size: var(--font-size-metrics-extra-large);
+    line-height: var(--font-size-metrics-extra-small);
+  }
+}

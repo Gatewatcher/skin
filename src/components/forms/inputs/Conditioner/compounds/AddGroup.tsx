@@ -6,7 +6,7 @@ import { buildTestIds } from '@/utils/testIds';
 
 import { SUFFIX_TEST_IDS, TEST_ID } from '../constants';
 import { useConditionerContext } from '../context';
-import type { LogicalGroupType } from '../types';
+import type { ConditionType, LogicalGroupType } from '../types';
 
 const TEST_IDS = buildTestIds(TEST_ID, SUFFIX_TEST_IDS);
 
@@ -18,8 +18,8 @@ export const AddGroup = () => {
     return null;
   }
 
-  const handleOnClick = (isElse: boolean) => {
-    const newCondition = { id: generateUniqId() };
+  const addGroup = (isElse: boolean) => {
+    const newCondition: ConditionType = { id: generateUniqId(), isElse };
 
     setConditions(conditionsValue => {
       conditionsValue.push(newCondition);
@@ -54,7 +54,7 @@ export const AddGroup = () => {
       <Button
         data-testid={TEST_IDS.addElseIf}
         disabled={readonly}
-        onClick={() => handleOnClick(false)}
+        onClick={() => addGroup(false)}
         startIcon="Add"
         variant="ghosted"
       >
@@ -64,7 +64,7 @@ export const AddGroup = () => {
         <Button
           data-testid={TEST_IDS.addElse}
           disabled={readonly}
-          onClick={() => handleOnClick(true)}
+          onClick={() => addGroup(true)}
           startIcon="Add"
           variant="ghosted"
         >

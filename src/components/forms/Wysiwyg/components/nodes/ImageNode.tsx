@@ -7,6 +7,7 @@ import type {
 } from 'lexical';
 import { $applyNodeReplacement, DecoratorNode } from 'lexical';
 import { Suspense } from 'react';
+import type { JSX } from 'react';
 
 export type ImageNodePayload = {
   altText?: string;

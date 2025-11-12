@@ -21,7 +21,9 @@ export const buildItemClassName = ({
   );
 };
 
-export const getAttritbutes = (attributes: Partial<ItemContentProps>) =>
+export const getAttritbutes = (
+  attributes: Partial<ItemContentProps> & Record<string, unknown>,
+) =>
   withoutKey(attributes, [
     'children',
     'endElement',
@@ -31,4 +33,5 @@ export const getAttritbutes = (attributes: Partial<ItemContentProps>) =>
     'startElement',
     'size',
     'type',
+    'ref',
   ]);

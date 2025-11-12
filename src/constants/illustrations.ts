@@ -2,6 +2,7 @@ export const ILLUSTRATION_NAMES = [
   '404Error',
   'Alerts',
   'AreaEmptyState',
+  'Books',
   'Cases',
   'Checklist',
   'CloudExport',
@@ -14,6 +15,7 @@ export const ILLUSTRATION_NAMES = [
   'Error',
   'FileUploading',
   'FolderEmpty',
+  'FriendlyRobot',
   'Gcap',
   'Gcenter',
   'GwFontLogo',
@@ -41,6 +43,7 @@ export const ILLUSTRATION_NAMES = [
   'Talking',
   'TreemapEmptyState',
   'UserCard',
+  'UserKey',
   'UserSearching',
   'VerticalBarEmptyState',
 ] as const;

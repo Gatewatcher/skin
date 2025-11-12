@@ -34,7 +34,7 @@ export const ShimmerColorChange: Story = {
       }, 6_000);
     }, []);
     return (
-      <Template key={shimmerColor} {...args} shimmerColor={shimmerColor} />
+      <ShimmerEffect key={shimmerColor} {...args} shimmerColor={shimmerColor} />
     );
   },
   args: {
@@ -45,9 +45,9 @@ export const ShimmerColorChange: Story = {
 export const WithShimmerText: Story = {
   render: args => {
     return (
-      <Template {...args}>
+      <ShimmerEffect {...args}>
         <ShimmerText>This is Shimmer Text</ShimmerText>
-      </Template>
+      </ShimmerEffect>
     );
   },
 };

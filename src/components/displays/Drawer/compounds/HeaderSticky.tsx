@@ -11,7 +11,7 @@ import styles from '../styles.module.scss';
 export type DrawerHeaderStickyProps = DataTestId & {
   children: ReactNode;
   customContent?: (isSticky: boolean) => ReactElement;
-  parentRef: RefObject<HTMLDivElement>;
+  parentRef: RefObject<HTMLDivElement | null>;
 } & Omit<StackProps, 'margin' | 'padding' | 'direction' | 'className'>;
 
 const HeaderSticky = ({

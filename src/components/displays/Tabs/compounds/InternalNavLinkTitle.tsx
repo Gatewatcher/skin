@@ -1,7 +1,7 @@
 import { classNames } from '@gatewatcher/bistoury/utils-dom';
 import type { DataTestId } from '@gatewatcher/bistoury/utils-types';
-import type { ReactNode } from 'react';
-import { forwardRef, useEffect } from 'react';
+import type { ReactNode, Ref } from 'react';
+import { useEffect } from 'react';
 import type { To } from 'react-router-dom';
 import { NavLink, useMatch, useResolvedPath } from 'react-router-dom';
 
@@ -13,48 +13,49 @@ export type InternalNavLinkTitleProps = DataTestId & {
   children: ReactNode;
   disabled?: boolean;
   onClick: () => void;
+  ref?: Ref<HTMLAnchorElement>;
   to: To;
   variant: TitleListVariant;
 };
 
-const InternalNavLinkTitle = forwardRef<
-  HTMLAnchorElement,
-  InternalNavLinkTitleProps
->(
-  (
-    { 'data-testid': testid, disabled, onClick, children, to, variant },
-    ref,
-  ) => {
-    const path = useResolvedPath(to);
-    const match = useMatch(`${path.pathname}/*`);
+const InternalNavLinkTitle = ({
+  'data-testid': testid,
+  disabled,
+  onClick,
+  children,
+  ref,
+  to,
+  variant,
+}: InternalNavLinkTitleProps) => {
+  const path = useResolvedPath(to);
+  const match = useMatch(`${path.pathname}/*`);
 
-    useEffect(() => {
-      if (match) {
-        onClick();
+  useEffect(() => {
+    if (match) {
+      onClick();
+    }
+  }, [match, onClick]);
+
+  return (
+    <NavLink
+      ref={ref}
+      className={({ isActive }) =>
+        classNames(
+          styles.Title,
+          styles.TitleLink,
+          styles[variant],
+          isActive && styles.active,
+          disabled && styles.disabled,
+        )
       }
-    }, [match, onClick]);
-
-    return (
-      <NavLink
-        ref={ref}
-        className={({ isActive }) =>
-          classNames(
-            styles.Title,
-            styles.TitleLink,
-            styles[variant],
-            isActive && styles.active,
-            disabled && styles.disabled,
-          )
-        }
-        data-testid={testid}
-        onClick={onClick}
-        tabIndex={disabled ? -1 : undefined}
-        to={to}
-      >
-        {children}
-      </NavLink>
-    );
-  },
-);
+      data-testid={testid}
+      onClick={onClick}
+      tabIndex={disabled ? -1 : undefined}
+      to={to}
+    >
+      {children}
+    </NavLink>
+  );
+};
 
 export default InternalNavLinkTitle;

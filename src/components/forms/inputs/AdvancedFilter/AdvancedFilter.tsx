@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import { Button } from '@/skin/actions';
-import { Badge, Dropdown } from '@/skin/displays';
+import { Dropdown } from '@/skin/displays';
 import type {
   ConditionerConditionType,
   ConditionerLogicalGroupType,
@@ -173,7 +173,9 @@ const AdvancedFilter = ({
     onSave(advancedFilters);
   };
 
-  const advancedFilterLength = Object.keys(advancedFilters).length;
+  const enabledFilterLength = Object.values(advancedFilters).filter(
+    filter => !filter.disabled,
+  ).length;
 
   const conditionerVariableProps = restrictedComparisonOperators
     ? {
@@ -260,17 +262,10 @@ const AdvancedFilter = ({
           startIcon="Filters"
           variant="ghosted"
         >
-          <Stack direction="row" gap={4}>
-            Filter
-            {!!advancedFilterLength && (
-              <Badge size="medium" type="low">
-                {advancedFilterLength}
-              </Badge>
-            )}
-          </Stack>
+          Filter
         </Button>
       </Dropdown>
-      {!!Object.values(advancedFilters).length && (
+      {!!enabledFilterLength && (
         <Preview
           advancedFilters={advancedFilters}
           onDelete={handleDelete}

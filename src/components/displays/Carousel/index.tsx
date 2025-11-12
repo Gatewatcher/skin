@@ -7,8 +7,8 @@ import {
   useState,
 } from 'react';
 
+import { useOnResizeElement } from '@/hooks';
 import { ButtonIcon } from '@/skin/actions';
-import { useOnResizeElement } from '@/skin/displays/panels/DrawerV2/PanelLayout/hooks';
 import { Stack } from '@/skin/layout';
 import type { Gap } from '@/skin/layout/Grid/types';
 

@@ -134,7 +134,7 @@ export const WithControl: Story = {
           <Button onClick={handleExpandClick}>Expand</Button>
           <Button onClick={() => setForceState('collapsed')}>Collapse</Button>
         </Stack>
-        <Template
+        <JsonViewer
           {...props}
           forceToState={forceState}
           onNodeClick={handleNodeClick}

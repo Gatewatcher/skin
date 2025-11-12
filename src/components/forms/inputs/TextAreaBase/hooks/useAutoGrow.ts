@@ -8,7 +8,7 @@ type UseAutoGrowOptions = {
 };
 
 export const useAutoGrow = (
-  ref: RefObject<HTMLTextAreaElement>,
+  ref: RefObject<HTMLTextAreaElement | null>,
   options: UseAutoGrowOptions = {},
 ) => {
   const { enabled = true, minHeight = 10, maxHeight } = options;

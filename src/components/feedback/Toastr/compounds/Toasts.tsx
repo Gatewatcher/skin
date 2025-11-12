@@ -87,7 +87,11 @@ const Toasts = ({
       {transitions(({ ...styles }, item) => (
         <animated.li key={item.id} style={styles}>
           <Toast
-            ref={ref => ref && refMap.set(item.id, ref)}
+            ref={ref => {
+              if (ref) {
+                refMap.set(item.id, ref);
+              }
+            }}
             onRemove={ev => handleRemove(ev, item)}
             {...item}
           />
